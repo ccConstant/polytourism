@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.btn{
+    background: #335EEA;
+    padding: 15px 30px;
+    color: white;
+    font-size: large;
+    border: 1px solid white;
+    margin-bottom: 15px;
+}
+.btn:hover{
+    color: #335EEA;
+    background: white;
+    border: 1px solid #335EEA;
+}
+.link{
+    text-decoration: underline;
+    color: #335EEA;
+    cursor: pointer;
+}

@@ -1,102 +1,104 @@
 <script setup>
+import {schema} from '../../../formsValidators/createUser'
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import Input from '@/Components/Input.vue'
+import Title from '@/Components/Title.vue'
+import { ref } from 'vue';
 
-const form = useForm({
+const form = ref({
     name: '',
     email: '',
+    country : '',
+    birth_date : '',
+    gender : '',
     password: '',
     password_confirmation: '',
 });
+// à changer
+const countries = [
+    'Abkhazie',
+'Afghanistan',
+'Fidji',
+'Finlande',
+'France',
+'Gabon',
+'Gambie',
+'Géorgie',
+'Ghana',
+'Grenade(pays)',
+'Grèce',
+'Guatemala',
+'Guinée',
+'Guinée équatoriale',
+'Guinée - Bissau',
+'Guyana',
+'Haïti',
+'Honduras',
+'Hongrie',
+'Îles Cook',
+'Inde',
+'Indonésie',
+'Irak',
+'Iran',
+'République d\'Irlande',
+'Islande,',
+]
 
 const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
+    console.log(form.value)
+    const {error,value} = schema.validate(form.value)
+    if(error){
+        console.log(error)
+    }else{
+        console.log('Test passed')
+    }
+
 };
 </script>
 
 <template>
     <GuestLayout>
         <Head title="Register" />
+        
+        <Title title="Créer un nouveau compte" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="d-flex flex-column gap-3">
             <div>
-                <InputLabel for="name" value="Name" />
-
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
+                <Input  v-model="form.name" title="nom complet" type="text" placeholder="nom complet" hint="votre nom doit contenir au moins 5 caractères" />
+            </div>
+            <div>
+                <Input v-model="form.email"  title="adresse e-mail" type="email" placeholder="adresse e-mail" hint="exemple : nom@example.com" />
+            </div>
+            <div>
+                <Input v-model="form.country"  title="pays" type="select" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />
+            </div>
+            <div>
+                <Input v-model="form.birth_date"  title="date de naissance" type="date" hint="Saisir votre date de naissance" />
+            </div>
+            <div>
+                <Input v-model="form.gender"  title="Sexe" type="select" :options="['Homme','Femme','Autre']" placeholder="Sexe" hint="Choisir votre sexe" />
+            </div>
+            <div>
+                <Input v-model="form.password"  title="mot de passe" type="password" placeholder="mot de passe" hint="votre mot de passe doit contenir au moins 8 caractères dont un majuscule,miniscule et un caractère spécial" />
+            </div>
+            <div>
+                <Input v-model="form.password_confirmation"  title="confirmer votre mot de passe" type="password" placeholder="confirmer votre mot de passe" hint="les deux mots de passe doivent etre identiques" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+            
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
+            <div class="flex flex-column-reverse items-center justify-end mt-4">
+                <p
                     :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    
                 >
-                    Already registered?
-                </Link>
+                    vous avez déjà un compte ? 
+                    <router-link class="link">connectez-vous</router-link>
+            </p>
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
+                <button class="btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Créer votre compte
+                </button>
             </div>
         </form>
     </GuestLayout>
