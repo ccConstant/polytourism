@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PlaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+/* Places Routes */
+Route::get('/place/all', [PlaceController::class, 'send_places']);
+Route::post('/place/add', [PlaceController::class, 'add_place']);
+Route::post('/place/verif', [PlaceController::class, 'verif_place']);
+Route::post('/place/update/{id}', [PlaceController::class, 'update_place']);
+Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
+Route::post('/place/delete', [PlaceController::class, 'delete_place']);

@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 class PlaceController extends Controller
 {
     /**
-     * Function called by ???.vue when the form is submitted to check data with the route: ???? (post)
+     * Function called by ???.vue when the form is submitted to check data with the route: /place/verif (post)
      * Checks the informations entered in the form, sends errors if needed
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class PlaceController extends Controller
     }
 
     /**
-     * Function called by ???.vue when the form is submitted to insert with the route: ???? (post)
+     * Function called by ???.vue when the form is submitted to insert with the route: /place/add (post)
      * Adds a place to the database
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -92,20 +92,29 @@ class PlaceController extends Controller
     }
 
     /**
-     * Function call by ??.vue with the route : ?? (get)
-     * Get ?? 
-     * @param int $id The if of the ???
+     * Function call by ??.vue with the route : /place/all (get)
+     * Get a list of all the places validated in the database 
      * @return \Illuminate\Http\Response
      */
-    public function send_places($id){
+    public function send_places(){
+        //TODO
+    }
+
+    /**
+     * Function call by ??.vue with the route : /place/{id} (get)
+     * Get the place with the id given in parameter 
+     * @param int $id The id of the place
+     * @return \Illuminate\Http\Response
+     */
+    public function send_place($id){
         // TODO
     }
 
     /**
-     * Function called by ???.vue when the form is submitted for update with the route: ??? (post)
-     * Updates an enregistrement of ?? in the data base with the informations entered in the form
+     * Function called by ???.vue when the form is submitted for update with the route: /place/update/{id} (post)
+     * Updates an enregistrement of place in the data base with the informations entered in the form
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id the id of the ??? we want to update
+     * @param  int  $id the id of the place we want to update
      * @return \Illuminate\Http\Response
      */
     public function update_place(Request $request, $id){
@@ -135,9 +144,9 @@ class PlaceController extends Controller
     }
 
     /**
-     * Function call by Example???.vue when we want to delete a ?? with the route :??(post)
-     * Deletes a ??? thanks to the id given in parameter
-     * @param int $id the id of the ??? we want to delete
+     * Function call by Example???.vue when we want to delete a place with the route : /place/delete (post)
+     * Delete a place thanks to the id given in parameter
+     * @param int $id the id of the place we want to delete
      */
     public function delete_place(Request $request, $id){
         $place=Place::findOrFail($id);
