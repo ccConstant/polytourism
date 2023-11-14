@@ -27,7 +27,7 @@ const connectUser = () => {
     <GuestLayout>
         <Head title="Log in" />
 
-        <Title title="Accèc client" />
+        <Title title="Accès client" />
 
         <form @submit.prevent="connectUser" class="d-flex flex-column gap-3">
             <div>
