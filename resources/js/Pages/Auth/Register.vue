@@ -64,25 +64,25 @@ const submit = () => {
 
         <form @submit.prevent="submit" class="d-flex flex-column gap-3">
             <div>
-                <Input  v-model="form.name" title="nom complet" type="text" placeholder="nom complet" hint="votre nom doit contenir au moins 5 caractères" />
+                <Input  v-model="form.name" title="Nom complet" type="text" placeholder="nom complet" hint="Votre nom doit contenir au moins 5 caractères" />
             </div>
             <div>
-                <Input v-model="form.email"  title="adresse e-mail" type="email" placeholder="adresse e-mail" hint="exemple : nom@example.com" />
+                <Input v-model="form.email"  title="Adresse e-mail" type="email" placeholder="adresse e-mail" hint="Exemple : nom@example.com" />
             </div>
             <div>
-                <Input v-model="form.country"  title="pays" type="select" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />
+                <Input v-model="form.country"  title="Pays" type="select" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />
             </div>
             <div>
-                <Input v-model="form.birth_date"  title="date de naissance" type="date" hint="Saisir votre date de naissance" />
+                <Input v-model="form.birth_date"  title="Date de naissance" type="date" hint="Saisir votre date de naissance" />
             </div>
             <div>
                 <Input v-model="form.gender"  title="Sexe" type="select" :options="['Homme','Femme','Autre']" placeholder="Sexe" hint="Choisir votre sexe" />
             </div>
             <div>
-                <Input v-model="form.password"  title="mot de passe" type="password" placeholder="mot de passe" hint="votre mot de passe doit contenir au moins 8 caractères dont un majuscule,miniscule et un caractère spécial" />
+                <Input v-model="form.password"  title="mot de passe" type="password" placeholder="mot de passe" hint="Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule et un caractère spécial" />
             </div>
             <div>
-                <Input v-model="form.password_confirmation"  title="confirmer votre mot de passe" type="password" placeholder="confirmer votre mot de passe" hint="les deux mots de passe doivent etre identiques" />
+                <Input v-model="form.password_confirmation"  title="confirmer votre mot de passe" type="password" placeholder="confirmer votre mot de passe" hint="Les deux mots de passe doivent être identiques" />
             </div>
 
             
