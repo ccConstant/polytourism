@@ -49,5 +49,10 @@ Route::get('/place/all', [PlaceController::class, 'send_places']);
 Route::post('/place/add', [PlaceController::class, 'add_place']);
 Route::post('/place/verif', [PlaceController::class, 'verif_place']);
 Route::post('/place/update/{id}', [PlaceController::class, 'update_place']);
-Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
+//Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
 Route::post('/place/delete', [PlaceController::class, 'delete_place']);
+
+// à supprimer
+Route::get('/place/10', function() {
+    return Inertia::render('PlaceDetails');
+});

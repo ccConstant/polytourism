@@ -1,9 +1,10 @@
 <template>
-    <h1 class="header"><slot></slot></h1>
+    <h1 :class="`header-${level}`"><slot></slot></h1>
 </template>
 
-<script>
-
+<script setup>
+const props = defineProps(['level'])
+console.log(props)
 </script>
 
 <style>

@@ -26,6 +26,7 @@
     border: 1px solid white;
     margin-bottom: 15px;
     border-radius: 8px;
+    width: fit-content;
 }
 .btn:hover{
     color: #335EEA;
@@ -66,21 +67,29 @@ section{
     font-size: 65px;
     
 }
-p.large1{
+p.large3{
     font-size: 24px;
 }
 p.large2{
     font-size: 32px;
 }
-p.large3{
+p.large1{
     font-size: 45px;
 }
-.header{
+.header-1,.header-2,.header-3{
     font-size: 65px;
     text-align: center;
     font-weight: bolder;
     text-transform: capitalize;
-    margin-bottom: 36px;
+}
+.header-2{
+    font-size: 48px;
+}
+.header-3{
+    font-size: 40px;
+}
+.header-4{
+    font-size: 32px;
 }
 .header-margin-top{
     margin-top: 36px;
@@ -112,6 +121,7 @@ p.large3{
     padding: 7px 11px;
     text-transform: uppercase;
     font-weight: lighter0;
+    width: fit-content;
 }
 .place-price{
     text-transform: uppercase;

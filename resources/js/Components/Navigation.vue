@@ -22,6 +22,7 @@
               <a class="dropdown-item" href="#">mes infos</a>
               <a class="dropdown-item" href="#">wishlist</a>
               <a class="dropdown-item" href="#">historique</a>
+              <a class="dropdown-item" href="#">déconnexion</a>
             </div>
           </div>
         </nav>
@@ -34,7 +35,7 @@ import Button from './Button.vue';
 
 const links = ['accueil','decouvrir lyon','presentation','a propos','contact']
 
-const UserIsConnected = false
+const UserIsConnected = true
 const showDropDownLinks = ref(false)
 const showNavBarLinks = ref(true)
 
