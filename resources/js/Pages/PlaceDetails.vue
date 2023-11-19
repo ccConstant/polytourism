@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <Button>Ajouter un commentaire</Button>
+      <Button @click="handleClick">Ajouter un commentaire</Button>
     </section>
     <Footer />
   </div>
@@ -40,6 +40,8 @@ import Header from '@/Components/Header.vue'
 import Info from '@/Components/Info.vue'
 import Button from '@/Components/Button.vue'
 import Footer from '@/Components/Footer.vue'
+
+
 </script>
 
 <style>

@@ -3,6 +3,7 @@ import {schema} from '../../../formsValidators/createUser'
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Input from '@/Components/Input.vue'
 import Title from '@/Components/Title.vue'
+import Error from '@/Components/Error.vue'
 import { ref } from 'vue';
 
 const form = ref({
@@ -14,6 +15,9 @@ const form = ref({
     password: '',
     password_confirmation: '',
 });
+
+const errorMessage = ref(null)
+
 // à changer
 const countries = [
 'Abkhazie',
@@ -225,12 +229,15 @@ const submit = () => {
     console.log(form.value)
     const {error,value} = schema.validate(form.value)
     if(error){
-        console.log(error)
+        console.log(error.message)
+        errorMessage.value = error.message
     }else{
         console.log('Test passed')
-    }
-
+    }    
 };
+const onErrorClose = () => {
+    errorMessage.value = null
+}
 </script>
 
 <template>
@@ -262,7 +269,7 @@ const submit = () => {
                 <Input v-model="form.password_confirmation"  title="confirmer votre mot de passe" type="password" placeholder="confirmer votre mot de passe" hint="Les deux mots de passe doivent être identiques" />
             </div>
 
-            
+            <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
 
             <div class="flex flex-column-reverse items-center justify-end mt-4">
                 <p

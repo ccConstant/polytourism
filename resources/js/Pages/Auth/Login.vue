@@ -1,13 +1,13 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Input from '@/Components/Input.vue'
 import Title from '@/Components/Title.vue'
+import Error from '@/Components/Error.vue';
 import {schema} from '../../../formsValidators/connectUser'
 
 import { ref } from 'vue';
 
-
+const errorMessage = ref(null)
 const form = ref({
     email: '',
     password: '',
@@ -17,10 +17,16 @@ const connectUser = () => {
     const {error,value} = schema.validate(form.value)
     if(error){
         console.log(error)
+        errorMessage.value = error.message
     }else{
         console.log('test passed')
     }
 };
+
+const onErrorClose = () => {
+    errorMessage.value = null
+}
+
 </script>
 
 <template>
@@ -37,6 +43,7 @@ const connectUser = () => {
                 <Input v-model="form.password"  title="votre mot de passe" type="password" placeholder="votre mot de passe" />
             </div>
 
+            <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
 
             <div class="d-flex flex-column-reverse items-center justify-end mt-4">
                 <p
