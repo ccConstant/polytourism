@@ -30,6 +30,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/ListPlaces', function() {
+    return Inertia::render('ListPlaces');
+});
+
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
