@@ -10,8 +10,8 @@
               
           </div>
           <div  v-if="UserIsConnected && showNavBarLinks" class="d-flex gap-3">
-              <Button buttonType="mini-primary">se connecter</Button>
-              <Button buttonType="mini-secondary">s'inscrire</Button>
+              <a href="/login"> <Button buttonType="mini-primary"> se connecter</Button> </a>
+              <a href="/register"> <Button buttonType="mini-secondary">s'inscrire</Button></a>
           </div>
           <div v-if="showNavBarLinks && !UserIsConnected"  class="dropdown show">
             <a @click="showDropDownLinks = !showDropDownLinks" class="btn btn-secondary dropdown-toggle btn-mini-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,7 +33,7 @@
 import { ref } from 'vue';
 import Button from './Button.vue';
 
-const links = ['accueil','decouvrir lyon','presentation','a propos','contact']
+const links = ['accueil','Laissez nous vous guider','presentation','a propos','contact']
 
 const UserIsConnected = true
 const showDropDownLinks = ref(false)

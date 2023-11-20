@@ -6,7 +6,7 @@
         <h1 class="large-title">Bienvenue sur <span class="primary-color">Polytourisme</span></h1>
         <p class="unselected-color my-5 large3"><span class="primary-color">Polytourisme</span> vous guide et vous accompagne dans votre découverte de la merveuilleuse ville de Lyon.
                                     Découvrez la beuaté de Lyon à travers nos activités recommandés.</p>
-        <Button>laissez nous vous guider</Button>
+        <Button>Découvrir Lyon</Button>
       </div>
       <div class="w-50">
         <img src="@/../../../../public/temp/lyon2.jpg" class="img-fluid rounded-top" alt="">

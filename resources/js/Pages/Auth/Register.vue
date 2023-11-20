@@ -280,7 +280,7 @@ const onErrorClose = () => {
                     <router-link class="link">connectez-vous</router-link>
             </p>
 
-                <button class="btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <button class="btn btn-primary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Créer votre compte
                 </button>
             </div>

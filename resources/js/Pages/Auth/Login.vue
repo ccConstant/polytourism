@@ -57,7 +57,7 @@ const onErrorClose = () => {
                     vous n'avez pas de compte ? <router-link class="link">créez-en un</router-link>
         </p>
 
-                <button class="btn">se connecter</button>
+                <button class="btn btn-primary">se connecter</button>
             </div>
         </form>
     </GuestLayout>
