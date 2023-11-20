@@ -27,31 +27,126 @@ class PlaceController extends Controller
             $request,
             [
                 // max: 255
-                'plc_nom' => 'required',
+                'plc_nom' => 'required|string|min:1|max:255',
+                'plc_idsitra' => 'required|string|min:1|max:255',
+                'plc_theme' => 'required|string|min:1|max:255',
+                'plc_type' => 'required|string|min:1|max:255',
+                'plc_address' => 'required|string|min:1|max:255',
+                'plc_insee'=> 'required|string|min:1|max:255',
+                'plc_descrcourtfr' => 'required|string|min:1|max:255',
+                'plc_descrdetailfr' => 'required|string|min:1|max:255',
+                'plc_contact' => 'required|string|min:1|max:255',
+                'plc_ouvertureenclair' => 'required|string|min:1|max:255',
+                'plc_ouverture' => 'required|string|min:1|max:255' ,
+                'plc_tarifsenclair' => 'required|string|min:1|max:255',
+                'plc_tarifmin' => 'required|numeric|min:1|max:255',
+                'plc_tarifmax' => 'required|numeric|min:1|max:255',
+                'plc_modepaiement' => 'required|string|min:1|max:255',
+                'plc_illustrationsn' => 'required|string|min:1|max:255',
+                'plc_producteur' => 'required|string|min:1|max:255',
+                'plc_datecreation' => 'nullable|date|timezone:UTC', // Adjust 'UTC' to the appropriate timezone
+                'plc_datemaj' => 'nullable|date|timezone:UTC', // Adjust 'UTC' to the appropriate timezone
+                'plc_gid' => 'required|numeric|min:1|max:255',
             ],
             [
                 'plc_nom.required' => 'You must enter a name for your place',
+                'plc_nom.string' => 'The name field must be a string',
+                'plc_nom.min' => 'You must enter a minimum of one character ',
+                'plc_nom.max' => 'You must enter a maximum of 255 characters',
+
+                'plc_idsitra.required' => 'You must enter a SITRA id for your place',
+                'plc_idsitra.string' => 'The SITRA id field must be a string',
+                'plc_idsitra.min' => 'You must enter a minimum of one character',
+                'plc_idsitra.max' => 'You must enter a maximum of 255 characters',
+                
+                'plc_theme.required' => 'You must enter a theme for your place',
+                'plc_theme.json' => 'The theme field must be a string',
+                'plc_theme.min' => 'The theme must be a minimum of one character',
+                'plc_theme.max' => 'The theme must be a maximum of 255 characters',
+
+                'plc_type.required' => 'You must enter a type for your place',
+                'plc_type.string' => 'The type field must be a string',
+                'plc_type.min' => 'The type must be a minimum of one character',
+                'plc_type.max' => 'The type must be a maximum of 255 characters',
+
+                'plc_address.required' => 'You must enter an address for your place',
+                'plc_address.json' => 'The address field must be a string',
+                'plc_address.min' => 'The address must be a minimum of one character',
+                'plc_address.max' => 'The address must be a maximum of 255 characters',
+
+                'plc_insee.required' => 'You must enter an INSEE code for your place',
+                'plc_insee.string' => 'The INSEE code field must be a string',
+                'plc_insee.min' => 'The INSEE code must be a minimum of one character',
+                'plc_insee.max' => 'The INSEE code must be a maximum of 255 characters',
+
+                'plc_descrcourtfr.required' => 'You must enter a short description in French for your place',
+                'plc_descrcourtfr.string' => 'The short description in French field must be a string',
+                'plc_descrcourtfr.min' => 'The short description in French must be a minimum of one character',
+                'plc_descrcourtfr.max' => 'The short description in French must be a maximum of 255 characters',
+
+                'plc_descrdetailfr.required' => 'You must enter a detailed description in French for your place',
+                'plc_descrdetailfr.string' => 'The detailed description in French field must be a string',
+                'plc_descrdetailfr.min' => 'The detailed description in French must be a minimum of one character',
+                'plc_descrdetailfr.max' => 'The detailed description in French must be a maximum of 255 characters',
+
+                'plc_contact.required' => 'You must enter contact information for your place',
+                'plc_contact.json' => 'The contact information field must be a string',
+                'plc_contact.min' => 'The contact information must be a minimum of one character',
+                'plc_contact.max' => 'The contact information must be a maximum of 255 characters',
+
+                'plc_ouvertureenclair.required' => 'You must enter opening information for your place',
+                'plc_ouvertureenclair.string' => 'The opening information field must be a string',
+                'plc_ouvertureenclair.min' => 'The opening information must be a minimum of one character',
+                'plc_ouvertureenclair.max' => 'The opening information must be a maximum of 255 characters',
+
+                'plc_ouverture.required' => 'You must enter detailed opening information for your place',
+                'plc_ouverture.json' => 'The detailed opening information field must be a string',
+                'plc_ouverture.min' => 'The detailed opening information must be a minimum of one character',
+                'plc_ouverture.max' => 'The detailed opening information must be a maximum of 255 characters',
+
+                'plc_tarifsenclair.required' => 'You must enter pricing information for your place',
+                'plc_tarifsenclair.string' => 'The pricing information field must be a string',
+                'plc_tarifsenclair.min' => 'The pricing information must be a minimum of one character',
+                'plc_tarifsenclair.max' => 'The pricing information must be a maximum of 255 characters',
+
+                'plc_tarifmin.required' => 'You must enter a minimum price for your place',
+                'plc_tarifmin.numeric' => 'The minimum price field must be a numeric value',
+                'plc_tarifmin.min' => 'The minimum price must be a minimum of one character',
+                'plc_tarifmin.max' => 'The minimum price must be a maximum of 255 characters',
+
+                'plc_tarifmax.required' => 'You must enter a maximum price for your place',
+                'plc_tarifmax.numeric' => 'The maximum price field must be a numeric value',
+                'plc_tarifmax.min' => 'The maximum price must be a minimum of one character',
+                'plc_tarifmax.max' => 'The minimum price must be a maximum of 255 characters',
+
+                'plc_modepaiement.required' => 'You must enter payment mode information for your place',
+                'plc_modepaiement.json' => 'The payment mode information field must be a string',
+                'plc_modepaiement.min' => 'The payment mode information must be a minimum of one character',
+                'plc_modepaiement.max' => 'The payment mode information must be a maximum of 255 characters',
+
+                'plc_illustrationsn.required' => 'You must enter illustration information for your place',
+                'plc_illustrationsn.json' => 'The illustration information field must be a string',
+                'plc_illustrationsn.min' => 'The illustration information must be a minimum of one character',
+                'plc_illustrationsn.max' => 'The illustration information must be a maximum of 255 characters',
+
+                'plc_producteur.required' => 'You must enter producer information for your place',
+                'plc_producteur.string' => 'The producer information field must be a string',
+                'plc_producteur.min' => 'The producer information must be a minimum of one character',
+                'plc_producteur.max' => 'The producer information must be a maximum of 255 characters',
+
+                'plc_datecreation.nullable' => 'The date creation field must be a valid date if provided',
+                'plc_datecreation.date' => 'The date creation field must be a valid date format',
+                'plc_datecreation.timezone' => 'The date creation field must be in the correct timezone',
+
+                'plc_datemaj.nullable' => 'The date maj field must be a valid date if provided',
+                'plc_datemaj.date' => 'The date maj field must be a valid date format',
+                'plc_datemaj.timezone' => 'The date maj field must be in the correct timezone',
+
+                'plc_gid.required' => 'You must enter a GID for your place',
+                'plc_gid.numeric' => 'The GID field must be a numeric value',
+                'plc_gid.min' => 'The GID must be a minimum of one character',
+                'plc_gid.max' => 'The GID must be a maximum of 255 characters',
             ]
-            // TODO: verifications for the attributes
-            // string('plc_idsitra');
-            // jsonb('plc_theme');
-            // string('plc_type');
-            // jsonb('plc_address');
-            // string('plc_insee');
-            // string('plc_descrcourtfr');
-            // string('plc_descrdetailfr');
-            // jsonb('plc_contact');
-            // string('plc_ouvertureenclair');
-            // jsonb('plc_ouverture');
-            // string('plc_tarifsenclair');
-            // float('plc_tarifmin');
-            // float('plc_tarifmax');
-            // jsonb('plc_modepaiement');
-            // jsonb('plc_illustrations');
-            // string('plc_producteur');
-            // timestampTz('plc_datecreation')->nullable();
-            // timestampTz('plc_datemaj')->nullable();
-            // integer('plc_gid');
         );
     }
 
