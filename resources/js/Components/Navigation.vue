@@ -1,12 +1,12 @@
 <template>
     <div class="border-bottom fixed top-0 left-0 right-0 bg-white">
         <nav class="navbar navbar-stick gap-3 px-2 container border-bottom py-2 ">
-          <h1 class="navbar-brand primary-color">Polytourisme.</h1>
+          <a href="/" class="navbar-brand primary-color">Polytourisme.</a>
           <div class="d-lg-none">
             <i @click="showNavBarLinks = !showNavBarLinks" class="fa-solid fa-bars icon"></i>
           </div>
           <div v-if="showNavBarLinks" class="d-flex gap-3 ">
-              <a href="#" v-for="(link,index) in links" :key="index" class="text-uppercase" :class="index == 0 ? 'primary-color' : 'unselected-color'">{{ link }}</a>
+              <a :href="link.link" v-for="(link,index) in links" :key="index" class="text-uppercase" @click="clickedLink = index" :class="index == clickedLink ? 'primary-color' : 'unselected-color'">{{ link.nom }}</a>
               
           </div>
           <div  v-if="UserIsConnected && showNavBarLinks" class="d-flex gap-3">
@@ -33,9 +33,26 @@
 import { ref } from 'vue';
 import Button from './Button.vue';
 
-const links = ['accueil','Laissez nous vous guider','presentation','a propos','contact']
+const links = [{
+  nom : 'accueil',
+  link: '#home',
+  }, {
+  nom: 'Laissez nous vous guider',
+  link: '#proposition',
+}, {
+  nom: 'presentation',
+  link: '#presentation',
+}, {
+  nom: 'a propos',
+  link: '#about',
+}, {
+  nom: 'contact',
+  link: '#contact',
+}
+]
 
 const UserIsConnected = true
+const clickedLink = ref(0)
 const showDropDownLinks = ref(false)
 const showNavBarLinks = ref(true)
 

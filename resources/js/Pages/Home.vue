@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navigation />
-    <section class="d-flex container align-items-center section gap-3">
+    <section id="home" class="d-flex container align-items-center section gap-3">
       <div class="w-50">
         <h1 class="large-title">Bienvenue sur <span class="primary-color">Polytourisme</span></h1>
         <p class="unselected-color my-5 large3"><span class="primary-color">Polytourisme</span> vous guide et vous accompagne dans votre découverte de la merveuilleuse ville de Lyon.
@@ -12,7 +12,7 @@
         <img src="@/../../../../public/temp/lyon2.jpg" class="img-fluid rounded-top" alt="">
       </div>
     </section>
-    <section class="light-blue section">
+    <section id="proposition" class="light-blue section">
       <div class="container">
         <Header level="1" class="my-5">proposition</Header>
         <p class="section-para">Nos Propositions pour vous : </p>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </section>
-    <section class="section container">
+    <section id="presentation" class="section container">
       <Header level="1" class="my-5">présentation</Header>
       <div class="d-flex flex-wrap justify-content-center gap-5">
         <Presentation title="Belle Vue Panoramique" description="Lyon est une ville située entre deux fleuves, le Rhône et la Saône, offrant de superbes panoramas. Les touristes peuvent profiter de vues imprenables depuis des points de vue tels que la colline de Fourvière, le parc de la Tête d'Or, et la Croix-Rousse. Ces sites offrent des perspectives magnifiques sur la ville, ses ponts, et son architecture, ce qui en fait des lieux parfaits pour la photographie et l'appréciation des paysages urbains."/>
@@ -32,7 +32,7 @@
         <Presentation title="Belle Vue Panoramique" description="Lyon est une ville située entre deux fleuves, le Rhône et la Saône, offrant de superbes panoramas. Les touristes peuvent profiter de vues imprenables depuis des points de vue tels que la colline de Fourvière, le parc de la Tête d'Or, et la Croix-Rousse. Ces sites offrent des perspectives magnifiques sur la ville, ses ponts, et son architecture, ce qui en fait des lieux parfaits pour la photographie et l'appréciation des paysages urbains."/>
       </div>
     </section>
-    <section class="section light-yellow">
+    <section id="about" class="section light-yellow">
       <div class="container d-flex flex-column align-items-center gap-4">
           <Header level="1" class="my-5">qui sommes-nous ?</Header>
           <p class="text-center large2"><span class="primary-color">polytourisme </span>est une équipe d’étudiants de l’école polytechnique Lyon en informatique </p>
@@ -41,7 +41,7 @@
           <p class="text-center large2">Notre mission est de vous faire découvrir Lyon de manière inoubliable. Nous voulons que chaque visite à Lyon soit une aventure mémorable.</p>
       </div>
     </section>
-    <section class="section container d-flex flex-column align-items-center gap-5">
+    <section id="contact" class="section container d-flex flex-column align-items-center gap-5">
       <Header level="1" class="my-5">Besoin d'aide ?</Header>
       <p class="large2 text-center">Bienvenue dans notre section de contact et d'aide. Nous sommes là pour répondre à vos questions, résoudre vos problèmes et vous assister dans la planification de votre séjour à Lyon. N'hésitez pas à nous contacter pour toute demande d'information, d'assistance ou de soutien. Votre expérience compte beaucoup pour nous.</p>
       <h1 class="header-1 light header-margin-top">Nos conseillers à votre écoute</h1>

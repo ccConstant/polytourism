@@ -6,6 +6,7 @@ import Error from '@/Components/Error.vue';
 import {schema} from '../../../formsValidators/connectUser'
 
 import { ref } from 'vue';
+import axios from 'axios'
 
 const errorMessage = ref(null)
 const form = ref({
@@ -13,13 +14,14 @@ const form = ref({
     password: '',
 });
 
-const connectUser = () => {
+const connectUser = async () => {
     const {error,value} = schema.validate(form.value)
     if(error){
         console.log(error)
         errorMessage.value = error.message
     }else{
-        console.log('test passed')
+        const response = await axios.post('/login',value)
+        console.log(response)
     }
 };
 

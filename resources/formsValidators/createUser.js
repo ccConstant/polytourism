@@ -23,11 +23,11 @@ export const schema = Joi.object({
         "any.required": "le sexe est obligatoire",
         "string.empty": "le sexe est obligatoire",
     }),
-    password: Joi.string().min(8).pattern(new RegExp('^.*[a-z]{1,}.*$')).pattern(new RegExp('^.*[A-Z]{1,}.*$')).pattern(new RegExp('^.*[&#$=+]{1,}.*$')).messages({
+    password: Joi.string().min(8).pattern(new RegExp('^.*[a-z]{1,}.*$')).pattern(new RegExp('^.*[A-Z]{1,}.*$')).pattern(new RegExp('^.*[#?!@$%^&*-@{}.+-:,_]{1,}.*$')).messages({
         "any.required": "le mot de passe est obligatoire",
         "string.empty": "le mot de passe est obligatoire",
         "string.min": "le mot de passe doit contenir au moins {{#limit}} caractères",
-        "string.pattern.base": "le mot de passe doit etre au format {{#regex}}",
+        "string.pattern.base": "le mot de passe doit contenir au moins une majuscule,minuscule et un caractère spéciale",
     }),
     password_confirmation: Joi.string().valid(Joi.ref('password')).messages({
         "any.required": "la confirmation de mot de passe est obligatoire",

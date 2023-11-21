@@ -5,6 +5,7 @@ import Input from '@/Components/Input.vue'
 import Title from '@/Components/Title.vue'
 import Error from '@/Components/Error.vue'
 import { ref } from 'vue';
+import axios from 'axios';
 
 const form = ref({
     name: '',
@@ -225,14 +226,15 @@ const countries = [
 'Zimbabwe'
 ]
 
-const submit = () => {
+const submit = async () => {
     console.log(form.value)
     const {error,value} = schema.validate(form.value)
     if(error){
         console.log(error.message)
         errorMessage.value = error.message
     }else{
-        console.log('Test passed')
+        const response = await axios.post('/login', value)
+        console.log(response)
     }    
 };
 const onErrorClose = () => {
