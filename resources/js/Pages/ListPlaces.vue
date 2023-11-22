@@ -23,7 +23,7 @@
          </div>
        </div>
            
-    <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-between ">
+    <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
           <Place />
           <Place />
           <Place />
