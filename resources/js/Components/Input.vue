@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column">
+    <div class="d-flex " :class="isInline ? 'flex-row align-items-center gap-2' : 'flex-column'">
         <label :for="props.title">{{ lodash.capitalize(props.title) }}</label>
         <select @change="update" class="form-control rounded-2 form-control-sm" v-if="props.type == 'select'" value="bldfokvn " >
             <option selected disabled>{{ props.placeholder }}</option>
@@ -17,7 +17,7 @@ import dayjs from 'dayjs'
 
 const now = dayjs().format('YYYY-MM-DD')
 
-const props = defineProps(['modelValue','title','placeholder','options','hint','type'])
+const props = defineProps(['modelValue','title','placeholder','isInline','options','hint','type'])
 const emits = defineEmits(['update:modelValue'])
 
 const update = function(e){
