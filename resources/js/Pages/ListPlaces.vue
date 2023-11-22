@@ -2,26 +2,48 @@
     
     <Navigation />
     <br><br><br><br><br><br><br>
-    <h1> Découvrez les lieux touristiques de Lyon</h1>
-    <p id="welcome">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette magnigique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore. Utilisez les filtres ci-dessous pour afficher votre recherche en fonction de vos préférences.</p>
-
-    <div class="d-flex gap-3 justify-content-center">
-          <Place />
-          <Place />
-          <Place />
-    </div>
-    <br><br>
-    <div class="d-flex gap-3 justify-content-center">
-          <Place />
-          <Place />
-          <Place />
-    </div>
-    <br><br><br><br><br><br><br>
     
-    <div class="center" >
+    <Header class="center" :level="2">Découvrez les lieux touristiques de Lyon</Header>
+
+    <p id="welcome" class="large3">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette magnigique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore. Utilisez les filtres ci-dessous pour afficher votre recherche en fonction de vos préférences.</p>
+    
+    
+    <div >
+        <div class="d-flex align-items-center container section justify-content-between">
+            <Header :level="4" > Filtré par : </Header>
+            <Input type="select" title="Thèmes" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
+            <Button @click="showFilterBar=!showFilterBar" buttonType='mini-primary'> + de filtres</Button>
+        </div>
+       <div v-if="showFilterBar" class="d-flex justify-content-between container section my-3 align-items-center">
+         <Input type="number" title="min" placeholder="min" :isInline="true" />
+         <Input type="number" title="max" placeholder="max" :isInline="true" />
+         <div>
+            <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
+          
+         </div>
+       </div>
+           
+    <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-between ">
+          <Place />
+          <Place />
+          <Place />
+          <Place />
+          <Place />
+          <Place />
+          <Place />
+          <Place />
+          
+        
+    </div>
+    
+    <br><br><br><br><br><br><br>
+    </div>
+    <div class="d-flex justify-content-center">
         <Button>Suggérez un lieu</Button>
     </div>
-     <Footer />
+   
+    <Footer/>
+
 </template>
 
 <style lang="css">
@@ -38,17 +60,40 @@ h1{
 }
 #welcome{
     margin-top: 40px;
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 60px;
+    margin-right: 60px;
     margin-bottom:40px;
     text-align: justify;
+    
 }
+
+
+.yellow{
+
+    color: yellow;
+}
+
+.empty-star{
+    color: #e5e0e0;
+    
+}
+
 #Discover{
     margin-top: 40px;
 }
 
+#ListPlaces{
+    margin-left: 45px;
+}
 
+#FiltrerPar{
+    margin-bottom: 20px;
+    margin-left: 60px;
+    font-size: 20px ;
+    font-weight: bold;
+    
 
+}
 </style>
 
 <script setup>
@@ -57,4 +102,13 @@ import Place from '@/Components/Place.vue'
 import Button from '@/Components/Button.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
+import Input from '@/Components/Input.vue'
+import { ref } from 'vue'
+
+const showFilterBar=ref(false)
+
+
+const stars = [0,1,2,3,4]
+const selectedStars = ref(3)
+
 </script>
