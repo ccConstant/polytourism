@@ -62,3 +62,9 @@ Route::post('/place/delete', [PlaceController::class, 'delete_place']);
 Route::get('/place/10', function() {
     return Inertia::render('PlaceDetails');
 });
+Route::get('/wishlist', function() {
+    return Inertia::render('WishList');
+});
+Route::get('/history', function() {
+    return Inertia::render('History');
+});
