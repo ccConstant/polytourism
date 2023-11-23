@@ -1,11 +1,12 @@
 <template>
-    <div class="d-flex " :class="isInline ? 'flex-row align-items-center gap-2' : 'flex-column'">
+    <div class="d-flex w-full " :class="isInline ? 'flex-row align-items-center gap-2' : 'flex-column'">
         <label :for="props.title">{{ lodash.capitalize(props.title) }}</label>
         <select @change="update" class="form-control rounded-2 form-control-sm" v-if="props.type == 'select'" value="bldfokvn " >
             <option selected disabled>{{ props.placeholder }}</option>
             <option :value="option" selected="false" v-for="option in props.options" :key="option" >{{ option }}</option>
         </select>
         <input @change="update" v-else-if="props.type == 'date'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm">
+        <textarea @change="update" style="resize: none;" rows="5" res v-else-if="props.type == 'textarea'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm"></textarea>
         <input @input="update" v-else :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm">
         <p class="form-text">{{ props.hint }}</p>
     </div>
