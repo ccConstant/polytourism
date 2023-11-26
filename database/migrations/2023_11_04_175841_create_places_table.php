@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('plc_type');
             $table->jsonb('plc_address');
             $table->string('plc_insee');
-            $table->string('place_descrcourtfr');
+            $table->string('plc_descrcourtfr');
             $table->string('plc_descrdetailfr');
             $table->jsonb('plc_contact');
             $table->string('plc_ouvertureenclair');

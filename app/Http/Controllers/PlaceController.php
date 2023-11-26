@@ -240,7 +240,7 @@ class PlaceController extends Controller
             'plc_type' => $place->plc_type,
             'plc_address' => $place->plc_address, 
             'plc_insee' => $place->plc_insee,
-            'place_descrcourtfr' => $place->place_descrcourtfr,
+            'plc_descrcourtfr' => $place->plc_descrcourtfr,
             'plc_descrdetailfr' => $place->plc_descrdetailfr,
             'plc_contact' => $place->plc_contact,
             'plc_ouvertureenclair' => $place->plc_ouvertureenclair,
