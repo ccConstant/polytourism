@@ -71,3 +71,6 @@ Route::get('/history', function() {
 Route::get('/myaccount', function() {
     return Inertia::render('MyAccount');
 });
+Route::get('/admin', function() {
+    return Inertia::render('AdminDashboard');
+});
