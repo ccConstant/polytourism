@@ -17,9 +17,25 @@
         <Header level="1" class="my-5">proposition</Header>
         <p class="section-para">Nos Propositions pour vous : </p>
         <div class="d-flex gap-3 justify-content-center">
-          <Place />
-          <Place />
-          <Place />
+          <Place :place="{id : 1,
+                  plc_nom : 'Hotel de ville',
+                  plc_theme : 'activite',
+                  plc_tarifsenclair : 'gratuit' ,
+                  plc_illustrations : 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}" />
+                  <Place :place="{
+                    id: 1,
+                    plc_nom: 'Hotel de ville',
+                    plc_theme: 'activite',
+                    plc_tarifsenclair: 'gratuit',
+                    plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                  }" />
+        <Place :place="{
+          id: 1,
+          plc_nom: 'Hotel de ville',
+          plc_theme: 'activite',
+          plc_tarifsenclair: 'gratuit',
+          plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          }" />
         </div>
       </div>
     </section>

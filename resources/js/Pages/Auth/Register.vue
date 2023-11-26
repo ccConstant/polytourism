@@ -4,6 +4,7 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Input from '@/Components/Input.vue'
 import Title from '@/Components/Title.vue'
 import Error from '@/Components/Error.vue'
+import Navigation from '@/Components/Navigation.vue';
 import { ref } from 'vue';
 import axios from 'axios';
 
@@ -251,6 +252,7 @@ const onErrorClose = () => {
 </script>
 
 <template>
+    <Navigation />
     <GuestLayout>
         <Head title="Register" />
         
