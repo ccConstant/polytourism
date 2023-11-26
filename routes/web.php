@@ -68,3 +68,6 @@ Route::get('/wishlist', function() {
 Route::get('/history', function() {
     return Inertia::render('History');
 });
+Route::get('/myaccount', function() {
+    return Inertia::render('MyAccount');
+});

@@ -5,9 +5,9 @@
             <option selected disabled>{{ props.placeholder }}</option>
             <option :value="option" selected="false" v-for="option in props.options" :key="option" >{{ option }}</option>
         </select>
-        <input @change="update" v-else-if="props.type == 'date'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm">
-        <textarea @change="update" style="resize: none;" rows="5" res v-else-if="props.type == 'textarea'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm"></textarea>
-        <input @input="update" v-else :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm">
+        <input @change="update" v-else-if="props.type == 'date'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm" :disabled="disabled">
+        <textarea @change="update" style="resize: none;" rows="5" res v-else-if="props.type == 'textarea'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm" :disabled="disabled "></textarea>
+        <input @input="update" :value="modelValue" v-else :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm" :disabled="disabled">
         <p class="form-text">{{ props.hint }}</p>
     </div>
 </template>
@@ -18,7 +18,7 @@ import dayjs from 'dayjs'
 
 const now = dayjs().format('YYYY-MM-DD')
 
-const props = defineProps(['modelValue','title','placeholder','isInline','options','hint','type'])
+const props = defineProps(['modelValue','title','placeholder','full','isInline','options','hint','type','disabled'])
 const emits = defineEmits(['update:modelValue'])
 
 const update = function(e){

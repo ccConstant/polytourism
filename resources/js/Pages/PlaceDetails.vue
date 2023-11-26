@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <PopUp :onClose="onClose" v-if="showPopUp" />
+      <PopUp :onClose="onClose" title="Ajouter un commentaire" type="textarea" placeholder="Donnez votre avis ..." :note="true"  v-if="showPopUp" />
       <Button @click="handleShow">Ajouter un commentaire</Button>
     </section>
     <section v-if="allComments.length > 0" class="section container d-flex flex-column gap-5 align-items-start">
