@@ -233,8 +233,16 @@ const submit = async () => {
         console.log(error.message)
         errorMessage.value = error.message
     }else{
-        const response = await axios.post('/login', value)
-        console.log(response)
+        axios.post('register',{
+                name:form.value.name,
+                email:form.value.email,
+                password:form.value.password,
+                gender:form.value.gender,
+                password_confirmation:form.value.password_confirmation,
+            })
+            .then(response =>{window.location.href = "/"})
+            .catch(error => console.log(error.response.data.errors)) ;
+       // console.log(response)
     }    
 };
 const onErrorClose = () => {
@@ -262,7 +270,7 @@ const onErrorClose = () => {
                 <Input v-model="form.birth_date"  title="Date de naissance" type="date" hint="Saisir votre date de naissance" />
             </div>
             <div>
-                <Input v-model="form.gender"  title="Sexe" type="select" :options="['Homme','Femme','Autre']" placeholder="Sexe" hint="Choisir votre sexe" />
+                <Input v-model="form.gender"  title="Sexe" type="select" :options="['Man','Woman','Other']" placeholder="Sexe" hint="Choisir votre sexe" />
             </div>
             <div>
                 <Input v-model="form.password"  title="mot de passe" type="password" placeholder="mot de passe" hint="Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule et un caractère spécial" />

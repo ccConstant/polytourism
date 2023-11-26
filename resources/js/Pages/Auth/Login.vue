@@ -20,8 +20,12 @@ const connectUser = async () => {
         console.log(error)
         errorMessage.value = error.message
     }else{
-        const response = await axios.post('/login',value)
-        console.log(response)
+       axios.post('login',{
+            email:form.value.email,
+            password:form.value.password,
+        })
+        .then(response =>{window.location.href = "/"})
+        .catch(error =>console.log(error.response.data.errors));
     }
 };
 
@@ -56,7 +60,9 @@ const onErrorClose = () => {
                 <p
                     :href="route('password.request')"
                 >
-                    vous n'avez pas de compte ? <router-link class="link">créez-en un</router-link>
+                    vous n'avez pas de compte ? 
+                    
+                    <a href="/register"><router-link class="link">Créez-en un</router-link></a>
         </p>
 
                 <button class="btn btn-primary">se connecter</button>
