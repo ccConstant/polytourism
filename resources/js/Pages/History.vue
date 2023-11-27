@@ -1,5 +1,5 @@
 <template>
-    <Navigation :connected="true" />
+    <Navigation :connected="props.auth.user" />
     <br><br><br><br><br><br><br>
 
     <Header class="center" :level="2">Bienvenue dans votre historique</Header>
@@ -123,4 +123,7 @@ import Header from '@/Components/Header.vue'
 import Place from '@/Components/Place.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
+
+const props = defineProps(['auth'])
+
 </script>

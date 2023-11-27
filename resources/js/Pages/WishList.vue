@@ -1,5 +1,5 @@
 <template>
-    <Navigation :connected="true" />
+    <Navigation :connected="props.auth.user" />
     <br><br><br><br><br><br><br>
 
     <Header class="center" :level="2">Bienvenue dans votre wish liste</Header>
@@ -128,7 +128,7 @@ import Input from '@/Components/Input.vue'
 import { ref } from 'vue'
 
 const showFilterBar = ref(false)
-
+const props = defineProps(['auth'])
 
 const stars = [0, 1, 2, 3, 4]
 const selectedStars = ref(-1)

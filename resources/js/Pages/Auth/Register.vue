@@ -234,14 +234,21 @@ const submit = async () => {
         console.log(error.message)
         errorMessage.value = error.message
     }else{
+        /*INSERT INTO`users`(`id`, `name`, `email`, `gender`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`)
+         VALUES('1', 'abdelhak', 'abdelhak@email.com', 'Man', '2023-11-01 21:25:25', 'abdelhak', 'scsq', '2023-11-01 21:25:25', '2023-11-01 21:25:25');*/
+        console.log(form.value.gender)
         axios.post('register',{
                 name:form.value.name,
                 email:form.value.email,
+                gender:'Man',
                 password:form.value.password,
-                gender:form.value.gender,
                 password_confirmation:form.value.password_confirmation,
             })
-            .then(response =>{window.location.href = "/"})
+            .then(response =>{
+                localStorage.setItem('user',response.data)
+                console.log(response)
+                window.location.href = "/"
+            })
             .catch(error => console.log(error.response.data.errors)) ;
        // console.log(response)
     }    

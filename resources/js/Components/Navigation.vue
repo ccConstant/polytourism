@@ -19,10 +19,10 @@
             </a>
       
             <div class="dropdown-menu" :class="showDropDownLinks ? 'show' : ''" aria-labelledby="dropdownMenuLink">
-              <a @click="showDropDownLinks = false" class="dropdown-item" href="#">mes infos</a>
+              <a @click="showDropDownLinks = false" class="dropdown-item" href="/myaccount">mes infos</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">historique</a>
-              <a @click="showDropDownLinks = false" class="dropdown-item" href="#">déconnexion</a>
+              <a class="dropdown-item" @click="logout" href="#">déconnexion</a>
             </div>
           </div>
         </nav>
@@ -32,6 +32,7 @@
 <script setup>
 import { ref } from 'vue';
 import Button from './Button.vue';
+import axios from 'axios';
 
 const links = [{
   nom : 'accueil',
@@ -64,6 +65,13 @@ addEventListener("resize", (e) => {
         showNavBarLinks.value = false
     }
 })
+
+const logout = () => { 
+  showDropDownLinks.value = false
+  axios.post('logout')
+  localStorage.clear()
+  window.location.href = '/'
+}
 
 </script>
 

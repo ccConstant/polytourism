@@ -1,7 +1,7 @@
 <template>
-   <router-link class="cursor-pointer" :class="buttonType == 'mini-primary' ? 'btn-mini-primary' : buttonType == 'mini-secondary' ? 'btn-mini-secondary' : 'btn-primary' " >
+   <a class="cursor-pointer" :class="buttonType == 'danger' ? 'btn-mini-danger ' : buttonType == 'mini-primary' ? 'btn-mini-primary' : buttonType == 'mini-secondary' ? 'btn-mini-secondary' : 'btn-primary' " >
         <slot></slot>
-   </router-link>
+   </a>
 </template>
 
 <script setup>

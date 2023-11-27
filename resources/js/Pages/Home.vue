@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navigation />
+    <Navigation :connected="props.auth.user" />
     <section id="home" class="d-flex container align-items-center section gap-3">
       <div class="w-50">
         <h1 class="large-title">Bienvenue sur <span class="primary-color">Polytourisme</span></h1>
@@ -79,6 +79,10 @@ import Place from '@/Components/Place.vue'
 import Presentation from '@/Components/Presentation.vue'
 import Info from '@/Components/Info.vue'
 import Footer from '@/Components/Footer.vue'
+
+const props = defineProps(['auth'])
+
+console.log(props.auth.user)
 
 </script>
 
