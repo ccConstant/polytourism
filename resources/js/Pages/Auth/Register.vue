@@ -249,7 +249,7 @@ const submit = async () => {
                 console.log(response)
                 window.location.href = "/"
             })
-            .catch(error => console.log(error.response.data.errors)) ;
+            .catch(error => errorMessage.value = 'Une erreur s\'est produite');
        // console.log(response)
     }    
 };

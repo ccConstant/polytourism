@@ -26,7 +26,7 @@ const connectUser = async () => {
             password:form.value.password,
         })
         .then(response =>{window.location.href = "/"})
-        .catch(error =>console.log(error.response.data.errors));
+        .catch(error => errorMessage.value = 'email ou mot de passe sont incorrects' );
     }
 };
 

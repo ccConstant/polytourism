@@ -22,51 +22,12 @@
           
          </div>
        </div>
-           
     <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
-          <Place :place="{
-              id: 1,
-              plc_nom: 'Hotel de ville',
-              plc_theme: 'activite',
-              plc_tarifsenclair: 'gratuit',
+          {{ allPlaces }}
+          <Place v-for="place in allPlaces" :key="place" :place="{
+              ...place,
               plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           }" />
-          <Place :place="{
-              id: 1,
-              plc_nom: 'Hotel de ville',
-              plc_theme: 'activite',
-              plc_tarifsenclair: 'gratuit',
-              plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          }" />
-          <Place :place="{
-              id: 1,
-              plc_nom: 'Hotel de ville',
-              plc_theme: 'activite',
-              plc_tarifsenclair: 'gratuit',
-              plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          }" />
-          <Place :place="{
-              id: 1,
-              plc_nom: 'Hotel de ville',
-              plc_theme: 'activite',
-              plc_tarifsenclair: 'gratuit',
-              plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          }" />
-          <Place :place="{
-              id: 1,
-              plc_nom: 'Hotel de ville',
-              plc_theme: 'activite',
-              plc_tarifsenclair: 'gratuit',
-              plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          }" />
-          <Place :place="{
-              id: 1,
-              plc_nom: 'Hotel de ville',
-              plc_theme: 'activite',
-              plc_tarifsenclair: 'gratuit',
-              plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          }" />
-
           
         
     </div>
@@ -135,13 +96,17 @@ h1{
 import Header from '@/Components/Header.vue'
 import Place from '@/Components/Place.vue'
 import Button from '@/Components/Button.vue'
+import Input from '@/Components/Input.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
-import Input from '@/Components/Input.vue'
 import { ref } from 'vue'
+import axios from 'axios'
 
 const showFilterBar=ref(false)
 
+const allPlaces = ref([])
+axios.get('place/all').then(response => allPlaces.value = response.data).catch((error => console.log(error)))
+//console.log(allPlaces.value)
 
 const stars = [0,1,2,3,4]
 const selectedStars = ref(-1)

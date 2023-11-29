@@ -3,7 +3,7 @@
         <Navigation :connected="props.auth.user" />
         <section class="section container d-flex flex-column align-items-center gap-5">
             <Header :level="2">mon compte</Header>
-            <div class="d-flex flex-wrap fluid gap-5 ">
+            <div class="d-flex w-full flex-wrap fluid my-20 justify-space-between gap-5">
                 <div class="d-flex align-items-center gap-5 w-[500px]" v-for="key in Object.keys(object)" :key="key">
                     <Input class="input" :title="key" v-model="object[key]" :disabled="true" />
                     <i @click="() => onClick(key)" class="fa-solid fa-pencil fa-lg" style="color: #000000;"></i>
@@ -59,8 +59,6 @@ const password = ref('')
 const object = ref({
     nom : props.auth.user.name,
     email : props.auth.user.email,
-    adresse : '11 rue de la liberté',
-    tel : '06.06.06.06',
 })
 
 
