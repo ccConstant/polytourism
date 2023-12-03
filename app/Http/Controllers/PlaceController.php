@@ -47,6 +47,7 @@ class PlaceController extends Controller
                 'plc_datecreation' => 'nullable|date|timezone:UTC', // Adjust 'UTC' to the appropriate timezone
                 'plc_datemaj' => 'nullable|date|timezone:UTC', // Adjust 'UTC' to the appropriate timezone
                 'plc_gid' => 'required|numeric|min:1|max:255',
+                'plc_validated' => 'required|boolean',
             ],
             [
                 'plc_nom.required' => 'You must enter a name for your place',
@@ -146,6 +147,9 @@ class PlaceController extends Controller
                 'plc_gid.numeric' => 'The GID field must be a numeric value',
                 'plc_gid.min' => 'The GID must be a minimum of one character',
                 'plc_gid.max' => 'The GID must be a maximum of 255 characters',
+
+                'plc_validated.required' => 'You must enter a validation status for your place',
+                'plc_validated.boolean' => 'The validation status field must be a boolean value',
             ]
         );
     }

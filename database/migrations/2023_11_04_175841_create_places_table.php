@@ -14,26 +14,27 @@ return new class extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->id();
 
-            $table->string('plc_idsitra');
-            $table->string('plc_nom');
-            $table->jsonb('plc_theme');
-            $table->string('plc_type');
-            $table->jsonb('plc_address');
-            $table->string('plc_insee');
-            $table->string('plc_descrcourtfr');
-            $table->string('plc_descrdetailfr');
-            $table->jsonb('plc_contact');
-            $table->string('plc_ouvertureenclair');
-            $table->jsonb('plc_ouverture');
-            $table->string('plc_tarifsenclair');
-            $table->float('plc_tarifmin');
-            $table->float('plc_tarifmax');
-            $table->jsonb('plc_modepaiement');
-            $table->jsonb('plc_illustrations');
-            $table->string('plc_producteur');
+            $table->string('plc_idsitra')->nullable();
+            $table->string('plc_nom')->nullable();
+            $table->string('plc_theme')->nullable();
+            $table->string('plc_type')->nullable();
+            $table->string('plc_address')->nullable();
+            $table->string('plc_insee')->nullable();
+            $table->string('plc_descrcourtfr')->nullable();
+            $table->string('plc_descrdetailfr')->nullable();
+            $table->string('plc_contact')->nullable();
+            $table->string('plc_ouvertureenclair')->nullable();
+            $table->string('plc_ouverture')->nullable();
+            $table->string('plc_tarifsenclair')->nullable();
+            $table->float('plc_tarifmin')->nullable();
+            $table->float('plc_tarifmax')->nullable();
+            $table->string('plc_modepaiement')->nullable();
+            $table->string('plc_illustrations')->nullable();
+            $table->string('plc_producteur')->nullable();
             $table->timestampTz('plc_datecreation')->nullable();
             $table->timestampTz('plc_datemaj')->nullable();
-            $table->integer('plc_gid');
+            $table->integer('plc_gid')->nullable();
+            $table->boolean('plc_validated');
             //$table->geometry('the_geom'); // type: geometry SRID=4171 GeomType=POINT on the GrandLyon website 
 
             $table->timestamps();
