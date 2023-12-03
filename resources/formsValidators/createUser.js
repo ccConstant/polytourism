@@ -11,6 +11,10 @@ export const schema = Joi.object({
         "string.empty": "l'email est obligatoire",
         "string.email": "l'email doit être valide",
     }),
+    pseudo: Joi.string().min(1).required().messages({
+        "any.required" : "le pseudo est obligatoire",
+        "string.empty" : "le pseudo est obligatoire",
+    }),
     country: Joi.string().required().messages({
         "any.required": "le pays est obligatoire",
         "string.empty": "le pays est obligatoire",

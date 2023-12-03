@@ -192,7 +192,7 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function send_places(){
-        /*$places = Place::all();
+        $places = Place::all();
         $array = [];
         foreach ($places as $place) {
             $obj = [
@@ -205,23 +205,7 @@ class PlaceController extends Controller
             ];
             array_push($array, $obj);
         }
-        return response()->json($array);*/
-
-        $array = [];
-        $obj1 = [
-            'id' => 1,
-            'plc_nom' => "Hôtel de ville",
-            'plc_theme' => ["#ACTIVITE"],
-            'plc_tarifsenclair' => 10,
-        ];
-
-        array_push($array, $obj1);
-        array_push($array, $obj1);
-        array_push($array, $obj1);
-        
         return response()->json($array);
-
-
     }
 
     /**

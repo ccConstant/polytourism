@@ -13,6 +13,7 @@ const form = ref({
     email: '',
     country : '',
     birth_date : '',
+    pseudo : '',
     gender : '',
     password: '',
     password_confirmation: '',
@@ -236,15 +237,16 @@ const submit = async () => {
     }else{
         /*INSERT INTO`users`(`id`, `name`, `email`, `gender`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`)
          VALUES('1', 'abdelhak', 'abdelhak@email.com', 'Man', '2023-11-01 21:25:25', 'abdelhak', 'scsq', '2023-11-01 21:25:25', '2023-11-01 21:25:25');*/
-        console.log(form.value.gender)
         axios.post('register',{
                 name:form.value.name,
                 email:form.value.email,
                 gender:'Man',
+                pseudo:form.value.pseudo,
                 password:form.value.password,
                 password_confirmation:form.value.password_confirmation,
             })
             .then(response =>{
+                console.log("accepted")
                 localStorage.setItem('user',response.data)
                 console.log(response)
                 window.location.href = "/"
@@ -271,6 +273,9 @@ const onErrorClose = () => {
             </div>
             <div>
                 <Input v-model="form.email"  title="Adresse e-mail" type="email" placeholder="adresse e-mail" hint="Exemple : nom@example.com" />
+            </div>
+            <div>
+                <Input v-model="form.pseudo"  title="Pseudo" type="text" placeholder="Pseudo" hint="Exemple : Pseudo utilisé pour saisir des commentaires" />
             </div>
             <div>
                 <Input v-model="form.country"  title="Pays" type="select" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />

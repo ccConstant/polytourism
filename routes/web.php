@@ -30,6 +30,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
 Route::get('/ListPlaces', function() {
     return Inertia::render('ListPlaces');
 });
@@ -62,15 +64,18 @@ Route::post('/place/delete', [PlaceController::class, 'delete_place']);
 Route::get('/place/10', function() {
     return Inertia::render('PlaceDetails');
 });
-Route::get('/wishlist', function() {
-    return Inertia::render('WishList');
-});
-Route::get('/history', function() {
-    return Inertia::render('History');
-});
-Route::get('/myaccount', function() {
-    return Inertia::render('MyAccount');
-});
-Route::get('/admin', function() {
-    return Inertia::render('AdminDashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', function() {
+        return Inertia::render('WishList');
+    });
+    Route::get('/history', function() {
+        return Inertia::render('History');
+    });
+    Route::get('/myaccount', function() {
+        return Inertia::render('MyAccount');
+    });
+    Route::get('/admin', function() {
+        return Inertia::render('AdminDashboard');
+    });
 });
