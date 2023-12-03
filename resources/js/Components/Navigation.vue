@@ -10,8 +10,8 @@
               
           </div>
           <div  v-if="!UserIsConnected && showNavBarLinks" class="d-flex gap-3">
-              <a href="/login"> <Button buttonType="mini-primary"> se connecter</Button> </a>
-              <a href="/register"> <Button buttonType="mini-secondary">s'inscrire</Button></a>
+              <a href="/login"> <Button buttonType="mini-primary"> Se connecter</Button> </a>
+              <a href="/register"> <Button buttonType="mini-secondary">S'inscrire</Button></a>
           </div>
           <div v-if="showNavBarLinks && UserIsConnected"  class="dropdown show">
             <a @click="showDropDownLinks = !showDropDownLinks" class="btn btn-secondary dropdown-toggle btn-mini-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,10 +19,10 @@
             </a>
       
             <div class="dropdown-menu" :class="showDropDownLinks ? 'show' : ''" aria-labelledby="dropdownMenuLink">
-              <a @click="showDropDownLinks = false" class="dropdown-item" href="/myaccount">mes infos</a>
-              <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">wishlist</a>
-              <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">historique</a>
-              <a class="dropdown-item" @click="logout" href="#">déconnexion</a>
+              <a @click="showDropDownLinks = false" class="dropdown-item" href="/myaccount">Mes infos</a>
+              <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
+              <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
+              <a class="dropdown-item" @click="logout" href="#">Déconnexion</a>
             </div>
           </div>
         </nav>

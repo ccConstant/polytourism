@@ -5,8 +5,8 @@
     <Header class="center" :level="2">Bienvenue dans votre historique</Header>
 
     <p id="welcome" class="large3">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette
-        magnigique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore.
-    </p>
+        magnifique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore.
+        </p>
 
 
     <div>

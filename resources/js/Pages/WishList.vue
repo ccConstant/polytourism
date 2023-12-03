@@ -2,10 +2,10 @@
     <Navigation :connected="props.auth.user" />
     <br><br><br><br><br><br><br>
 
-    <Header class="center" :level="2">Bienvenue dans votre wish liste</Header>
+    <Header class="center" :level="2">Bienvenue dans votre Wishlist</Header>
 
     <p id="welcome" class="large3">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette
-        magnigique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore.
+        magnifique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore.
         </p>
 
 
