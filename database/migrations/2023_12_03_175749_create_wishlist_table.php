@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Filename: 2023_12_03_175749_create_wishlist_table.php
 * Creation date: Dec 3 2023

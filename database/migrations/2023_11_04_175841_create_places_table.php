@@ -1,4 +1,5 @@
 <?php
+
 /*
 * Filename: 2023_11_04_175841_create_places_table.php
 * Creation date: Nov 3 2023
