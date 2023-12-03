@@ -1,4 +1,10 @@
 <?php
+/*
+* Filename: 2023_12_03_175736_create_comments_table.php
+* Creation date: Dec 3 2023
+* Update date: 
+* This file is used create the 'comments' table in the database.
+*/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

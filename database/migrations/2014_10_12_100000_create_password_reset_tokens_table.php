@@ -1,5 +1,11 @@
 <?php
-
+/*
+* Filename:2014_10_12_100000_create_password_reset_tokens_table.php
+* Creation date: 
+* Update date:   
+* This Laravel migration file is intended to create a table named 'password_reset_tokens'.
+* It is commonly used in authentication systems to store tokens associated with password reset requests.
+*/
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

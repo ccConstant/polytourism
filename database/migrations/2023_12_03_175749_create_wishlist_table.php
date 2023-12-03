@@ -1,4 +1,10 @@
 <?php
+/*
+* Filename: 2023_12_03_175749_create_wishlist_table.php
+* Creation date: Dec 3 2023
+* Update date: 
+* This file is used create the 'wishlist' table in the database.
+*/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

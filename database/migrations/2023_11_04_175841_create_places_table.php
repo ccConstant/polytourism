@@ -1,4 +1,10 @@
 <?php
+/*
+* Filename: 2023_11_04_175841_create_places_table.php
+* Creation date: Nov 3 2023
+* Update date: Dec 3 2023   
+* This file is used create the 'places' table in the database.
+*/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

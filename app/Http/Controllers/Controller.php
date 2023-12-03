@@ -1,4 +1,8 @@
 <?php
+/*This base controller is designed to be a starting point for the application's controllers.
+*When a new controller is created in the application, this base controller is typically extended to inherit its functionality.*/
+
+
 
 namespace App\Http\Controllers;
 
