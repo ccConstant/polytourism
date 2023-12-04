@@ -41,7 +41,7 @@ return new class extends Migration
             $table->timestampTz('plc_datecreation')->nullable();
             $table->timestampTz('plc_datemaj')->nullable();
             $table->integer('plc_gid')->nullable();
-            $table->boolean('plc_validated');
+            $table->boolean('plc_validated')->default(false);
             //$table->geometry('the_geom'); // type: geometry SRID=4171 GeomType=POINT on the GrandLyon website 
 
             $table->timestamps();
