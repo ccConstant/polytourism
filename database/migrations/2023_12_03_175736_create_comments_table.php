@@ -20,7 +20,6 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('user_pseudo');
             $table->integer('comment_rating'); //to check/constraint from 1 to 5
             $table->string('comment_text');
             $table->date('comment_date');

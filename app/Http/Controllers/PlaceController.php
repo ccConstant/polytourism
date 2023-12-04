@@ -30,7 +30,6 @@ class PlaceController extends Controller
                 'plc_nom' => 'required|string|min:1|max:255',
                 'plc_idsitra' => 'required|string|min:1|max:255',
                 'plc_theme' => 'required|string|min:1|max:255',
-                'plc_type' => 'required|string|min:1|max:255',
                 'plc_address' => 'required|string|min:1|max:255',
                 'plc_insee'=> 'required|string|min:1|max:255',
                 'plc_descrcourtfr' => 'required|string|min:1|max:255',
@@ -64,11 +63,6 @@ class PlaceController extends Controller
                 'plc_theme.json' => 'The theme field must be a string',
                 'plc_theme.min' => 'The theme must be a minimum of one character',
                 'plc_theme.max' => 'The theme must be a maximum of 255 characters',
-
-                'plc_type.required' => 'You must enter a type for your place',
-                'plc_type.string' => 'The type field must be a string',
-                'plc_type.min' => 'The type must be a minimum of one character',
-                'plc_type.max' => 'The type must be a maximum of 255 characters',
 
                 'plc_address.required' => 'You must enter an address for your place',
                 'plc_address.json' => 'The address field must be a string',

@@ -21,25 +21,16 @@ return new class extends Migration
         Schema::create('place_update', function (Blueprint $table) {
             $table->id();
 
-            $table->string('plcUpdt_idsitra');
-            $table->string('plcUpdt_nom');
-            $table->jsonb('plcUpdt_theme');
-            $table->string('plcUpdt_type');
-            $table->jsonb('plcUpdt_address');
-            $table->string('plcUpdt_insee');
-            $table->string('plcUpdt_descrcourtfr');
-            $table->string('plcUpdt_descrdetailfr');
-            $table->jsonb('plcUpdt_contact');
-            $table->string('plcUpdt_ouvertureenclair');
-            $table->jsonb('plcUpdt_ouverture');
-            $table->string('plcUpdt_tarifsenclair');
-            $table->float('plcUpdt_tarifmin');
-            $table->float('plcUpdt_tarifmax');
-            $table->jsonb('plcUpdt_modepaiement');
-            $table->jsonb('plcUpdt_illustrations');
-            $table->string('plcUpdt_producteur');
-            $table->timestampTz('plcUpdt_datemaj')->nullable();
-            $table->integer('plcUpdt_gid');
+            $table->string('plcUpdt_nom')->nullable();
+            $table->jsonb('plcUpdt_theme')->nullable();
+            $table->jsonb('plcUpdt_address')->nullable();
+            $table->string('plcUpdt_descrcourtfr')->nullable();
+            $table->string('plcUpdt_descrdetailfr')->nullable();
+            $table->jsonb('plcUpdt_contact')->nullable();
+            $table->string('plcUpdt_ouvertureenclair')->nullable();
+            $table->jsonb('plcUpdt_ouverture')->nullable();
+            $table->string('plcUpdt_tarifsenclair')->nullable();
+            $table->jsonb('plcUpdt_illustrations')->nullable();
             $table->boolean('plcUpdt_validated');
             $table->integer('plc_id');
 
