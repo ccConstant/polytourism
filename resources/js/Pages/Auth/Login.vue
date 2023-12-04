@@ -1,30 +1,45 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Input from '@/Components/Input.vue'
 import Title from '@/Components/Title.vue'
+import Error from '@/Components/Error.vue';
+import Navigation from '@/Components/Navigation.vue';
 import {schema} from '../../../formsValidators/connectUser'
 
 import { ref } from 'vue';
+import axios from 'axios'
 
-
+const errorMessage = ref(null)
 const form = ref({
     email: '',
     password: '',
 });
 
-const connectUser = () => {
+const connectUser = async () => {
     const {error,value} = schema.validate(form.value)
     if(error){
         console.log(error)
+        errorMessage.value = error.message
     }else{
-        console.log('test passed')
+       axios.post('login',{
+            email:form.value.email,
+            password:form.value.password,
+        })
+        .then(response =>{window.location.href = "/"})
+        .catch(error => errorMessage.value = 'email ou mot de passe sont incorrects' );
     }
 };
+
+const onErrorClose = () => {
+    errorMessage.value = null
+}
+
 </script>
 
 <template>
+    <Navigation />
     <GuestLayout>
+        
         <Head title="Log in" />
 
         <Title title="Accès client" />
@@ -37,6 +52,7 @@ const connectUser = () => {
                 <Input v-model="form.password"  title="votre mot de passe" type="password" placeholder="votre mot de passe" />
             </div>
 
+            <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
 
             <div class="d-flex flex-column-reverse items-center justify-end mt-4">
                 <p
@@ -47,10 +63,12 @@ const connectUser = () => {
                 <p
                     :href="route('password.request')"
                 >
-                    vous n'avez pas de compte ? <router-link class="link">créez-en un</router-link>
+                    vous n'avez pas de compte ? 
+                    
+                    <a href="/register"><router-link class="link">Créez-en un</router-link></a>
         </p>
 
-                <button class="btn">se connecter</button>
+                <button class="btn btn-primary">se connecter</button>
             </div>
         </form>
     </GuestLayout>

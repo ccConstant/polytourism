@@ -17,14 +17,26 @@ use App\Http\Controllers\PlaceController;
 |
 */
 
+Route::get('/home', function() {
+    return Inertia::render('Home');
+});
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+Route::get('/ListPlaces', function() {
+    return Inertia::render('ListPlaces');
+});
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -36,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
 require __DIR__.'/auth.php';
 
 /* Places Routes */
@@ -43,5 +57,25 @@ Route::get('/place/all', [PlaceController::class, 'send_places']);
 Route::post('/place/add', [PlaceController::class, 'add_place']);
 Route::post('/place/verif', [PlaceController::class, 'verif_place']);
 Route::post('/place/update/{id}', [PlaceController::class, 'update_place']);
-Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
+//Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
 Route::post('/place/delete', [PlaceController::class, 'delete_place']);
+
+// à supprimer
+Route::get('/place/10', function() {
+    return Inertia::render('PlaceDetails');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', function() {
+        return Inertia::render('WishList');
+    });
+    Route::get('/history', function() {
+        return Inertia::render('History');
+    });
+    Route::get('/myaccount', function() {
+        return Inertia::render('MyAccount');
+    });
+    Route::get('/admin', function() {
+        return Inertia::render('AdminDashboard');
+    });
+});

@@ -3,13 +3,38 @@
 @tailwind utilities;
 
 
-.btn{
+
+.btn-mini-primary{
+    background-color: #335EEA;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-transform: capitalize;
+}
+.btn-mini-danger {
+    background-color: #dc3545;
+    color: white;
+    margin-top: 30px;
+    padding: 15px 30px;
+    border-radius: 3px;
+    text-transform: capitalize;
+}
+.btn-mini-secondary {
+    background-color: #dadce2;
+    color: #335EEB;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-transform: capitalize;
+}
+.btn-primary{
     background: #335EEA;
     padding: 15px 30px;
     color: white;
     font-size: large;
     border: 1px solid white;
     margin-bottom: 15px;
+    border-radius: 8px;
+    width: fit-content;
 }
 .btn:hover{
     color: #335EEA;
@@ -20,4 +45,111 @@
     text-decoration: underline;
     color: #335EEA;
     cursor: pointer;
+}
+
+.primary-color{
+    color: #335EEA;
+}
+.unselected-color{
+    color: #869CB8;
+}
+a.unselected-color:hover{
+    color: #335EEA;
+}
+
+.icon{
+    color: #335EEA;
+    padding: 3px 8px;
+    background-color:  rgb(233, 228, 228);
+    border-radius: 2px;
+    cursor: pointer;
+}
+.icon:hover{
+    background-color: rgb(219, 216, 216) ;
+}
+section{
+    margin: 110px 0;
+    padding: 100px 0;
+}
+.large-title{
+    font-size: 65px;
+    
+}
+p.large3{
+    font-size: 24px;
+}
+p.large2{
+    font-size: 32px;
+}
+p.large1{
+    font-size: 45px;
+}
+.header-1,.header-2,.header-3{
+    font-size: 65px;
+    text-align: center;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+.header-2{
+    font-size: 48px;
+}
+.header-3{
+    font-size: 40px;
+}
+.header-4{
+    font-size: 32px;
+}
+.header-margin-top{
+    margin-top: 36px;
+}
+.light{
+    font-weight: lighter;
+}
+.section-para{
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 36px;
+}
+.place{
+    border : 1px solid #9B9B9B;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.place,.place-image{
+    width: 350px;
+    width: 280px;
+}
+.place-title{
+    font-size: 36px;
+    font-weight: bold;
+}
+.place-theme{
+    background-color: #FFFE83;
+    padding: 7px 11px;
+    text-transform: uppercase;
+    font-weight: lighter0;
+    width: fit-content;
+}
+.place-price{
+    text-transform: uppercase;
+    font-weight: lighter0
+}
+.light-blue{
+    background-color: #AEF2EE;
+}
+
+.presentation{
+    width: 543px;
+}
+.presentation h1{
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.light-yellow{
+    background-color: #FFFE83 ;
+}
+.light-green{
+    background-color: #40F071;
 }

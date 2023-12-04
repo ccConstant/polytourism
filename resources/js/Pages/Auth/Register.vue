@@ -3,17 +3,24 @@ import {schema} from '../../../formsValidators/createUser'
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import Input from '@/Components/Input.vue'
 import Title from '@/Components/Title.vue'
+import Error from '@/Components/Error.vue'
+import Navigation from '@/Components/Navigation.vue';
 import { ref } from 'vue';
+import axios from 'axios';
 
 const form = ref({
     name: '',
     email: '',
     country : '',
     birth_date : '',
+    pseudo : '',
     gender : '',
     password: '',
     password_confirmation: '',
 });
+
+const errorMessage = ref(null)
+
 // à changer
 const countries = [
 'Abkhazie',
@@ -221,19 +228,40 @@ const countries = [
 'Zimbabwe'
 ]
 
-const submit = () => {
+const submit = async () => {
     console.log(form.value)
     const {error,value} = schema.validate(form.value)
     if(error){
-        console.log(error)
+        console.log(error.message)
+        errorMessage.value = error.message
     }else{
-        console.log('Test passed')
-    }
-
+        /*INSERT INTO`users`(`id`, `name`, `email`, `gender`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`)
+         VALUES('1', 'abdelhak', 'abdelhak@email.com', 'Man', '2023-11-01 21:25:25', 'abdelhak', 'scsq', '2023-11-01 21:25:25', '2023-11-01 21:25:25');*/
+        axios.post('register',{
+                name:form.value.name,
+                email:form.value.email,
+                gender:'Man',
+                pseudo:form.value.pseudo,
+                password:form.value.password,
+                password_confirmation:form.value.password_confirmation,
+            })
+            .then(response =>{
+                console.log("accepted")
+                localStorage.setItem('user',response.data)
+                console.log(response)
+                window.location.href = "/"
+            })
+            .catch(error => errorMessage.value = 'Une erreur s\'est produite');
+       // console.log(response)
+    }    
 };
+const onErrorClose = () => {
+    errorMessage.value = null
+}
 </script>
 
 <template>
+    <Navigation />
     <GuestLayout>
         <Head title="Register" />
         
@@ -247,13 +275,16 @@ const submit = () => {
                 <Input v-model="form.email"  title="Adresse e-mail" type="email" placeholder="adresse e-mail" hint="Exemple : nom@example.com" />
             </div>
             <div>
+                <Input v-model="form.pseudo"  title="Pseudo" type="text" placeholder="Pseudo" hint="Exemple : Pseudo utilisé pour saisir des commentaires" />
+            </div>
+            <div>
                 <Input v-model="form.country"  title="Pays" type="select" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />
             </div>
             <div>
                 <Input v-model="form.birth_date"  title="Date de naissance" type="date" hint="Saisir votre date de naissance" />
             </div>
             <div>
-                <Input v-model="form.gender"  title="Sexe" type="select" :options="['Homme','Femme','Autre']" placeholder="Sexe" hint="Choisir votre sexe" />
+                <Input v-model="form.gender"  title="Sexe" type="select" :options="['Man','Woman','Other']" placeholder="Sexe" hint="Choisir votre sexe" />
             </div>
             <div>
                 <Input v-model="form.password"  title="mot de passe" type="password" placeholder="mot de passe" hint="Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule et un caractère spécial" />
@@ -262,7 +293,7 @@ const submit = () => {
                 <Input v-model="form.password_confirmation"  title="confirmer votre mot de passe" type="password" placeholder="confirmer votre mot de passe" hint="Les deux mots de passe doivent être identiques" />
             </div>
 
-            
+            <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
 
             <div class="flex flex-column-reverse items-center justify-end mt-4">
                 <p
@@ -273,7 +304,7 @@ const submit = () => {
                     <router-link class="link">connectez-vous</router-link>
             </p>
 
-                <button class="btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <button class="btn btn-primary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Créer votre compte
                 </button>
             </div>
