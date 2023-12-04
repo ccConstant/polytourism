@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PlaceUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +62,14 @@ Route::post('/place/update/{id}', [PlaceController::class, 'update_place']);
 //Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
 Route::post('/place/delete', [PlaceController::class, 'delete_place']);
 
-// à supprimer
+/* PlaceUpdate Routes */
+Route::get('/placeUpdate/all', [PlaceUpdateController::class, 'send_placeUpdates']);
+Route::post('/placeUpdate/add', [PlaceUpdateController::class, 'add_placeUpdate']);
+Route::post('/placeUpdate/validate/{id}', [PlaceUpdateController::class, 'validate_placeUpdate']);
+Route::post('/placeUpdate/delete/{id}', [PlaceUpdateController::class, 'delete_placeUpdate']);
+
+
+
 Route::get('/place/10', function() {
     return Inertia::render('PlaceDetails');
 });
@@ -78,4 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', function() {
         return Inertia::render('AdminDashboard');
     });
+    Route::get('/users', [UserController::class, 'send_users']);
+    Route::post('/users/setRoleToAdmin/{id}', [UserController::class, 'setRoleToAdmin']);
+    Route::post('/users/setRoleToUser/{id}', [UserController::class, 'setRoleToUser']);
 });
