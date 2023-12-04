@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('plcUpdt_tarifsenclair')->nullable();
             $table->jsonb('plcUpdt_illustrations')->nullable();
             $table->boolean('plcUpdt_validated');
-            $table->integer('plc_id');
+            $table->unsignedBigInteger('plc_id');
 
             $table->foreign('plc_id')
                 ->references('id')

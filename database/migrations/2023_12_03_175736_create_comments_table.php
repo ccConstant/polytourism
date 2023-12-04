@@ -21,6 +21,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->integer('comment_rating'); //to check/constraint from 1 to 5
+            $table->unsignedBigInteger('user_id');
             $table->string('comment_text');
             $table->date('comment_date');
             $table->foreign('user_id')
