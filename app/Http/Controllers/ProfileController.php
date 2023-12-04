@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Filename: ProfileController.php
+* Creation date: Nov * 2023
+* Update date: Nov * 2023
+* This file is used to link the view files and the database that concern the Users table.
+* For example: Display, update or delete the user's profile form
+*/
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;

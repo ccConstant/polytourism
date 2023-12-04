@@ -3,7 +3,7 @@
 /*
 * Filename: PlaceController.php
 * Creation date: Nov 3 2023
-* Update date: Nov 4 2023
+* Update date: Dec 3 2023
 * This file is used to link the view files and the database that concern the Place table.
 * For example: add a place, update a place, import a place, delete a place...
 */
@@ -30,7 +30,6 @@ class PlaceController extends Controller
                 'plc_nom' => 'required|string|min:1|max:255',
                 'plc_idsitra' => 'required|string|min:1|max:255',
                 'plc_theme' => 'required|string|min:1|max:255',
-                'plc_type' => 'required|string|min:1|max:255',
                 'plc_address' => 'required|string|min:1|max:255',
                 'plc_insee'=> 'required|string|min:1|max:255',
                 'plc_descrcourtfr' => 'required|string|min:1|max:255',
@@ -47,6 +46,7 @@ class PlaceController extends Controller
                 'plc_datecreation' => 'nullable|date|timezone:UTC', // Adjust 'UTC' to the appropriate timezone
                 'plc_datemaj' => 'nullable|date|timezone:UTC', // Adjust 'UTC' to the appropriate timezone
                 'plc_gid' => 'required|numeric|min:1|max:255',
+                'plc_validated' => 'required|boolean',
             ],
             [
                 'plc_nom.required' => 'You must enter a name for your place',
@@ -63,11 +63,6 @@ class PlaceController extends Controller
                 'plc_theme.json' => 'The theme field must be a string',
                 'plc_theme.min' => 'The theme must be a minimum of one character',
                 'plc_theme.max' => 'The theme must be a maximum of 255 characters',
-
-                'plc_type.required' => 'You must enter a type for your place',
-                'plc_type.string' => 'The type field must be a string',
-                'plc_type.min' => 'The type must be a minimum of one character',
-                'plc_type.max' => 'The type must be a maximum of 255 characters',
 
                 'plc_address.required' => 'You must enter an address for your place',
                 'plc_address.json' => 'The address field must be a string',
@@ -146,6 +141,9 @@ class PlaceController extends Controller
                 'plc_gid.numeric' => 'The GID field must be a numeric value',
                 'plc_gid.min' => 'The GID must be a minimum of one character',
                 'plc_gid.max' => 'The GID must be a maximum of 255 characters',
+
+                'plc_validated.required' => 'You must enter a validation status for your place',
+                'plc_validated.boolean' => 'The validation status field must be a boolean value',
             ]
         );
     }
