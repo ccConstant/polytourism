@@ -19,17 +19,9 @@ import Header from '@/Components/Header.vue'
 import Table from '@/Components/Table.vue'
 import Button from '@/Components/Button.vue'
 import Footer from '@/Components/Footer.vue'
+import { ref } from 'vue'
 
-const usersAttributes = ['id','nom','contact','pays', 'date de naissance']
-const users = [
-    {
-        id : 1,
-        nom : 'Mark',
-        contact : 'otto',
-        pays : 'France',
-        birth_date : '02/10/2003'
-    }
-]
+const usersAttributes = ['id','name','email', 'pseudo', 'gender', 'role']
 
 const placesAttributes = ['id', 'nom', 'contact', 'adresse', 'tarif']
 const places = [
@@ -188,6 +180,10 @@ const places = [
         tarif: '3.2'
     },
 ]
+const users = ref([])
+
+axios.get('/users').then(response => users.value=response.data).catch((error => console.log(error)))
+console.log(users)
 
 const searchByName = (data,input) => {
     return data.filter((elem) => {

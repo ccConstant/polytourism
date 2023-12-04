@@ -1,9 +1,9 @@
 <?php
 
 /*
-* Filename: 2023_12_03_175857_create_place_update_table.php
-* Creation date: Dec 3 2023
-* Update date: 
+* Filename: 2023_12_03_173829_create_place_updates_table.php
+* Creation date: Dec 4 2023
+* Update date: Dec 4 2023
 * This file is used create the 'place_update' table in the database.
 */
 

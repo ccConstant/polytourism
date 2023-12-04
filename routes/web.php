@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PlaceUpdateController;
 use App\Http\Controllers\WishlistController;
 
 /*
@@ -67,7 +69,14 @@ Route::post('/wishlist/verif', [WishlistController::class, 'verif_wishlist']);
 Route::post('/wishlist/add', [WishlistController::class, 'add_wishlist']);
 Route::post('/wishlist/delete', [WishlistController::class, 'delete_wishlist']);
 
-// à supprimer
+/* PlaceUpdate Routes */
+Route::get('/placeUpdate/all', [PlaceUpdateController::class, 'send_placeUpdates']);
+Route::post('/placeUpdate/add', [PlaceUpdateController::class, 'add_placeUpdate']);
+Route::post('/placeUpdate/validate/{id}', [PlaceUpdateController::class, 'validate_placeUpdate']);
+Route::post('/placeUpdate/delete/{id}', [PlaceUpdateController::class, 'delete_placeUpdate']);
+
+
+
 Route::get('/place/10', function() {
     return Inertia::render('PlaceDetails');
 });
@@ -85,4 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', function() {
         return Inertia::render('AdminDashboard');
     });
+    Route::get('/users', [UserController::class, 'send_users']);
+    Route::post('/users/setRoleToAdmin/{id}', [UserController::class, 'setRoleToAdmin']);
+    Route::post('/users/setRoleToUser/{id}', [UserController::class, 'setRoleToUser']);
 });

@@ -1,9 +1,9 @@
 <?php
 
 /*
-* Filename: 2023_12_03_175736_create_comments_table.php
-* Creation date: Dec 3 2023
-* Update date: 
+* Filename: 2023_12_04_173408_create_comments_table.php
+* Creation date: Dec 4 2023
+* Update date: Dec 4 2023
 * This file is used create the 'comments' table in the database.
 */
 
@@ -41,3 +41,4 @@ return new class extends Migration
         Schema::dropIfExists('comments');
     }
 };
+
