@@ -20,14 +20,14 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('user_pseudo');
+            $table->string('user_id');
             $table->integer('comment_rating'); //to check/constraint from 1 to 5
             $table->string('comment_text');
             $table->date('comment_date');
             
 
-            $table->foreign('user_pseudo')
-                ->references('pseudo')
+            $table->foreign('user_id')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
             $table->timestamps();
