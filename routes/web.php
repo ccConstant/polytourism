@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,12 @@ Route::post('/place/verif', [PlaceController::class, 'verif_place']);
 Route::post('/place/update/{id}', [PlaceController::class, 'update_place']);
 //Route::get('/place/{id}', [PlaceController::class, 'send_place'])->whereNumber('id');
 Route::post('/place/delete', [PlaceController::class, 'delete_place']);
+
+/* Wishlist Routes */
+Route::get('/wishlist/{id}', [WishlistController::class, 'send_wishlists']);
+Route::post('/wishlist/verif', [WishlistController::class, 'verif_wishlist']);
+Route::post('/wishlist/add', [WishlistController::class, 'add_wishlist']);
+Route::post('/wishlist/delete', [WishlistController::class, 'delete_wishlist']);
 
 // à supprimer
 Route::get('/place/10', function() {
