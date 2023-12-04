@@ -20,7 +20,10 @@ return new class extends Migration
     {
         Schema::create('wishlist', function (Blueprint $table) {
             $table->id();
-            //id user and plc table d'association
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('plc_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('plc_id')->references('id')->on('places')->onDelete('cascade');
             $table->timestamps();
         });
     }
