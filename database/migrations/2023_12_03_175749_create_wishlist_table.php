@@ -20,6 +20,7 @@ return new class extends Migration
     {
         Schema::create('wishlist', function (Blueprint $table) {
             $table->id();
+            //id user and plc table d'association
             $table->timestamps();
         });
     }

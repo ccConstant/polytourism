@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('plc_idsitra')->nullable();
             $table->string('plc_nom')->nullable();
             $table->string('plc_theme')->nullable();
-            $table->string('plc_type')->nullable();
             $table->string('plc_address')->nullable();
             $table->string('plc_insee')->nullable();
             $table->string('plc_descrcourtfr')->nullable();
@@ -38,8 +37,8 @@ return new class extends Migration
             $table->string('plc_modepaiement')->nullable();
             $table->string('plc_illustrations')->nullable();
             $table->string('plc_producteur')->nullable();
-            $table->timestampTz('plc_datecreation')->nullable();
-            $table->timestampTz('plc_datemaj')->nullable();
+            //$table->timestampTz('plc_datecreation')->nullable();
+            //$table->timestampTz('plc_datemaj')->nullable();
             $table->integer('plc_gid')->nullable();
             $table->boolean('plc_validated');
             //$table->geometry('the_geom'); // type: geometry SRID=4171 GeomType=POINT on the GrandLyon website 
