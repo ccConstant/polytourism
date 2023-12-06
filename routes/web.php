@@ -8,6 +8,7 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlaceUpdateController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
