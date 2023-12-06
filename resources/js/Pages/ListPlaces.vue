@@ -104,7 +104,7 @@ import axios from 'axios'
 const showFilterBar=ref(false)
 
 const allPlaces = ref([])
-axios.get('place/all').then(response => allPlaces.value = response.data).catch((error => console.log(error)))
+axios.get('/place/all').then(response => allPlaces.value = response.data).catch((error => console.log(error)))
 //console.log(allPlaces.value)
 
 const stars = [0,1,2,3,4]

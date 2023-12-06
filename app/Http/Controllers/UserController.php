@@ -16,20 +16,33 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    /**
+     * Function called by ???.vue with the route: /users (post)
+     * Send all users to the view
+     * @return \Illuminate\Http\Response
+     */
     public function send_users(){
         $users = User::all();
         return $users;
     }
 
+    /**
+     * Function called by ???.vue with the route: /users/setRoleToAdmin/{id} (post)
+     * Set the role of the user to admin
+     * @param int $id : id of the user
+     */
     public function setRoleToAdmin($id){
         $user = User::find($id);
         $user->update(['role' => 'admin']);
-        return $user;
     }
 
+    /**
+     * Function called by ???.vue with the route: /users/setRoleToUser/{id} (post)
+     * Set the role of the user to user
+     * @param int $id : id of the user
+     */
     public function setRoleToUser($id){
         $user = User::find($id);
         $user->update(['role' => 'user']);
-        return $user;
     }
 }
