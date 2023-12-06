@@ -39,6 +39,7 @@ import Input from '@/Components/Input.vue'
 import { computed, ref, watch } from 'vue'
 
 const props = defineProps(['title','attr','onSearch','data','edit','delete','accept','decline','add'])
+console.log('from table',props) // hello
 const input = ref('')
 const data = ref(props.data)
 

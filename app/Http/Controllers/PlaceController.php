@@ -188,7 +188,8 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function send_places(){
-        $places = Place::where('plc_validated', 1)->get();
+        // à changer
+        $places = Place::where('plc_validated', 0)->get();
         $array = [];
         foreach ($places as $place) {
             $obj = [

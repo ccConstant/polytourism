@@ -11,21 +11,20 @@
     <div >
         <div class="d-flex align-items-center container section justify-content-between">
             <Header :level="4" > Filtré par : </Header>
-            <Input type="select" title="Thèmes" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
+            <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
             <Button @click="showFilterBar=!showFilterBar" buttonType='mini-primary'> + de filtres</Button>
         </div>
        <div v-if="showFilterBar" class="d-flex justify-content-between container section my-3 align-items-center">
-         <Input type="number" title="min" placeholder="min" :isInline="true" />
-         <Input type="number" title="max" placeholder="max" :isInline="true" />
+         <Input type="number" title="min" placeholder="min" v-model="filter.min" :isInline="true" />
+         <Input type="number" title="max" placeholder="max" v-model="filter.max" :isInline="true" />
          <div>
             <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
           
          </div>
        </div>
     <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
-          <Place v-for="place in allPlaces" :key="place" :place="{
+          <Place v-for="place in filteredPlaces" :key="place" :place="{
               ...place,
-              plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           }" />
           
         
@@ -98,14 +97,33 @@ import Button from '@/Components/Button.vue'
 import Input from '@/Components/Input.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import axios from 'axios'
 
 const showFilterBar=ref(false)
+const filteredPlaces=ref([])
+const filter = ref({
+    theme : '',
+    min : 0,
+    max : null,
+    rating : 0
+})
+
+watch(filter.value,() => {
+    console.log(filter.value)
+    filteredPlaces.value = allPlaces.value.filter((place) => {
+        return place.plc_theme.includes(filter.value.theme) 
+    })
+})
 
 const allPlaces = ref([])
-axios.get('/place/all').then(response => allPlaces.value = response.data).catch((error => console.log(error)))
-//console.log(allPlaces.value)
+axios.get('/place/all').then(response => {
+    allPlaces.value = response.data
+    filteredPlaces.value = allPlaces.value
+    console.log(allPlaces.value[0])
+    console.log(response.data)}).catch((error => console.log(error)))
+
+
 
 const stars = [0,1,2,3,4]
 const selectedStars = ref(-1)
