@@ -75,7 +75,12 @@ Route::post('/placeUpdate/add', [PlaceUpdateController::class, 'add_placeUpdate'
 Route::post('/placeUpdate/validate/{id}', [PlaceUpdateController::class, 'validate_placeUpdate']);
 Route::post('/placeUpdate/delete/{id}', [PlaceUpdateController::class, 'delete_placeUpdate']);
 
-
+/* Comment Routes */
+Route::get('/comment/all', [CommentController::class, 'send_comments']);
+Route::get('/comment/rated/{id}', [CommentController::class, 'send_rated']);
+Route::post('/comment/add', [CommentController::class, 'add_comment']);
+Route::post('/comment/verif', [CommentController::class, 'verif_comment']);
+Route::post('/comment/delete/{id}', [CommentController::class, 'delete_comment']);
 
 Route::get('/place/10', function() {
     return Inertia::render('PlaceDetails');
