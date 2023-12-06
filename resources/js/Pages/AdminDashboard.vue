@@ -3,8 +3,8 @@
     <Navigation />
     <section class="section container d-flex flex-column gap-5">
         <Header :level="1">bienvenue admin</Header>
-        <Table title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :delete="onDelete"></Table>
-        <Table title="liste des lieux" :onSearch="searchByName" :attr="placesAttributes" :data="places" :delete="onDelete" :edit="onEdit">
+        <Table v-if="userLoaded" title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :delete="onDelete"></Table>
+        <Table v-if="placesLoaded" title="liste des lieux" :onSearch="searchByName" :attr="placesAttributes" :data="places" :delete="onDelete" :edit="onEdit">
             <Button><a href="/">ajouter un lieu</a></Button>
         </Table>
         <Table title="liste des lieux à valider" :onSearch="searchByName" :attr="placesAttributes" :data="places" :accept="onAccept" :decline="onDecline"></Table>
@@ -24,170 +24,61 @@ import { ref } from 'vue'
 const usersAttributes = ['id','name','email', 'pseudo', 'gender', 'role']
 
 const placesAttributes = ['id', 'nom', 'contact', 'adresse', 'tarif']
-const places = [
-    {
-        id: 1,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 2,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 3,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 4,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 5,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 6,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 7,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 8,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 9,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 10,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 11,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 12,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 13,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 14,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 15,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 16,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 17,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 18,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 19,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 20,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 21,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-    {
-        id: 22,
-        nom: 'nom',
-        contact: 'otto',
-        adresse: 'Lyon',
-        tarif: '3.2'
-    },
-]
-const users = ref([])
 
-axios.get('/users').then(response => users.value=response.data).catch((error => console.log(error)))
-console.log(users)
+const places =ref([])
+let placesLoaded = ref(false)
+const placesUpdated = ref([])
+let placesUpdatesLoaded = ref(false)
+
+
+const users = ref([])
+let userLoaded = ref(false)
+
+//get users
+axios.get('/users').then(response => {
+    let data = response.data
+    data.forEach(user => {
+        delete user.email_verified_at
+        delete user.created_at
+        delete user.updated_at
+    });
+    users.value = data
+    userLoaded.value = true
+
+}).catch((error => console.log(error)))
+
+//get places
+axios.get('/place/all').then(response => {
+    let data = response.data
+    /*
+    {
+        "postalCode":"69003",
+        "streetAddress":"129 rue Servient",
+        "addressCountry":"FR",
+        "addressLocality":"Lyon 3ème"
+    }
+    */ 
+    data.forEach(place => {
+        delete place.plc_illustrations
+        console.log(place)
+        place.plc_address = 'adresse'
+    });
+    console.log(data)
+    places.value = data
+    placesLoaded.value = true
+
+}).catch((error => console.log(error)))
+
+//get places
+axios.get('/placeUpdate/all').then(response => {
+    let data = response.data
+    placesUpdated.value = data
+    placesUpdatesLoaded.value = true
+
+}).catch((error => console.log(error)))
 
 const searchByName = (data,input) => {
     return data.filter((elem) => {
-        console.log(elem.nom,input)
         return elem.nom.includes(input)
     })
 }

@@ -28,10 +28,8 @@ class PlaceController extends Controller
             [
                 // max: 255
                 'plc_nom' => 'required|string|min:1|max:255',
-                'plc_idsitra' => 'required|string|min:1|max:255',
                 'plc_theme' => 'required|string|min:1|max:255',
                 'plc_address' => 'required|string|min:1|max:255',
-                'plc_insee'=> 'required|string|min:1|max:255',
                 'plc_descrcourtfr' => 'required|string|min:1|max:255',
                 'plc_descrdetailfr' => 'required|string|min:1|max:255',
                 'plc_contact' => 'required|string|min:1|max:255',
@@ -185,12 +183,13 @@ class PlaceController extends Controller
     }
 
     /**
-     * Function call by ??.vue with the route : /place/all (get)
+     * Function call by ListPlaces.vue with the route : /place/all (get)
      * Get a list of all the places validated in the database 
      * @return \Illuminate\Http\Response
      */
     public function send_places(){
-        $places = Place::all();
+        // à changer
+        $places = Place::where('plc_validated', 0)->get();
         $array = [];
         foreach ($places as $place) {
             $obj = [
@@ -207,7 +206,7 @@ class PlaceController extends Controller
     }
 
     /**
-     * Function call by ??.vue with the route : /place/{id} (get)
+     * Function call by PlaceDetails.vue with the route : /place/{id} (get)
      * Get the place with the id given in parameter 
      * @param int $id The id of the place
      * @return \Illuminate\Http\Response

@@ -4,7 +4,6 @@
 
 <script setup>
 const props = defineProps(['level'])
-console.log(props)
 </script>
 
 <style>

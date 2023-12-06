@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex presentation gap-4" :class="flip ? 'flex-column-reverse' : 'flex-column'">
     <div>
-        <img src="../../../public/temp/lyon2.jpg" class="img-fluid rounded-top" alt="">
+        <img :src=image class="img-fluid rounded-top" alt="">
     </div>
     <div>
         <h1 class="my-3">{{ title }}</h1>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-const props = defineProps(['title','description','flip'])
+const props = defineProps(['title','description','flip','image'])
 </script>
 
 <style>
