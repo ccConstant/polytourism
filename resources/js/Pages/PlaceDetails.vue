@@ -56,12 +56,17 @@ import Footer from '@/Components/Footer.vue'
 import PopUp from '@/Components/PopUp.vue'
 import Comment from '@/Components/Comment.vue'
 import { ref } from 'vue'
+import axios from 'axios'
 
 const showPopUp = ref(false)
 const onClose = () => showPopUp.value = false
 const handleShow = () => {
   showPopUp.value = true
 }
+const props = defineProps(['id'])
+const place = ref(null)
+
+axios.get('/place/'+window.location.pathname.split('/')[2]).then((response) => place.value = response.data).catch((error) => console.log(error))
 
 const allComments = [{
   name: 'Anonyme 1',
@@ -107,7 +112,7 @@ const endIndex = ref(2)
 
 <style>
 .bg-img{
-  background: url('../../../public/temp/lyon2.jpg');
+  background: url('https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   height: 600px;
   background-position: center center;
   background-size: cover;

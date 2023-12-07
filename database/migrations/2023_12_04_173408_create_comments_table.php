@@ -3,7 +3,7 @@
 /*
 * Filename: 2023_12_04_173408_create_comments_table.php
 * Creation date: Dec 4 2023
-* Update date: Dec 4 2023
+* Update date: Dec 6 2023
 * This file is used create the 'comments' table in the database.
 */
 
@@ -20,15 +20,21 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->integer('comment_rating'); //to check/constraint from 1 to 5
             $table->unsignedBigInteger('user_id');
-            $table->string('comment_text');
-            $table->date('comment_date');
+            $table->string("user_pseudo");
+            $table->unsignedBigInteger('plc_id');
+            $table->integer('com_rating');
+            $table->string('com_title');
+            $table->string('com_text');
+            $table->date('com_date');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->string("user_pseudo");
+            $table->foreign('plc_id')
+                ->references('id')
+                ->on('places')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

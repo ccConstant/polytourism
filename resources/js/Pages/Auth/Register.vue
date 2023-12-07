@@ -251,7 +251,10 @@ const submit = async () => {
                 console.log(response)
                 window.location.href = "/"
             })
-            .catch(error => errorMessage.value = 'Une erreur s\'est produite');
+            .catch(error => {
+                errorMessage.value = 'Une erreur s\'est produite'
+                console.log(error)
+            });
        // console.log(response)
     }    
 };
