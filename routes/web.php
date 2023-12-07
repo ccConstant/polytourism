@@ -34,10 +34,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 Route::get('/ListPlaces', function() {
     return Inertia::render('ListPlaces');
+});
+
+Route::get('/forgotPassword', function() {
+    return Inertia::render('ForgotPassword');
 });
 
 

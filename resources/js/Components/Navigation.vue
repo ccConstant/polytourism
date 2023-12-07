@@ -22,7 +22,7 @@
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/myaccount">Mes infos</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
-              <a class="dropdown-item" @click="logout">Déconnexion</a>
+              <a @click="logout" class="dropdown-item" href="">Déconnexion</a>
             </div>
           </div>
         </nav>
@@ -69,8 +69,9 @@ addEventListener("resize", (e) => {
 const logout = () => { 
   showDropDownLinks.value = false
   axios.post('/logout')
+  console.log('logout')
   localStorage.clear()
-  window.location.href = '/'
+  window.location.reload();
 }
 
 </script>
