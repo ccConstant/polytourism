@@ -56,12 +56,17 @@ import Footer from '@/Components/Footer.vue'
 import PopUp from '@/Components/PopUp.vue'
 import Comment from '@/Components/Comment.vue'
 import { ref } from 'vue'
+import axios from 'axios'
 
 const showPopUp = ref(false)
 const onClose = () => showPopUp.value = false
 const handleShow = () => {
   showPopUp.value = true
 }
+const props = defineProps(['id'])
+const place = ref(null)
+
+axios.get('/place/'+window.location.pathname.split('/')[2]).then((response) => place.value = response.data).catch((error) => console.log(error))
 
 const allComments = [{
   name: 'Anonyme 1',
