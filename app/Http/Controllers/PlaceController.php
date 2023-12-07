@@ -184,7 +184,7 @@ class PlaceController extends Controller
 
     /**
      * Function call by ListPlaces.vue with the route : /place/all (get)
-     * Get a list of all the places validated in the database 
+     * Get a list of all the places validated in the database with most important information of a place
      * @return \Illuminate\Http\Response
      */
     public function send_places(){
@@ -196,6 +196,7 @@ class PlaceController extends Controller
                 'plc_nom' => $place->plc_nom,
                 'plc_theme' => $place->plc_theme,
                 'plc_type' => $place->plc_type,
+                'plc_address' => $place->plc_address,
                 'plc_tarifsenclair' => $place->plc_tarifsenclair,
                 'plc_illustrations' => $place->plc_illustrations,
             ];

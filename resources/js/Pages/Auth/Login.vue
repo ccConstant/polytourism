@@ -55,14 +55,8 @@ const onErrorClose = () => {
             <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
 
             <div class="d-flex flex-column-reverse items-center justify-end mt-4">
-                <p
-                    class="link"
-                >
-                    mot de passe oublié ?
-            </p>
-                <p
-                    :href="route('password.request')"
-                >
+                <p> <a class="link" href="forgot-password" > Mot de passe oublié ? </a></p>
+                <p>
                     vous n'avez pas de compte ? 
                     
                     <a href="/register"><router-link class="link">Créez-en un</router-link></a>
