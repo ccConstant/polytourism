@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Filename: PlaceUpdate.php
+ * Creation date: 4 Dec 2023
+ * Update date: 7 Dec 2023
+ * This file defines the model PlaceUpdate.
+ * We can see more details about this model (like its attributes)
+ * in the migration file named "2023_12_04_173829_create_place_updates_table" in database/migrations.
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
