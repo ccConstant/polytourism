@@ -15,6 +15,5 @@ class Comment extends Model
         "com_rating",
         "com_title",
         "com_text",
-        "com_date",
     ];
 }
