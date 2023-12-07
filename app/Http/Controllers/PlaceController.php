@@ -3,7 +3,7 @@
 /*
 * Filename: PlaceController.php
 * Creation date: Nov 3 2023
-* Update date: Dec 3 2023
+* Update date: Dec 7 2023
 * This file is used to link the view files and the database that concern the Place table.
 * For example: add a place, update a place, import a place, delete a place...
 */
@@ -276,5 +276,25 @@ class PlaceController extends Controller
     public function delete_place(Request $request, $id){
         $place=Place::findOrFail($id);
         $place->delete();
+    }
+
+    /**
+     * Function call by Example???.vue when we want to send a list of themes with the route: /place/themes (get)
+     * Get a list of all the themes in the database
+     * @return \Illuminate\Http\Response
+     */
+    public function send_themes(){
+        $places = Place::all();
+        $array = [];
+        // note optimised
+        foreach ($places as $place) {
+            $obj = explode(', ', str_replace("'", "", substr($place->plc_theme,2,-2)));
+            foreach ($obj as $theme) {
+                if (!in_array($theme, $array)) {
+                    array_push($array, $theme);
+                }
+            }
+        }
+        return response()->json($array);
     }
 }
