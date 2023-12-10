@@ -13,51 +13,7 @@
 
 
         <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-
-
-
+            <Place v-for="place in places" :key="place.id" :place="place" />
         </div>
 
         <br><br><br><br><br><br><br>
@@ -125,5 +81,19 @@ import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
 
 const props = defineProps(['auth'])
+
+const places = ref([])
+const placeLoaded = ref(false)
+axios.get('/history/' + props.auth.user.id).then(async (response) => {
+    await response.data.forEach(async element => {
+        await axios.get('/place/' + element.plc_id).then((res) => {
+            places.value.push({
+                ...res.data,
+                id: element.plc_id
+            })
+        }).catch(error => console.log(error))
+    });
+    placeLoaded.value = true
+}).catch((error) => console.log('failed')).finally(() => console.log('finally...'))
 
 </script>

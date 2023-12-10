@@ -70,13 +70,13 @@ class CommentController extends Controller
     public function add_comment(Request $request){
         $comment=Comment::createOrFirst([
             'user_id' => $request->user_id,
-            'user_pseudo' => User::where('id', $request->user_id)->get()->pseudo,
+            'user_pseudo' =>  $request->user_pseudo,
             'plc_id' => $request->plc_id,
             'com_rating' => $request->com_rating,
             'com_title' => $request->com_title,
             'com_text' => $request->com_text,
         ]);
-
+        echo($comment);
         $com_id = $comment->id;
         return response()->json([
             'com_id' => $ $com_id,
@@ -106,6 +106,7 @@ class CommentController extends Controller
         }
         return response()->json($array);
     }
+    
 
     /**
      * Function called by ???.vue with the route : /comment/all (get)

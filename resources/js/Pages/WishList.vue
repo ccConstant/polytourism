@@ -1,7 +1,6 @@
-<template>
-    <Navigation :connected="props.auth.user" />
+<template >
+    <Navigation  :connected="props.auth.user" />
     <br><br><br><br><br><br><br>
-
     <Header class="center" :level="2">Bienvenue dans votre Wishlist</Header>
 
     <p id="welcome" class="large3">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette
@@ -10,59 +9,13 @@
 
 
     <div>
-        
-
-        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-            <Place :place="{
-                id: 1,
-                plc_nom: 'Hotel de ville',
-                plc_theme: 'activite',
-                plc_tarifsenclair: 'gratuit',
-                plc_illustrations: 'https://images.unsplash.com/photo-1597692289746-070a015e0714?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-            }" />
-
-
-
+        <div v-if="placeLoaded" class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
+            
+            <Place v-for="place in places" :key="place.id" :place="place" />
         </div>
 
         <br><br><br><br><br><br><br>
     </div>
-
     <Footer />
 </template>
 
@@ -121,16 +74,27 @@ h1 {
 <script setup>
 import Header from '@/Components/Header.vue'
 import Place from '@/Components/Place.vue'
-import Button from '@/Components/Button.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
-import Input from '@/Components/Input.vue'
+import axios from 'axios'
 import { ref } from 'vue'
 
-const showFilterBar = ref(false)
 const props = defineProps(['auth'])
 
-const stars = [0, 1, 2, 3, 4]
-const selectedStars = ref(-1)
+const places = ref([])
+const placeLoaded = ref(false)
+axios.get('/wishlist/'+props.auth.user.id).then(async (response) => {
+    await response.data.forEach(async element => {
+        await axios.get('/place/'+element.plc_id).then((res) => {
+            places.value.push({
+                ...res.data,
+                id : element.plc_id
+            })
+            console.log(res.data)
+        }).catch(error => console.log(error))
+    });
+    console.log('fin')
+    placeLoaded.value = true
+}).catch((error) => console.log('failed')).finally(() => console.log('finally...'))
 
 </script>

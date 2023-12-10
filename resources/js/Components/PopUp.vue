@@ -7,7 +7,7 @@
     </div>
     <div v-if="note" class="d-flex align-items-center justify-content-end gap-3">
         <Header :level="3">Note : </Header>
-        <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star'" ></i>
+        <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="() => updateStars(index)" :class="selectedStars >= index ? 'yellow' : 'empty-star'" ></i>
     </div>
     <Input :type="type" @input="update" :full="true" :placeholder="placeholder" />
     
@@ -23,15 +23,33 @@ import Input from './Input.vue';
 import Button from './Button.vue';
 
 const props = defineProps(['onClose','onSubmit','modelValue','type','title','note','placeholder'])
-const element = ref(null)
+const input = ref('')
 
 const stars = [0, 1, 2, 3, 4]
 const selectedStars = ref(-1)
 
 const emits = defineEmits(['update:modelValue'])
 
+const updateStars = (index) => {
+    selectedStars.value = index
+    emits('update:modelValue', {
+        com_rating: selectedStars.value+1,
+        com_text: input.value
+    })
+}
+
+
+
 const update = function (e) {
-    emits('update:modelValue', e.target.value)
+    input.value = e.target.value
+    if(props.note){
+        emits('update:modelValue', {
+            com_rating : selectedStars.value+1,
+            com_text : input.value
+        })
+    }else{
+        emits('update:modelValue', input.value)
+    }
 }
 
 

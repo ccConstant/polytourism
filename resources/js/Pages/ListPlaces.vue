@@ -1,6 +1,6 @@
 <template>
     
-    <Navigation />
+    <Navigation :connected="true" />
     <br><br><br><br><br><br><br>
     
     <Header class="center" :level="2">Découvrez les lieux touristiques de Lyon</Header>
