@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('plc_descrcourtfr')->nullable();
             $table->string('plc_descrdetailfr', 3500)->nullable();
             $table->string('plc_contact', 1500)->nullable();
-            $table->string('plc_ouvertureenclair', 2000)->nullable();
+            $table->string('plc_ouvertureenclair', 1000)->nullable();
             $table->string('plc_ouverture')->nullable();
             $table->string('plc_tarifsenclair',1000)->nullable();
             $table->string('plc_illustrations', 7000)->nullable();

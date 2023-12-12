@@ -62,6 +62,14 @@ const showPopUp = ref(false)
 const onClose = () => showPopUp.value = false
 const handleShow = () => {
   showPopUp.value = true
+  /*axios.post('/comment/add', {
+    plc_id: place.value.id,
+    user_id: 1,
+    comm_rating: 5,
+    comm_title: "",
+    comm_text: "",
+  }).then((response) => console.log(response.data)).catch((error) => console.log(error));*/ 
+  //TODO 
 }
 const props = defineProps(['id'])
 const place = ref(null)
