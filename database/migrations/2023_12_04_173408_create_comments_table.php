@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('com_rating');
             $table->string('com_title');
             $table->string('com_text');
-            $table->date('com_date');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

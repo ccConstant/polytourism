@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -27,7 +28,6 @@ class CommentController extends Controller
             $request,
             [
                 'user_id' => 'required|exists:user,id',
-                'user_pseudo' => 'required|exists:user,pseudo',
                 'plc_id' => 'required|exists:place,id',
                 'com_rating' => 'required|integer|min:1|max:5',
                 'com_title' => 'required|string|min:1|max:255',
@@ -37,9 +37,6 @@ class CommentController extends Controller
             [
                 'user_id.required' => 'The user id is required',
                 'user_id.exists' => 'The user id must exist in the user table',
-
-                'user_pseudo.required' => 'The user pseudo is required',
-                'user_pseudo.exists' => 'The user pseudo must exist in the user table',
 
                 'plc_id.required' => 'The place id is required',
                 'plc_id.exists' => 'The place id must exist in the place table',
@@ -73,14 +70,13 @@ class CommentController extends Controller
     public function add_comment(Request $request){
         $comment=Comment::createOrFirst([
             'user_id' => $request->user_id,
-            'user_pseudo' => $request->user_pseudo,
+            'user_pseudo' =>  $request->user_pseudo,
             'plc_id' => $request->plc_id,
             'com_rating' => $request->com_rating,
             'com_title' => $request->com_title,
             'com_text' => $request->com_text,
-            'com_date' => $request->com_date,
         ]);
-
+        echo($comment);
         $com_id = $comment->id;
         return response()->json([
             'com_id' => $ $com_id,
@@ -105,12 +101,12 @@ class CommentController extends Controller
                 'com_rating' => $comment->com_rating,
                 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
-                'com_date' => $comment->com_date,
             ];
             array_push($array, $obj);
         }
         return response()->json($array);
     }
+    
 
     /**
      * Function called by ???.vue with the route : /comment/all (get)

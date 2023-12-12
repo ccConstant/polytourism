@@ -7,7 +7,7 @@
         <div class="d-flex wrapper flex-column justify-content-between px-3 py-2">
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="place-title" ><a :href="'/placeView/'+place.id">{{ place.plc_nom }}</a></h2>
-                <i @click="isLiked = !isLiked" class=" fa-heart" :class="isLiked ? 'fa-solid': 'fa-regular'"></i>
+                <i @click="toggleLike" class=" fa-heart cursor-pointer" :class="isLiked ? 'fa-solid': 'fa-regular'"></i>
             </div>
             <div class="d-flex my-3 justify-content-between align-items-center">
                 <span class="place-theme" v-if="!place.plc_theme.startsWith('[\'')">{{ place.plc_theme }}</span>
@@ -21,14 +21,14 @@
 </template>
 
 <script setup>
+import axios from "axios"
 import isArray from "lodash/isArray"
 import { ref } from "vue"
 
 const props = defineProps(['place'])
-console.log(props.place)
+const user = JSON.parse(localStorage.getItem('user'))
 let url = ref('')
 try{
-    console.log('try')
     if (!props.place.plc_illustrations.startsWith('{') && !props.place.plc_illustrations.startsWith('[')) {
         url.value = props.place.plc_illustrations
     }else{
@@ -38,7 +38,47 @@ try{
 }catch(e){
     
 }
-const isLiked = ref(true)
+const isLiked = ref(false)
+let id
+
+if(user){
+    axios.get('/wishlist/'+user.id).then((response) => {
+        response.data.forEach(element => {
+            if(element.plc_id == props.place.id){
+                isLiked.value = true;
+                return;
+            }
+        });
+    }).catch(e => console.log(e))
+}
+
+const toggleLike = () => {
+    if(!user)
+        return ;
+    if(isLiked.value){
+        // je n'arrive pas à rentrer dans le then parce que axios renvoie network error meme si il met à jour la db et effectue les bonnes
+        // operations 
+        console.log('delete !!!!')
+        axios.post('/wishlist/delete', {
+            id
+        }).then((res) => {
+            console.log('succed to delete')
+            isLiked.value = false
+        }).catch((error) => console.log(error))
+    }else{
+        
+        axios.post('/wishlist/add',{
+            plc_id : props.place.id,
+            user_id : user.id
+        }).then((res) => {
+            console.log('like added')
+            isLiked.value = true
+            id = res.data.wsh_id
+        }).catch((error) => console.log(error))
+    }
+    
+}
+
 </script>
 
 <style>

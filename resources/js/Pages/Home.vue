@@ -81,7 +81,7 @@ import Info from '@/Components/Info.vue'
 import Footer from '@/Components/Footer.vue'
 
 const props = defineProps(['auth'])
-
+localStorage.setItem('user',JSON.stringify(props.auth.user))
 console.log(props.auth.user)
 
 </script>

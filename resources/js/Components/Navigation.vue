@@ -38,13 +38,13 @@ const links = [{
   nom : 'accueil',
   link: '/#home',
   }, {
-  nom: 'Laissez nous vous guider',
+  nom: 'Laissez-nous vous guider',
   link: '/#proposition',
 }, {
-  nom: 'presentation',
+  nom: 'présentation',
   link: '/#presentation',
 }, {
-  nom: 'a propos',
+  nom: 'à propos',
   link: '/#about',
 }, {
   nom: 'contact',

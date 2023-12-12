@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="authorized">
     <Navigation />
     <section class="section container d-flex flex-column gap-5">
         <Header :level="1">bienvenue admin</Header>
@@ -21,9 +21,16 @@ import Button from '@/Components/Button.vue'
 import Footer from '@/Components/Footer.vue'
 import { ref } from 'vue'
 
+const authorized = ref(false)
 const usersAttributes = ['id','name','email', 'pseudo', 'gender', 'role']
 
 const placesAttributes = ['id', 'nom', 'contact', 'adresse', 'tarif']
+
+const props = defineProps(['auth'])
+
+if(props.auth.user.role != 'admin'){
+    window.location.href = '/'
+}
 
 const places =ref([])
 let placesLoaded = ref(false)

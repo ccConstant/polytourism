@@ -50,10 +50,9 @@ class WishlistController extends Controller
             'plc_id' => $request->plc_id,
             'user_id' => $request->user_id,
         ]);
-
         $wsh_id = $wishlist->id;
         return response()->json([
-            'wsh_id' => $ $wsh_id,
+            'wsh_id' => $wsh_id,
         ]);
     }
 
