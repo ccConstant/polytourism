@@ -85,6 +85,7 @@ Route::get('/comment/rated/{id}', [CommentController::class, 'send_rated']);
 Route::post('/comment/add', [CommentController::class, 'add_comment']);
 Route::post('/comment/verif', [CommentController::class, 'verif_comment']);
 Route::post('/comment/delete/{id}', [CommentController::class, 'delete_comment']);
+Route::get('/comment/average/{id}', [CommentController::class, 'average_rating']);
 
 
 Route::middleware('auth')->group(function () {

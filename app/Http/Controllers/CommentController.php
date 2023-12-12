@@ -3,7 +3,7 @@
 /*
 * Filename: CommenyController.php
 * Creation date: Dec 6 2023
-* Update date:
+* Update date: Dec 13 2023
 * This file is used to link the view files and the database that concern the Comments table.
 * For example: add a comment, delete a comment...
 */
@@ -84,7 +84,7 @@ class CommentController extends Controller
     }
 
     /**
-     * Function called by ???.vue with the route : /comment/{id} (get)
+     * Function called by ???.vue with the route : /comment/rated/{id} (get)
      * Get all the comments of the user connected
      * The id parameter corresponds to the id of the user connected 
      * @param int $id the id of the user connected
@@ -132,12 +132,32 @@ class CommentController extends Controller
     }
 
     /**
-     * Function call by Example???.vue when we want to delete a comment with the route : /comment/delete (post)
+     * Function called by Example???.vue when we want to delete a comment with the route : /comment/delete (post)
      * Delete a comment thanks to the id given in parameter
      * @param int $id the id of the comment we want to delete
      */
     public function delete_comment(Request $request, $id){
         $comment = Comment::findOrFail($id);
         $comment->delete();
+    }
+
+    /**
+     * Function called by ???.vue when we want the averagfe rating of a place with the route : /comment/average/{id} (get)
+     * Get the average rating of a place thanks to the id given in parameter
+     * @param int $id the id of the place we want the average rating
+     * @return \Illuminate\Http\Response the average rating, or a null response if there is no comment 
+     */
+    public function average_rating($id){
+        $comments = Comment::where('plc_id', $id)->get();
+        if (count($comments) == 0){
+            $average = null;
+        } else {
+            $average = 0;
+            foreach($comments as $comment){
+                $average += $comment->com_rating;
+            }
+            $average = $average / count($comments);
+        }
+        return response()->json($average);
     }
 }
