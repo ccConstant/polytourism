@@ -84,11 +84,14 @@ const props = defineProps(['auth'])
 const places = ref([])
 const placeLoaded = ref(false)
 axios.get('/wishlist/'+props.auth.user.id).then(async (response) => {
+    console.log(response.data)
     await response.data.forEach(async element => {
+        console.log(element)
         await axios.get('/place/'+element.plc_id).then((res) => {
             places.value.push({
                 ...res.data,
-                id : element.plc_id
+                id : element.plc_id,
+                id_wishList : element.id
             })
             console.log(res.data)
         }).catch(error => console.log(error))

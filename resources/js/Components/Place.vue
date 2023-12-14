@@ -58,8 +58,8 @@ const toggleLike = () => {
     if(isLiked.value){
         // je n'arrive pas à rentrer dans le then parce que axios renvoie network error meme si il met à jour la db et effectue les bonnes
         // operations 
-        console.log('delete !!!!')
-        axios.post('/wishlist/delete', {
+        console.log('delete !!!!',props.place.id_wishList)
+        axios.post('/wishlist/delete/'+props.place.id, {
             id
         }).then((res) => {
             console.log('succed to delete')

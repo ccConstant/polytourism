@@ -1,24 +1,21 @@
-<template>
+<template >
     <Navigation :connected="props.auth.user" />
     <br><br><br><br><br><br><br>
-
-    <Header class="center" :level="2">Bienvenue dans votre historique</Header>
+    <Header class="center" :level="2">Bienvenue dans votre Historique</Header>
 
     <p id="welcome" class="large3">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette
         magnifique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore.
-        </p>
+    </p>
 
 
     <div>
+        <div v-if="placeLoaded" class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
 
-
-        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
             <Place v-for="place in places" :key="place.id" :place="place" />
         </div>
 
         <br><br><br><br><br><br><br>
     </div>
-
     <Footer />
 </template>
 
@@ -79,20 +76,24 @@ import Header from '@/Components/Header.vue'
 import Place from '@/Components/Place.vue'
 import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
+import axios from 'axios'
+import { ref } from 'vue'
 
 const props = defineProps(['auth'])
 
 const places = ref([])
 const placeLoaded = ref(false)
-axios.get('/history/' + props.auth.user.id).then(async (response) => {
+axios.get('/historique/' + props.auth.user.id).then(async (response) => {
     await response.data.forEach(async element => {
         await axios.get('/place/' + element.plc_id).then((res) => {
             places.value.push({
                 ...res.data,
                 id: element.plc_id
             })
+            console.log(res.data)
         }).catch(error => console.log(error))
     });
+    console.log('fin')
     placeLoaded.value = true
 }).catch((error) => console.log('failed')).finally(() => console.log('finally...'))
 

@@ -37,10 +37,11 @@
       <Button @click="handleShow">Ajouter un commentaire</Button>
     </section>
     <section v-if="allComments.length > 0" class="section container d-flex flex-column gap-5 align-items-start">
+      <Header level="2">Note moyenne : {{ rating }}</Header>
       <Header level="2">Avis de Nos Chers Clients : </Header>
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex w-100 justify-content-between align-items-center">
         <i class="fa-solid fa-chevron-left fa-2xl"  @click="() => { if(startIndex > 0){ endIndex--; startIndex-- }}" :class="startIndex <= 0 ? 'disabled' : 'enabled'"></i>
-        <div  v-if="commentsLoaded" class="d-flex gap-2 justify-content-center">
+        <div  v-if="commentsLoaded" class="d-flex w-100 gap-2 justify-content-center">
           <Comment v-for="comment in allComments.slice(startIndex, endIndex +1)" :key="comment" :comment="comment" />
           
         </div>
@@ -86,10 +87,15 @@ const placeLoaded = ref(false)
 const url = ref('')
 const comment = ref({})
 const commentsLoaded = ref(false)
+const rating = ref(-1)
 
 const id = window.location.pathname.split('/')[2]
 
 watch(comment,() => console.log('comment updated',comment.value))
+
+axios.get('/comment/average/'+id)
+.then((res) => rating.value = res.data)
+.catch(err => console.log(err))
 
 axios.get('/place/'+id).then((response) => {
   place.value = response.data
@@ -99,10 +105,14 @@ axios.get('/place/'+id).then((response) => {
   placeLoaded.value = true
 }).catch((error) => console.log(error))
 
-axios.get('/comment/'+id).then((response) => {
-  allComments.value = response.data
-  commentsLoaded.value = true
-} )
+const  getComments = () => {
+  axios.get('/comment/place/' + id).then((response) => {
+    allComments.value = response.data
+    commentsLoaded.value = true
+  })
+}
+
+getComments();
 
 const onSubmit = () => {
   axios.post('/comment/add',{
@@ -111,7 +121,10 @@ const onSubmit = () => {
     user_id : props.auth.user.id,
     user_pseudo : props.auth.user.pseudo,
     plc_id : id,
-  }).then(response => console.log(response.data))
+  }).then(response => {
+    console.log(response.data)
+    getComments()
+  })
   
   .catch((error => console.log(error))).finally(() => {
     console.log('on finally')
