@@ -81,7 +81,10 @@ class WishlistController extends Controller
      * Delete a wishlist thanks to the id given in parameter
      * @param int $id the id of the wishlist we want to delete
      */
-    public function delete_wishlist(Request $request, $id){
+    public function delete_wishlist($id){
+        return response()->json([
+            'id' => $id,
+        ]);
         $wishlist = Wishlist::findOrFail($id);
         $wishlist->delete();
     }

@@ -20,12 +20,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string("user_pseudo");
-            $table->unsignedBigInteger('plc_id');
-            $table->integer('com_rating');
-            $table->string('com_title');
-            $table->string('com_text');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string("user_pseudo")->nullable();
+            $table->unsignedBigInteger('plc_id')->nullable();
+            $table->integer('com_rating')->nullable();
+            $table->string('com_title')->nullable();
+            $table->string('com_text')->nullable();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

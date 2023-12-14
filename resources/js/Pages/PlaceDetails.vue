@@ -110,8 +110,10 @@ const onSubmit = () => {
     com_title : 'my comment',
     user_id : props.auth.user.id,
     user_pseudo : props.auth.user.pseudo,
-    plc_id : id*1
-  }).then(response => onClose()).catch((error => console.log(error))).finally(() => {
+    plc_id : id,
+  }).then(response => console.log(response.data))
+  
+  .catch((error => console.log(error))).finally(() => {
     console.log('on finally')
     onClose()
   })}

@@ -68,7 +68,7 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_comment(Request $request){
-        $comment=Comment::createOrFirst([
+        $comment=Comment::create([
             'user_id' => $request->user_id,
             'user_pseudo' =>  $request->user_pseudo,
             'plc_id' => $request->plc_id,
@@ -76,11 +76,10 @@ class CommentController extends Controller
             'com_title' => $request->com_title,
             'com_text' => $request->com_text,
         ]);
-        echo($comment);
-        $com_id = $comment->id;
-        return response()->json([
-            'com_id' => $ $com_id,
-        ]);
+        //$com_id = $comment->id;
+        //return response()->json([
+          //  'com_id' => $ $com_id,
+        //]);
     }
 
     /**
