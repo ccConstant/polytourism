@@ -106,6 +106,31 @@ class CommentController extends Controller
         }
         return response()->json($array);
     }
+
+
+    /**
+     * Function called by ???.vue with the route : /comment/{id} (get)
+     * Get all the comments of a place
+     * The id parameter corresponds to the id of the place 
+     * @param int $id the id of theplace
+     * @return \Illuminate\Http\Response
+     */
+    public function send_placeComments($id){
+        $comments = Comment::where('plc_id', $id)->get();
+        $array = [];
+        foreach($comments as $comment){
+            $obj = [
+                'user_id' => $comment->user_id,
+                'user_pseudo' => $comment->user_pseudo,
+                'plc_id' => $comment->plc_id,
+                'com_rating' => $comment->com_rating,
+                'com_title' => $comment->com_title,
+                'com_text' => $comment->com_text,
+            ];
+            array_push($array, $obj);
+        }
+        return response()->json($array);
+    }
     
 
     /**
