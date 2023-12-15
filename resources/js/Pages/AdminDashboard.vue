@@ -67,10 +67,8 @@ axios.get('/place/all').then(response => {
     */ 
     data.forEach(place => {
         delete place.plc_illustrations
-        console.log(place)
         place.plc_address = 'adresse'
     });
-    console.log(data)
     places.value = data
     placesLoaded.value = true
 

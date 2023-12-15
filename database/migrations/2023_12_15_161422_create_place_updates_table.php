@@ -1,10 +1,10 @@
 <?php
 
 /*
-* Filename: 2023_12_03_173829_create_place_updates_table.php
-* Creation date: Dec 4 2023
-* Update date: Dec 4 2023
-* This file is used create the 'place_update' table in the database.
+* Filename: 2023_12_15_161422_create_place_updates_table.php
+* Creation date: Dec 15 2023
+* Update date: Dec 15 2023
+* This file is used create the 'place_updates' table in the database.
 */
 
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +18,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('place_update', function (Blueprint $table) {
+        Schema::create('place_updates', function (Blueprint $table) {
             $table->id();
 
             $table->string('plcUpdt_nom')->nullable();
@@ -51,3 +51,4 @@ return new class extends Migration
         Schema::dropIfExists('place_update');
     }
 };
+

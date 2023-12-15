@@ -31,3 +31,4 @@ class PlaceUpdate extends Model
         'plc_id',
     ];
 }
+

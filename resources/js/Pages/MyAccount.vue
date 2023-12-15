@@ -36,7 +36,6 @@ const input = ref('')
 const onClose = () => showPopUp.value = false
 const onSubmit = () => {
     object.value[modifierField.value] = input.value
-    console.log(modifierField.value,input.value, object.value.pseudo)
     
     axios.patch('profile',{
         ...props.auth.user,
@@ -63,7 +62,6 @@ const password = ref('')
 const object = ref({
     nom : props.auth.user.name,
     email : props.auth.user.email,
-    pseudo : props.auth.user.pseudo
 })
 
 
