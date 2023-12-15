@@ -68,6 +68,7 @@ class WishlistController extends Controller
         $array = [];
         foreach($wishlists as $wishlist){
             $obj = [
+                'id' => $wishlist->id,
                 'plc_id' => $wishlist->plc_id,
                 'user_id' => $wishlist->user_id,
             ];
