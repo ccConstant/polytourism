@@ -26,7 +26,6 @@ class PlaceController extends Controller
         $this->validate(
             $request,
             [
-                // max: 255
                 'plc_nom' => 'required|string|min:1|max:255',
                 'plc_theme' => 'required|string|min:1|max:255',
                 'plc_address' => 'required|string|min:1|max:255',

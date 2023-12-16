@@ -23,15 +23,14 @@ return new class extends Migration
 
             $table->string('plcUpdt_nom')->nullable();
             $table->jsonb('plcUpdt_theme')->nullable();
-            $table->jsonb('plcUpdt_address')->nullable();
+            $table->jsonb('plcUpdt_address',1000)->nullable();
             $table->string('plcUpdt_descrcourtfr')->nullable();
-            $table->string('plcUpdt_descrdetailfr')->nullable();
-            $table->jsonb('plcUpdt_contact')->nullable();
-            $table->string('plcUpdt_ouvertureenclair')->nullable();
-            $table->jsonb('plcUpdt_ouverture')->nullable();
-            $table->string('plcUpdt_tarifsenclair')->nullable();
-            $table->jsonb('plcUpdt_illustrations')->nullable();
-            $table->boolean('plcUpdt_validated');
+            $table->string('plcUpdt_descrdetailfr',3500)->nullable();
+            $table->jsonb('plcUpdt_contact',1500)->nullable();
+            $table->string('plcUpdt_ouvertureenclair',1000)->nullable();
+            $table->string('plcUpdt_tarifsenclair',1000)->nullable();
+            $table->jsonb('plcUpdt_illustrations',7000)->nullable();
+            $table->boolean('plcUpdt_validated')->default(false);
             $table->unsignedBigInteger('plc_id');
 
             $table->foreign('plc_id')
