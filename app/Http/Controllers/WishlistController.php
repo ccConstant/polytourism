@@ -46,7 +46,7 @@ class WishlistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_wishlist(Request $request){
-        $wishlist=Wishlist::createOrFirst([
+        $wishlist=Wishlist::firstOrCreate([
             'plc_id' => $request->plc_id,
             'user_id' => $request->user_id,
         ]);
