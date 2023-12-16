@@ -3,7 +3,7 @@
 /*
 * Filename: WishlistController.php
 * Creation date: Dec 4 2023
-* Update date: Dec 6 2023
+* Update date: Dec 16 2023
 * This file is used to link the view files and the database that concern the Wishlist table.
 * For example: add a place to a user's wishlist, delete a wishlist...
 */
@@ -83,10 +83,10 @@ class WishlistController extends Controller
      * @param int $id the id of the wishlist we want to delete
      */
     public function delete_wishlist($id){
+        $wishlist = Wishlist::findOrFail($id);
+        $wishlist->delete();
         return response()->json([
             'id' => $id,
         ]);
-        $wishlist = Wishlist::findOrFail($id);
-        $wishlist->delete();
     }
 }
