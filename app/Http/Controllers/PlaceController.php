@@ -133,6 +133,7 @@ class PlaceController extends Controller
                 'plc_address' => $place->plc_address,
                 'plc_tarifsenclair' => $place->plc_tarifsenclair,
                 'plc_illustrations' => $place->plc_illustrations,
+                'plc_contact' => $place->plc_contact,
             ];
             array_push($array, $obj);
         }
