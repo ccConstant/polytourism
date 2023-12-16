@@ -11,7 +11,7 @@
     <div>
         <div v-if="placeLoaded" class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
             
-            <Place v-for="place in places" :key="place.id" :place="place" />
+            <Place v-for="place in places" @refresh-page="refresh" :key="place.id" :place="place" />
         </div>
 
         <br><br><br><br><br><br><br>
@@ -83,21 +83,26 @@ const props = defineProps(['auth'])
 
 const places = ref([])
 const placeLoaded = ref(false)
-axios.get('/wishlist/'+props.auth.user.id).then(async (response) => {
-    console.log(response.data)
-    await response.data.forEach(async element => {
-        console.log(element)
-        await axios.get('/place/'+element.plc_id).then((res) => {
-            places.value.push({
-                ...res.data,
-                id : element.plc_id,
-                id_wishList : element.id
-            })
-            console.log(res.data)
-        }).catch(error => console.log(error))
-    });
-    console.log('fin')
-    placeLoaded.value = true
-}).catch((error) => console.log('failed')).finally(() => console.log('finally...'))
+const refresh = () => {
+    places.value = []
+    axios.get('/wishlist/' + props.auth.user.id).then(async (response) => {
+        console.log(response.data)
+        await response.data.forEach(async element => {
+            console.log(element)
+            await axios.get('/place/' + element.plc_id).then((res) => {
+                places.value.push({
+                    ...res.data,
+                    id: element.plc_id,
+                    id_wishList: element.id
+                })
+                console.log(res.data)
+            }).catch(error => console.log(error))
+        });
+        console.log('fin')
+        placeLoaded.value = true
+    }).catch((error) => console.log('failed')).finally(() => console.log('finally...'))
+}
+
+refresh();
 
 </script>

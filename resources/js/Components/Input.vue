@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex " :class="isInline ? 'flex-row align-items-center gap-2' : 'flex-column'">
+    <div class="d-flex " :class="[isInline ? 'flex-row align-items-center gap-2' : 'flex-column',full ? 'w-100' : '']">
         <label :for="props.title">{{ lodash.capitalize(props.title) }}</label>
         <select @change="update" class="form-control rounded-2 form-control-sm" v-if="props.type == 'select'" value="bldfokvn " >
             <option selected disabled>{{ props.placeholder }}</option>

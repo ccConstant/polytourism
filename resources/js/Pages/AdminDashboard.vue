@@ -1,9 +1,9 @@
 <template>
-  <div v-if="authorized">
+  <div>
     <Navigation />
     <section class="section container d-flex flex-column gap-5">
         <Header :level="1">bienvenue admin</Header>
-        <Table v-if="userLoaded" title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :delete="onDelete"></Table>
+        <Table v-if="userLoaded" title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :onEdit="onEditUser" :delete="onDelete"></Table>
         <Table v-if="placesLoaded" title="liste des lieux" :onSearch="searchByName" :attr="placesAttributes" :data="places" :delete="onDelete" :edit="onEdit">
             <Button><a href="/">ajouter un lieu</a></Button>
         </Table>
@@ -21,7 +21,6 @@ import Button from '@/Components/Button.vue'
 import Footer from '@/Components/Footer.vue'
 import { ref } from 'vue'
 
-const authorized = ref(false)
 const usersAttributes = ['id','name','email', 'pseudo', 'gender', 'role']
 
 const placesAttributes = ['id', 'nom', 'contact', 'adresse', 'tarif']
@@ -67,6 +66,7 @@ axios.get('/place/all').then(response => {
     */ 
     data.forEach(place => {
         delete place.plc_illustrations
+        delete place.plc_theme
         place.plc_address = 'adresse'
     });
     places.value = data
@@ -87,6 +87,14 @@ const searchByName = (data,input) => {
         return elem.nom.includes(input)
     })
 }
+
+const onEditUser = async (id,role) => {
+    console.log(id)
+    await axios.post('/users/setRoleToAdmin/'+id)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+}
+
 const onDelete = (data,id) => data.filter((elem) => elem.id !== id)
 const onEdit = (data,id) => data
 const onDecline = (data,id) => data.filter((elem) => elem.id !== id)

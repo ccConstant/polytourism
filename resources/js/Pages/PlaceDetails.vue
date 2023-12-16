@@ -24,7 +24,7 @@
         <div class="d-flex gap-5 flex-column">
           <Header level="4">Localisation & infos pratiques</Header>
           <div class="d-flex gap-4 flex-column">
-            <Info :hasBorder="false" :info="place.plc_address.streetAddress + ' ' + place.plc_address.addressLocality + '' + place.plc_address.postalCode + ' ' + place.plc_address.addressCountry"><i class="fa-solid fa-location-dot fa-xl" style="color: #000000;"></i></Info>
+            <Info :hasBorder="false" :info="place.plc_address.streetAddress + ' ' + place.plc_address.addressLocality + ' ' + place.plc_address.postalCode + ' ' + place.plc_address.addressCountry"><i class="fa-solid fa-location-dot fa-xl" style="color: #000000;"></i></Info>
             <Info :hasBorder="false" :info="place.plc_tarifsenclair"><i class="fa-solid fa-sack-dollar fa-xl" style="color: #000000;"></i></Info>
             <Info :hasBorder="false" info="06.06.06.06.06"><i class="fa-solid fa-phone fa-xl" style="color: #000000;"></i></Info>
             <Info :hasBorder="false" info="info@lyon.fr"><i class="fa-regular fa-envelope fa-xl" style="color: #000000;"></i></Info>
@@ -98,8 +98,16 @@ axios.get('/comment/average/'+id)
 .catch(err => console.log(err))
 
 axios.get('/place/'+id).then((response) => {
+  console.log(response.data)
   place.value = response.data
-  place.value.plc_address = JSON.parse(place.value.plc_address.replace(/'/g, '"').replace(/'/g, '"'))
+
+  place.value.plc_address = place.value.plc_address.replace(/'/g, '"')
+  console.log(place.value.plc_address)
+  console.log(place.value.plc_address.substring(1, place.value.plc_address.length - 1))
+  place.value.plc_address = JSON.parse(place.value.plc_address.substring(1,place.value.plc_address.length - 1))
+  
+  console.log(place.value.plc_address)
+  
   let images = place.value.plc_illustrations ? JSON.parse(place.value.plc_illustrations.replace(/'/g, '"').replace(/'/g, '"').substring(1, place.value.plc_illustrations.length - 1)) : ''
   url.value = isArray(images) ? images[0].url : images.url
   placeLoaded.value = true

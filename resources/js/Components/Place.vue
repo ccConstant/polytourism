@@ -26,6 +26,7 @@ import isArray from "lodash/isArray"
 import { ref } from "vue"
 
 const props = defineProps(['place'])
+const emit = defineEmits(['refreshPage'])
 const user = JSON.parse(localStorage.getItem('user'))
 let url = ref('')
 try{
@@ -59,11 +60,10 @@ const toggleLike = () => {
         // je n'arrive pas à rentrer dans le then parce que axios renvoie network error meme si il met à jour la db et effectue les bonnes
         // operations 
         console.log('delete !!!!',props.place.id_wishList)
-        axios.post('/wishlist/delete/'+props.place.id, {
-            id
-        }).then((res) => {
+        axios.post('/wishlist/delete/'+ props.place.id_wishList).then((res) => {
             console.log('succed to delete')
             isLiked.value = false
+            emit('refreshPage');
         }).catch((error) => console.log(error))
     }else{
         

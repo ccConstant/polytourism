@@ -71,7 +71,7 @@ Route::get('/place/themes', [PlaceController::class, 'send_themes']);
 Route::get('/wishlist/{id}', [WishlistController::class, 'send_wishlists']);
 Route::post('/wishlist/verif', [WishlistController::class, 'verif_wishlist']);
 Route::post('/wishlist/add', [WishlistController::class, 'add_wishlist']);
-Route::post('/wishlist/delete', [WishlistController::class, 'delete_wishlist']);
+Route::post('/wishlist/delete/{id}', [WishlistController::class, 'delete_wishlist']);
 
 /* PlaceUpdate Routes */
 Route::get('/placeUpdate/all', [PlaceUpdateController::class, 'send_placeUpdates']);
