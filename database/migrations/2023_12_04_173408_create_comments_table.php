@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string("user_pseudo")->nullable();
             $table->unsignedBigInteger('plc_id')->nullable();
             $table->integer('com_rating')->nullable();
-            $table->string('com_title')->nullable();
+            // $table->string('com_title')->nullable();
             $table->string('com_text')->nullable();
             $table->foreign('user_id')
                 ->references('id')

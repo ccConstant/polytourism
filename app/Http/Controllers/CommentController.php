@@ -30,7 +30,7 @@ class CommentController extends Controller
                 'user_id' => 'required|exists:user,id',
                 'plc_id' => 'required|exists:place,id',
                 'com_rating' => 'required|integer|min:1|max:5',
-                'com_title' => 'required|string|min:1|max:255',
+                //  'com_title' => 'required|string|min:1|max:255',
                 'com_text' => 'required|string|min:1|max:255',
                 'com_date' => 'nullable|date',
             ],
@@ -46,10 +46,10 @@ class CommentController extends Controller
                 'com_rating.min' => 'The comment rating must be at least 1',
                 'com_rating.max' => 'The comment rating must be at most 5',
 
-                'com_title.required' => 'The comment title is required',
-                'com_title.string' => 'The comment title must be a string',
-                'com_title.min' => 'The comment title must be at least 1 character',
-                'com_title.max' => 'The comment title must be at most 255 characters',
+                // 'com_title.required' => 'The comment title is required',
+                // 'com_title.string' => 'The comment title must be a string',
+                // 'com_title.min' => 'The comment title must be at least 1 character',
+                // 'com_title.max' => 'The comment title must be at most 255 characters',
 
                 'com_text.required' => 'The comment text is required',
                 'com_text.string' => 'The comment text must be a string',
@@ -73,7 +73,7 @@ class CommentController extends Controller
             'user_pseudo' =>  $request->user_pseudo,
             'plc_id' => $request->plc_id,
             'com_rating' => $request->com_rating,
-            'com_title' => $request->com_title,
+            // 'com_title' => $request->com_title,
             'com_text' => $request->com_text,
         ]);
         //$com_id = $comment->id;
@@ -98,7 +98,7 @@ class CommentController extends Controller
                 'user_pseudo' => $comment->user_pseudo,
                 'plc_id' => $comment->plc_id,
                 'com_rating' => $comment->com_rating,
-                'com_title' => $comment->com_title,
+                // 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
             ];
             array_push($array, $obj);
@@ -123,7 +123,7 @@ class CommentController extends Controller
                 'user_pseudo' => $comment->user_pseudo,
                 'plc_id' => $comment->plc_id,
                 'com_rating' => $comment->com_rating,
-                'com_title' => $comment->com_title,
+                // 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
             ];
             array_push($array, $obj);
@@ -146,7 +146,7 @@ class CommentController extends Controller
                 'user_pseudo' => $comment->user_pseudo,
                 'plc_id' => $comment->plc_id,
                 'com_rating' => $comment->com_rating,
-                'com_title' => $comment->com_title,
+                // 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
                 'com_date' => $comment->com_date,
             ];
