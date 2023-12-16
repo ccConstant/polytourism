@@ -3,7 +3,7 @@
 /*
 * Filename: CommenyController.php
 * Creation date: Dec 6 2023
-* Update date: Dec 13 2023
+* Update date: Dec 16 2023
 * This file is used to link the view files and the database that concern the Comments table.
 * For example: add a comment, delete a comment...
 */
@@ -32,7 +32,6 @@ class CommentController extends Controller
                 'com_rating' => 'required|integer|min:1|max:5',
                 //  'com_title' => 'required|string|min:1|max:255',
                 'com_text' => 'required|string|min:1|max:255',
-                'com_date' => 'nullable|date',
             ],
             [
                 'user_id.required' => 'The user id is required',
@@ -55,8 +54,6 @@ class CommentController extends Controller
                 'com_text.string' => 'The comment text must be a string',
                 'com_text.min' => 'The comment text must be at least 1 character',
                 'com_text.max' => 'The comment text must be at most 255 characters',
-
-                'com_date.date' => 'The comment date must be a date',
             ]
         );
     }
@@ -100,6 +97,7 @@ class CommentController extends Controller
                 'com_rating' => $comment->com_rating,
                 // 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
+                'com_date' => $comment->created_at,
             ];
             array_push($array, $obj);
         }
@@ -108,7 +106,7 @@ class CommentController extends Controller
 
 
     /**
-     * Function called by ???.vue with the route : /comment/{id} (get)
+     * Function called by ???.vue with the route : /comment/place/{id} (get)
      * Get all the comments of a place
      * The id parameter corresponds to the id of the place 
      * @param int $id the id of theplace
@@ -125,6 +123,7 @@ class CommentController extends Controller
                 'com_rating' => $comment->com_rating,
                 // 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
+                'com_date' => $comment->created_at,
             ];
             array_push($array, $obj);
         }
@@ -148,7 +147,7 @@ class CommentController extends Controller
                 'com_rating' => $comment->com_rating,
                 // 'com_title' => $comment->com_title,
                 'com_text' => $comment->com_text,
-                'com_date' => $comment->com_date,
+                'com_date' => $comment->created_at,
             ];
             array_push($array, $obj);
         }
