@@ -3,7 +3,7 @@
 /*
 * Filename: 2023_11_04_175841_create_places_table.php
 * Creation date: Nov 3 2023
-* Update date: Dec 3 2023   
+* Update date: Dec 16 2023   
 * This file is used create the 'places' table in the database.
 */
 
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('plc_ouvertureenclair', 1000)->nullable();
             $table->string('plc_tarifsenclair',1000)->nullable();
             $table->jsonb('plc_illustrations', 7000)->nullable();
+            $table->float('plc_rating')->nullable();
             $table->boolean('plc_validated')->default(false);
             $table->timestamps();
         });

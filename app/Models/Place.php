@@ -3,7 +3,7 @@
 /**
  * Filename: Place.php
  * Creation date: 4 Nov 2023
- * Update date: 14 Dec 2023
+ * Update date: 16 Dec 2023
  * This file defines the model Place.
  * We can see more details about this model (like its attributes)
  * in the migration file named "2023_11_04_175841_create_places_table" in database/migrations.
@@ -27,6 +27,7 @@ class Place extends Model
         'plc_ouvertureenclair',
         'plc_tarifsenclair',
         'plc_illustrations',
+        'plc_rating',
         'plc_validated',
     ];
 }
