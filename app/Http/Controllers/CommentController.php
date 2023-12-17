@@ -3,7 +3,7 @@
 /*
 * Filename: CommenyController.php
 * Creation date: Dec 6 2023
-* Update date: Dec 16 2023
+* Update date: Dec 17 2023
 * This file is used to link the view files and the database that concern the Comments table.
 * For example: add a comment, delete a comment...
 */
@@ -73,6 +73,8 @@ class CommentController extends Controller
             // 'com_title' => $request->com_title,
             'com_text' => $request->com_text,
         ]);
+        // update Place table
+        $this->update_placeRating($request->plc_id);
         //$com_id = $comment->id;
         //return response()->json([
           //  'com_id' => $ $com_id,
@@ -109,7 +111,7 @@ class CommentController extends Controller
      * Function called by ???.vue with the route : /comment/place/{id} (get)
      * Get all the comments of a place
      * The id parameter corresponds to the id of the place 
-     * @param int $id the id of theplace
+     * @param int $id the id of the place
      * @return \Illuminate\Http\Response
      */
     public function send_placeComments($id){
@@ -162,10 +164,12 @@ class CommentController extends Controller
     public function delete_comment(Request $request, $id){
         $comment = Comment::findOrFail($id);
         $comment->delete();
+        // update Place table
+        $this->update_placeRating($request->plc_id);
     }
 
     /**
-     * Function called by ???.vue when we want the averagfe rating of a place with the route : /comment/average/{id} (get)
+     * Function called by ???.vue when we want the average rating of a place with the route : /comment/average/{id} (get)
      * Get the average rating of a place thanks to the id given in parameter
      * @param int $id the id of the place we want the average rating
      * @return \Illuminate\Http\Response the average rating, or a null response if there is no comment 
@@ -182,5 +186,25 @@ class CommentController extends Controller
             $average = $average / count($comments);
         }
         return response()->json($average);
+
+    }
+
+    /**
+     * Function called by other functions in this file every time the Comments table is updated
+     * Notifies the Places table and calls the right function in PlaneController
+     * @param int $id the id of the place to update
+     */
+    private function update_placeRating($id){
+        $comments = Comment::where('plc_id', $id)->get();
+        if (count($comments) == 0){
+            $average = null;
+        } else {
+            $average = 0;
+            foreach($comments as $comment){
+                $average += $comment->com_rating;
+            }
+            $average = $average / count($comments);
+        }
+        PlaceController::update_rating($id, $average);
     }
 }

@@ -3,7 +3,7 @@
 /*
 * Filename: PlaceController.php
 * Creation date: Nov 3 2023
-* Update date: Dec 14 2023
+* Update date: Dec 17 2023
 * This file is used to link the view files and the database that concern the Place table.
 * For example: add a place, update a place, import a place, delete a place...
 */
@@ -106,6 +106,7 @@ class PlaceController extends Controller
             'plc_ouvertureenclair' => $request->plc_ouvertureenclair,
             'plc_tarifsenclair' => $request->plc_tarifsenclair,
             'plc_illustrations' => $request->plc_illustrations,
+            'plc_rating' => null,
             'plc_validated' => '0',
         ]);
 
@@ -129,11 +130,11 @@ class PlaceController extends Controller
                 'id' => $place->id,
                 'plc_nom' => $place->plc_nom,
                 'plc_theme' => $place->plc_theme,
-                'plc_type' => $place->plc_type,
                 'plc_address' => $place->plc_address,
                 'plc_tarifsenclair' => $place->plc_tarifsenclair,
                 'plc_illustrations' => $place->plc_illustrations,
                 'plc_contact' => $place->plc_contact,
+                'plc_rating' => $place->plc_rating,
             ];
             array_push($array, $obj);
         }
@@ -148,6 +149,7 @@ class PlaceController extends Controller
      */
     public function send_place($id){
         
+        error_log("send place est appelé");
         $place=Place::findOrFail($id);
         return response()->json([
             'plc_nom' => $place->plc_nom,
@@ -160,6 +162,7 @@ class PlaceController extends Controller
             'plc_modepaiement' => $place->plc_modepaiement,
             'plc_illustrations' => $place->plc_illustrations, 
             'plc_tarifsenclair' => $place->plc_tarifsenclair,
+            'plc_rating' => $place->plc_rating,
             ]);
     }
 
@@ -214,5 +217,18 @@ class PlaceController extends Controller
             }
         }
         return response()->json($array);
+    }
+
+    /**
+     * Function called by CommentController.php when a comment is added or deleted (every time the rating should change)
+     * Updates an enregistrement of place in the data base with the new rating
+     * @param  float $new_rating the new rating of the place
+     * @param  int  $id the id of the place we want to update
+     */
+    public static function update_rating($id, $new_rating){
+        $place=Place::findOrFail($id);
+        $place->update([
+            'plc_rating' => $new_rating,
+        ]);
     }
 }
