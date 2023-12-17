@@ -105,7 +105,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/placeView/{id}', function() {
         return Inertia::render('PlaceDetails');
     });
+    Route::get('/comparePlace/{id}', function() {
+        return Inertia::render('ComparePlaces');
+    });
     Route::get('/users', [UserController::class, 'send_users']);
     Route::post('/users/setRoleToAdmin/{id}', [UserController::class, 'setRoleToAdmin']);
     Route::post('/users/setRoleToUser/{id}', [UserController::class, 'setRoleToUser']);
+});
+
+
+Route::fallback(function() {
+   return view('404'); // la vue 404.blade.php
 });

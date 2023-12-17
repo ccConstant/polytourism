@@ -13,7 +13,7 @@
             <span class="block" v-for="theme in place.plc_theme.substring(1, place.plc_theme.length - 1).split(',')" :key="theme">#{{ theme }}</span>
         </span> 
       </div>
-      <Header class="text-start " :level="3">Description</Header>
+      <Header class="text-start" :level="3">Description</Header>
       <p class="large3">{{ place.plc_descrdetailfr }}</p>
     </section>
     <section class="section container d-flex flex-column align-items-center gap-5">
@@ -102,12 +102,8 @@ axios.get('/place/'+id).then((response) => {
   place.value = response.data
 
   place.value.plc_address = place.value.plc_address.replace(/'/g, '"')
-  console.log(place.value.plc_address)
-  console.log(place.value.plc_address.substring(1, place.value.plc_address.length - 1))
   place.value.plc_address = JSON.parse(place.value.plc_address.substring(1,place.value.plc_address.length - 1))
-  
-  console.log(place.value.plc_address)
-  
+    
   let images = place.value.plc_illustrations ? JSON.parse(place.value.plc_illustrations.replace(/'/g, '"').replace(/'/g, '"').substring(1, place.value.plc_illustrations.length - 1)) : ''
   url.value = isArray(images) ? images[0].url : images.url
   placeLoaded.value = true

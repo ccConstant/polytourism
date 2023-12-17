@@ -1,5 +1,5 @@
 <template>
-    <div class="border-bottom fixed top-0 left-0 right-0 bg-white">
+    <div class="nav border-bottom fixed top-0 left-0 right-0 bg-white">
         <nav class="navbar navbar-stick gap-3 px-2 container border-bottom py-2 ">
           <a href="/" class="navbar-brand primary-color">Polytourisme.</a>
           <div class="d-lg-none">
@@ -77,5 +77,7 @@ const logout = () => {
 </script>
 
 <style>
-
+.nav{
+  z-index: 100;
+}
 </style>

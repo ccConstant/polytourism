@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navigation />
+    <Navigation :connected="true" />
     <section class="section container d-flex flex-column gap-5">
         <Header :level="1">bienvenue admin</Header>
         <Table v-if="userLoaded" title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :onEdit="onEditUser" :delete="onDelete"></Table>
