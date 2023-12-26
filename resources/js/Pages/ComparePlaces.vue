@@ -129,6 +129,7 @@ axios.get('/place/'+id)
     delete resp.plc_contact
     delete resp.plc_ouvertureenclair
     delete resp.plc_modepaiement
+    delete resp.plc_rating
     delete resp.plc_illustrations
 
     console.log(resp)

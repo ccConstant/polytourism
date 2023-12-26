@@ -11,6 +11,7 @@
     <div >
         <div class="d-flex align-items-center container section justify-content-between">
             <Header :level="4" > Filtré par : </Header>
+            <Input type="text" title="intitulé" v-model="filter.name" :isInline="true" placeholder="Intitulé"/> 
             <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
             <Button @click="showFilterBar=!showFilterBar" buttonType='mini-primary'> + de filtres</Button>
         </div>
@@ -22,14 +23,25 @@
           
          </div>
        </div>
-    <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
-          <Place v-for="place in filteredPlaces" :key="place" :place="{
-              ...place,
-          }" />
-          
-        
-    </div>
-    
+        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
+            <Place v-for="place in filteredPlaces.slice(page*limit, (page+1) * limit)" :key="place" :place="{
+                ...place,
+            }" />
+            
+            
+        </div>
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item cursor-pointer" @click="minPage > 1 ? minPage -= 1 : minPage"><a class="page-link">Précédent</a></li>
+                <li class="page-item" v-for="pg in Array.from({ length: maxPage }, (_, i) => i + 1).slice(minPage-1, minPage-1 +nbPageLinks)" :key="pg">
+                    <a class="page-link cursor-pointer" :class="page == pg ? 'active' : ''" @click="page = pg">{{ pg }}</a>
+                </li>
+
+                <li class="page-item cursor-pointer" @click="minPage < maxPage - nbPageLinks ? minPage += 1 : minPage" ><a class="page-link">Suivant</a></li>
+            </ul>
+            </nav>
+        </div>
     <br><br><br><br><br><br><br>
     </div>
     <div class="d-flex justify-content-center">
@@ -102,30 +114,38 @@ import axios from 'axios'
 
 const showFilterBar=ref(false)
 const filteredPlaces=ref([])
+const pageList = ref([])
 const filter = ref({
     theme : '',
+    name : '',
     min : 0,
     max : null,
     rating : 0
 })
 
 watch(filter.value,() => {
-    console.log(filter.value)
     filteredPlaces.value = allPlaces.value.filter((place) => {
-        return place.plc_theme.includes(filter.value.theme) 
+        return place.plc_theme.includes(filter.value.theme) && place.plc_nom.toLowerCase().includes(filter.value.name)
     })
+    maxPage.value = filteredPlaces.value.length / limit;
+    minPage.value = 1
 })
 
 const allPlaces = ref([])
 axios.get('/place/all').then(response => {
     allPlaces.value = response.data
     filteredPlaces.value = allPlaces.value
-    console.log(allPlaces.value[0])
-    console.log(response.data)}).catch((error => console.log(error)))
+    maxPage.value = filteredPlaces.value.length / limit;
+}).catch((error => console.log(error)))
 
 
 
 const stars = [0,1,2,3,4]
 const selectedStars = ref(-1)
+const page = ref(0);
+const limit = 15
+const nbPageLinks = 3
+const minPage = ref(1)
+const maxPage = ref(-1)
 
 </script>
