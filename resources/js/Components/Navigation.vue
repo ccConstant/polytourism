@@ -20,6 +20,7 @@
       
             <div class="dropdown-menu" :class="showDropDownLinks ? 'show' : ''" aria-labelledby="dropdownMenuLink">
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/myaccount">Mes infos</a>
+              <a @click="showDropDownLinks = false" class="dropdown-item" v-if="connected.role == 'admin'" href="/admin">Tableau de bord</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
               <a @click="logout" class="dropdown-item" href="">Déconnexion</a>
@@ -52,7 +53,7 @@ const links = [{
 }
 ]
 const props = defineProps(['connected'])
-console.log(props.connected)
+console.log(props)
 const UserIsConnected = props.connected
 const clickedLink = ref(0)
 const showDropDownLinks = ref(false)
@@ -71,7 +72,7 @@ const logout = () => {
   axios.post('/logout')
   console.log('logout')
   localStorage.clear()
-  window.location.reload();
+  window.location.href = '/';
 }
 
 </script>

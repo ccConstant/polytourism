@@ -1,6 +1,6 @@
 <template>
     
-    <Navigation :connected="true" />
+    <Navigation :connected="auth.user" />
     <br><br><br><br><br><br><br>
     
     <Header class="center" :level="2">Découvrez les lieux touristiques de Lyon</Header>
@@ -112,6 +112,7 @@ import Navigation from '@/Components/Navigation.vue'
 import { ref, watch } from 'vue'
 import axios from 'axios'
 
+const props = defineProps(['auth']);
 const showFilterBar=ref(false)
 const filteredPlaces=ref([])
 const pageList = ref([])

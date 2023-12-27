@@ -116,7 +116,7 @@ axios.get('/place/'+id)
     resp.plc_address = parseString(resp.plc_address)
     resp.plc_contact = parseString(resp.plc_contact)
     resp.plc_theme = (parseString(resp.plc_theme))[0]
-    console.log(resp.plc_theme)
+    console.log(resp)
     for(let i = 0 ; i < resp.plc_contact.length ; i++){
         if(resp.plc_contact[i]['Téléphone']){
             resp.tel = resp.plc_contact[i]['Téléphone']

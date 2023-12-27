@@ -21,7 +21,7 @@
                     
                     <td>
                         <div class="d-flex h-[20px] gap-2 justify-content-center align-items-center">
-                            <i v-if="props.onEdit" @click="() => edit(elem.id)" class="fa-solid fa-pencil fa-lg" style="color: #000000;"></i>
+                            <i v-if="props.onEdit" @click="() => {title == 'liste des utilisateurs' ? edit(elem.id) : onEdit(elem.id)}" class="fa-solid fa-pencil fa-lg" style="color: #000000;"></i>
                             <i v-if="props.delete" @click="() => data = props.delete(data,elem.id)" class="fa-solid fa-trash fa-lg" style="color: #000000;"></i>
                             <i v-if="props.accept" @click="() => data = accept(data,elem.id)" class="fa-solid fa-check fa-lg" style="color: #000000;"></i>
                             <i v-if="props.decline" @click="() => data = decline(data,elem.id)" class="fa-solid fa-x fa-lg" style="color: #000000;"></i>
@@ -42,7 +42,7 @@ import { computed, ref, watch } from 'vue'
 
 const props = defineProps(['title','attr','onEdit','onSearch','data','delete','accept','decline','add'])
 // defineProps(['onClose','onSubmit','modelValue','type','title','note','placeholder'])
-
+console.log(props.title)
 const role = ref('')
 const id = ref(null)
 const showPopUp = ref(false)
