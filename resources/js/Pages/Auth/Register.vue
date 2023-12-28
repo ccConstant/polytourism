@@ -240,7 +240,7 @@ const submit = async () => {
         axios.post('register',{
                 name:form.value.name,
                 email:form.value.email,
-                gender:'Man',
+                gender:form.value.gender,
                 pseudo:form.value.pseudo,
                 password:form.value.password,
                 password_confirmation:form.value.password_confirmation,

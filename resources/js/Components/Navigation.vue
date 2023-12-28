@@ -23,7 +23,7 @@
               <a @click="showDropDownLinks = false" class="dropdown-item" v-if="connected.role == 'admin'" href="/admin">Tableau de bord</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
-              <a @click="logout" class="dropdown-item" href="">Déconnexion</a>
+              <a @click="logout" class="dropdown-item">Déconnexion</a>
             </div>
           </div>
         </nav>
@@ -70,8 +70,9 @@ addEventListener("resize", (e) => {
 const logout = () => { 
   showDropDownLinks.value = false
   axios.post('/logout')
-  console.log('logout')
   localStorage.clear()
+  console.log('logout')
+  window.location.reload()
   window.location.href = '/';
 }
 

@@ -41,7 +41,6 @@ const users = ref([])
 let userLoaded = ref(false)
 
 function parseString(str) {
-    console.log(str.replace(/'/g, '"').substring(1, str.length - 1))
     try{
         return JSON.parse(str.replace(/'/g, '"').substring(1, str.length - 1))
     }catch(e){
@@ -73,8 +72,6 @@ axios.get('/place/all').then(response => {
         "addressLocality":"Lyon 3ème"
     }
     */ 
-   console.log(data[2].plc_address)
-    console.log(parseString(data[2].plc_address))
     data.forEach(place => {
         delete place.plc_illustrations
         delete place.plc_theme
@@ -104,10 +101,10 @@ const searchByName = (data,input) => {
 }
 
 const onEditUser = async (id,role) => {
-    console.log(id)
-    /*await axios.post('/users/setRoleToAdmin/'+id)
+    console.log('here in edit user',id)
+    await axios.post('/users/setRoleToAdmin/'+id)
     .then(response => console.log(response))
-    .catch(error => console.log(error))*/
+    .catch(error => console.log(error))
     
 }
 
