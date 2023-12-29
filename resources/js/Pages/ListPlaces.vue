@@ -13,16 +13,14 @@
             <Header :level="4" > Filtré par : </Header>
             <Input type="text" title="intitulé" v-model="filter.name" :isInline="true" placeholder="Intitulé"/> 
             <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
-            <Button @click="showFilterBar=!showFilterBar" buttonType='mini-primary'> + de filtres</Button>
+            <div class="d-flex justify-content-between my-3 align-items-center">
+             <div>
+                 <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
+             </div>
+           </div>
+            
         </div>
-       <div v-if="showFilterBar" class="d-flex justify-content-between container section my-3 align-items-center">
-         <Input type="number" title="min" placeholder="min" v-model="filter.min" :isInline="true" />
-         <Input type="number" title="max" placeholder="max" v-model="filter.max" :isInline="true" />
-         <div>
-            <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
-          
-         </div>
-       </div>
+       
         <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
             <Place v-for="place in filteredPlaces.slice(page*limit, (page+1) * limit)" :key="place" :place="{
                 ...place,
@@ -35,7 +33,7 @@
             <ul class="pagination">
                 <li class="page-item cursor-pointer" @click="minPage > 1 ? minPage -= 1 : minPage"><a class="page-link">Précédent</a></li>
                 <li class="page-item" v-for="pg in Array.from({ length: maxPage }, (_, i) => i + 1).slice(minPage-1, minPage-1 +nbPageLinks)" :key="pg">
-                    <a class="page-link cursor-pointer" :class="page == pg ? 'active' : ''" @click="page = pg">{{ pg }}</a>
+                    <a class="page-link cursor-pointer" :class="page == pg -1? 'active' : ''" @click="page = pg - 1">{{ pg }}</a>
                 </li>
 
                 <li class="page-item cursor-pointer" @click="minPage < maxPage - nbPageLinks ? minPage += 1 : minPage" ><a class="page-link">Suivant</a></li>
@@ -130,6 +128,8 @@ watch(filter.value,() => {
     })
     maxPage.value = filteredPlaces.value.length / limit;
     minPage.value = 1
+    page.value = 0
+    console.log(minPage.value)
 })
 
 const allPlaces = ref([])
@@ -137,6 +137,7 @@ axios.get('/place/all').then(response => {
     allPlaces.value = response.data
     filteredPlaces.value = allPlaces.value
     maxPage.value = filteredPlaces.value.length / limit;
+    console.log(allPlaces.value[10])
 }).catch((error => console.log(error)))
 
 

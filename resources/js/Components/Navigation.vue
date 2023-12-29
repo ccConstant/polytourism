@@ -24,6 +24,7 @@
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
               <a @click="logout" class="dropdown-item">Déconnexion</a>
+              <a @click="logout" class="dropdown-item">Déconnexion</a>
             </div>
           </div>
         </nav>
@@ -74,14 +75,10 @@ const logout = () => {
   console.log("\n props ")
    console.log(props.connected)
   axios.post('/logout')
-  console.log("user connected ")
-  console.log(UserIsConnected)
-  console.log("\n props ")
-   console.log(props.connected)
-  
-  localStorage.clear();
-  
-  window.location.reload();
+  localStorage.clear()
+  console.log('logout')
+  window.location.reload()
+  window.location.href = '/';
 }
 
 </script>

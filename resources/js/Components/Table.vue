@@ -53,6 +53,7 @@ function edit(_id){
     console.log('edit here ? ')
     id.value = _id
     showPopUp.value = true
+    props.onEdit(_id)
     console.log(showPopUp.value,id.value)
 }
 
