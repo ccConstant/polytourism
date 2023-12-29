@@ -5,7 +5,7 @@
     
     <Header class="center" :level="2">Découvrez les lieux touristiques de Lyon</Header>
 
-    <p id="welcome" class="large3">Bienvenue dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette magnigique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore. Utilisez les filtres ci-dessous pour afficher votre recherche en fonction de vos préférences.</p>
+    <p id="welcome" class="large3">Bienvenu(e) dans notre répertoire complet de lieux touristiques à Lyon. Explorez cette magnifique ville en découvrant une variété d'attractions, de restaurants, de musées, de parcs et bien plus encore. Utilisez les filtres ci-dessous pour affiner votre recherche en fonction de vos préférences.</p>
     
     
     <div >
@@ -45,7 +45,7 @@
     <br><br><br><br><br><br><br>
     </div>
     <div class="d-flex justify-content-center">
-        <Button>Suggérez un lieu</Button>
+        <a href=""><Button>Suggérez un lieu</Button>
     </div>
    
     <Footer/>
