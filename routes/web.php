@@ -38,6 +38,10 @@ Route::get('/ListPlaces', function() {
     return Inertia::render('ListPlaces');
 });
 
+Route::get('/NewPlace', function() {
+    return Inertia::render('NewPlace');
+});
+
 Route::get('/forgotPassword', function() {
     return Inertia::render('ForgotPassword');
 });
