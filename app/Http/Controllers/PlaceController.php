@@ -194,7 +194,8 @@ class PlaceController extends Controller
      * Delete a place thanks to the id given in parameter
      * @param int $id the id of the place we want to delete
      */
-    public function delete_place(Request $request, $id){
+    public function delete_place($id){
+        echo($id);
         $place=Place::findOrFail($id);
         $place->delete();
     }

@@ -23,8 +23,7 @@
               <a @click="showDropDownLinks = false" class="dropdown-item" v-if="connected.role == 'admin'" href="/admin">Tableau de bord</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
-              <a @click="logout" class="dropdown-item">Déconnexion</a>
-              <a @click="logout" class="dropdown-item">Déconnexion</a>
+              <a @click="logout" class="dropdown-item cursor-pointer">Déconnexion</a>
             </div>
           </div>
         </nav>

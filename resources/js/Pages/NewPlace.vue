@@ -6,55 +6,74 @@
     
     <Header class="center"  :level="2" fw-bold>Ajouter un nouveau lieu</Header>
     <div id="image">
-    <img  src="https://www.tictactrip.eu/blog/wp-content/uploads/2020/11/Couverture-Lyon-1160x652.png" class="u-fit u-res" alt="">
+    <img src="https://www.tictactrip.eu/blog/wp-content/uploads/2020/11/Couverture-Lyon-1160x652.png" class="u-fit u-res w-100" alt="">
     </div >
     <p id="instructions">N’hésitez pas à <span class="fw-bold"> nous suggérer </span> des nouveau lieux pour les proposer aux touristes</p><br><br>
     
     
     
       
-    <div class="d-flex align-items-center container  gap-5 section ">
-        <Input class="flexcontainer" title="Intitulé" placeholder="Intitulé"  />
-        <Input class="flexcontainer" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--"  :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
+    <div class="div d-flex align-items-center container  gap-5 section ">
+        <Input class="flexcontainer" v-model="form.plc_nom" title="Intitulé" placeholder="Intitulé"  />
+        <Input class="flexcontainer" v-model="form.plc_theme" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--"  :options="themes"/> 
     </div>   <br>
-    <div class="d-flex align-items-center container gap-5 section ">
-        <Input class="flexcontainer" title="Adresse" placeholder="Adresse"  />
-        <Input class="flexcontainer" title="Tarif" placeholder="Indiquez le tarif de service"  />
+    <div class="div d-flex align-items-center container gap-5 section ">
+        <Input class="flexcontainer" v-model="form.plc_address" title="Adresse" placeholder="Adresse"  />
+        <Input class="flexcontainer" v-model="form.plc_tarifsenclair" title="Tarif" placeholder="Indiquez le tarif de service"  />
     </div>   <br>
-    <div class="d-flex align-items-center container gap-5 section ">
-        <Input class="flexShortDesc" title="Description courte" placeholder="Description courte"  />
+    <div class="div d-flex align-items-center container gap-5 section ">
+        <Input class="flexShortDesc" v-model="form.plc_descrcourtfr" title="Description courte" placeholder="Description courte"  />
     </div><br>
-    <div class="d-flex align-items-center container gap-5 section ">    
-        <Input class="flexDetaiDesc" title="Description détaillée" placeholder="Description détaillée ... "  />
+    <div class="div d-flex align-items-center container gap-5 section ">    
+        <Input class="flexDetaiDesc" v-model="form.plc_descrdetailfr" type="textarea" title="Description détaillée" placeholder="Description détaillée ... "  />
     </div>  <br>
-    <div class="d-flex align-items-center container gap-5 section ">
-        <Input class="flexcontainer" title="Numéro de téléphone" placeholder="+33"  />
-        <Input  class="flexcontainer" title="Adresse mail" placeholder="@"  />
+    <div class="div d-flex align-items-center container gap-5 section ">
+        <Input class="flexcontainer" v-model="form.plc_contact.tel" title="Numéro de téléphone" placeholder="+33"  />
+        <Input  class="flexcontainer" v-model="form.plc_contact.email" title="Adresse mail" placeholder="@"  />
     </div>  <br>
-    <div class="d-flex align-items-center container gap-5 section ">
-        <Input class="flexcontainer" title="Lien externe" placeholder="https://"  />
-        <Input class="flexcontainer" type="select" title="Jours d'ouvertures" placeholder="--Indiquez vos jours d'ouvertures--" :options="['Lundi','Mardi','Mercrdi','Jeudi','Vendredi','Samedi','Dimanche']" />
+    <div class="div d-flex align-items-center container gap-5 section ">
+        <Input class="flexcontainer"  title="Lien externe" placeholder="https://"  />
+        <Input class="flexcontainer"  type="select" :multiple="true" title="Jours d'ouvertures" placeholder="--Indiquez vos jours d'ouvertures--" :options="['Lundi','Mardi','Mercrdi','Jeudi','Vendredi','Samedi','Dimanche']" />
     </div> <br>
 
 
-    <div class="d-flex align-items-center container gap-5 section ">
+    <div class="div d-flex align-items-center container gap-5 section ">
         <p>Début de service :</p>
-        <input type="time" class="element" title="Début de service" id="appt" name="appt" min="09:00" max="18:00" required />
+        <input type="time" class="element" v-model="hourOfStart" title="Début de service" id="appt" name="appt" min="09:00" max="18:00" required />
       
         <p>Fin de service :</p>
-        <input type="time" class="element" title="Fin de service" id="appt" name="appt" min="09:00" max="18:00" required />
+        <input type="time" class="element" :disabled="!hourOfStart" v-model="hourOfend" title="Fin de service" id="appt" name="appt" :min="hourOfStart" max="18:00" required />
     </div> <br>
     
-    <div class="d-flex align-items-center container gap-5 section ">
-        <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Ajouter des images</label>
-        <input class="form-control" type="file" id="formFileMultiple" multiple>
-        </div>
+    <div class="div d-flex align-items-center container gap-5 section ">
+        <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com --> 
+    <div class="mb-3">
+      <label
+        for="formFileMultiple"
+        class="mb-2 inline-block text-neutral-700 "
+        >Ajouter des images</label
+      >
+      <input
+        class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none "
+        type="file"
+        id="formFileMultiple"
+        multiple />
     </div>
-    
+</div>
+    <div class="mb-3">
+        <label
+            for="formFileMultiple"
+            class="mb-2 inline-block text-neutral-700 mr-5"
+            >Donner une note au lieu</label>
+        <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="form.plc_rating = index" :class="form.plc_rating >= index ? 'yellow' : 'empty-star'" ></i>
+    </div>
+<Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
       
     
-
+<br/>
+<br/>
+<br/>
+<br/>
 
 
     
@@ -91,20 +110,9 @@
 </div>
 
     <div class="d-flex justify-content-center">
-        <Button>Suggérez un lieu</Button>
+        <Button @click="addPlace">Suggérez le lieu</Button>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 <Footer />
@@ -112,10 +120,81 @@
 
 
 
+<script setup>
+import Header from '@/Components/Header.vue'
+import Button from '@/Components/Button.vue'
+import Footer from '@/Components/Footer.vue'
+import Navigation from '@/Components/Navigation.vue'
+import Input from '@/Components/Input.vue'
+import Error from '@/Components/Error.vue'
+import {schema} from '../../formsValidators/addPlace.js'
+import { ref } from 'vue'
+import axios from 'axios'
+
+const errorMessage = ref(null)
+const stars = [0, 1, 2, 3, 4]
+
+const form = ref({
+    'plc_nom' : '',
+    'plc_theme' : '',
+    'plc_address' : '',
+    'plc_descrcourtfr': '',
+    'plc_descrdetailfr' : '',
+    'plc_contact' : {
+        tel : '',
+        email : ''
+    },
+    'plc_ouvertureenclair': null,
+    'plc_tarifsenclair': '',
+    'plc_illustrations' : '',
+    'plc_rating' : -1,
+    'plc_validated' : false,
+})
+
+const hourOfStart = ref(null)
+const hourOfend = ref(null)
+
+const themes = ref([])
+axios.get('/place/themes').then((res) => themes.value = res.data).catch((err) => console.log(err))
+
+const addPlace = () => {
+    form.value.plc_ouvertureenclair = `de ${hourOfStart} à ${hourOfend}`
+    const { error, value } = schema.validate(form.value)
+    if (error) {
+        console.log(error.message)
+        errorMessage.value = error.message
+    } else {
+    axios.post('/place/add',form.value)
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error))
+}}
+
+const onErrorClose = () => {
+    errorMessage.value = null
+}
+
+</script>
 
 
 
 <style lang="css">
+@media screen and (max-width : 800px) {
+    .div{
+        flex-direction: column;
+    }
+    .div > div,.div > input{
+        width: 100%;
+    }
+}
+.yellow{
+
+    color: rgb(255, 255, 0);
+}
+
+.empty-star{
+    color: #e5e0e0;
+    
+}
 h1{
     text-align:center;
     font-size:40px;
@@ -186,14 +265,5 @@ h1{
 
 </style>
 
-<script setup>
-import Header from '@/Components/Header.vue'
-import Place from '@/Components/Place.vue'
-import Button from '@/Components/Button.vue'
-import Footer from '@/Components/Footer.vue'
-import Navigation from '@/Components/Navigation.vue'
-import Input from '@/Components/Input.vue'
-
-</script>
 
 

@@ -42,8 +42,8 @@
         </div>
     <br><br><br><br><br><br><br>
     </div>
-    <div class="d-flex justify-content-center">
-        <a href=""><Button>Suggérez un lieu</Button>
+    <div class="d-flex mb-5 justify-content-center">
+        <a href="/newPlace"><Button>Suggérez un lieu</Button></a>
     </div>
    
     <Footer/>
