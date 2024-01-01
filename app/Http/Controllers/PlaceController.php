@@ -96,6 +96,7 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_place(Request $request){
+        dd($request->all());
         $place=Place::create([
             'plc_nom' => $request->plc_nom,
             'plc_theme' => $request->plc_theme,

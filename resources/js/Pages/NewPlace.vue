@@ -57,6 +57,7 @@
         class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none "
         type="file"
         id="formFileMultiple"
+        @change="onFileChange"
         multiple />
     </div>
 </div>
@@ -146,16 +147,27 @@ const form = ref({
     },
     'plc_ouvertureenclair': null,
     'plc_tarifsenclair': '',
-    'plc_illustrations' : '',
+    'plc_illustrations' : null,
     'plc_rating' : -1,
     'plc_validated' : false,
 })
+
 
 const hourOfStart = ref(null)
 const hourOfend = ref(null)
 
 const themes = ref([])
 axios.get('/place/themes').then((res) => themes.value = res.data).catch((err) => console.log(err))
+
+function onFileChange(e) {
+    console.log('file updated')
+    console.log(e)
+    var files = e.target.files || e.dataTransfer.files;
+    if (!files.length)
+        return;
+    form.value.plc_illustrations = files[0]
+    console.log(form.value)
+}
 
 const addPlace = () => {
     form.value.plc_ouvertureenclair = `de ${hourOfStart} à ${hourOfend}`
@@ -172,6 +184,7 @@ const addPlace = () => {
 const onErrorClose = () => {
     errorMessage.value = null
 }
+
 
 </script>
 
@@ -255,15 +268,9 @@ h1{
     width:100%;
 }
 
-
 .input {
   margin: 0.4rem 0;
   width: 50%;
 }
-
-
-
 </style>
-
-
 

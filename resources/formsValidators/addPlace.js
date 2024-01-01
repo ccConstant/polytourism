@@ -57,9 +57,9 @@ export const schema = Joi.object({
         "any.required": "le tarif est obligatoire",
         "string.empty": "le tarif est obligatoire",
     }),
-    'plc_illustrations': Joi.optional(),
-    'plc_rating': Joi.number().required().messages({
+    plc_illustrations: Joi.optional(),
+    plc_rating: Joi.number().required().messages({
         "any.required": "la note est obligatoire",
     }),
-    'plc_validated': Joi.optional(),
+    plc_validated: Joi.optional(),
 })
