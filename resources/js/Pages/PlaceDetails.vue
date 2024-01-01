@@ -94,7 +94,10 @@ const id = window.location.pathname.split('/')[2]
 watch(comment,() => console.log('comment updated',comment.value))
 
 axios.get('/comment/average/'+id)
-.then((res) => rating.value = res.data)
+.then((res) => {
+  console.log(typeof res.data)
+  rating.value = res.data.toFixed(2)
+})
 .catch(err => console.log(err))
 
 axios.get('/place/'+id).then((response) => {
@@ -126,8 +129,8 @@ const onSubmit = () => {
     user_pseudo : props.auth.user.pseudo,
     plc_id : id,
   }).then(response => {
-    console.log(response.data)
     getComments()
+    location.reload()
   })
   
   .catch((error => console.log(error))).finally(() => {
