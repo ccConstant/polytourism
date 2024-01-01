@@ -3,7 +3,7 @@
 /*
 * Filename: PlaceController.php
 * Creation date: Nov 3 2023
-* Update date: Dec 17 2023
+* Update date: Jan 01 2024
 * This file is used to link the view files and the database that concern the Place table.
 * For example: add a place, update a place, import a place, delete a place...
 */
@@ -34,7 +34,7 @@ class PlaceController extends Controller
                 'plc_contact' => 'required|string|min:1|max:255',
                 'plc_ouvertureenclair' => 'required|string|min:1|max:255',
                 'plc_tarifsenclair' => 'required|string|min:1|max:255',
-                'plc_illustrationsn' => 'required|string|min:1|max:255',
+                'plc_illustrations' => 'required|file|mimes:jpeg,png|max:2048',
                 'plc_validated' => 'required|boolean',
             ],
             [
@@ -78,10 +78,10 @@ class PlaceController extends Controller
                 'plc_tarifsenclair.min' => 'The pricing information must be a minimum of one character',
                 'plc_tarifsenclair.max' => 'The pricing information must be a maximum of 255 characters',
 
-                'plc_illustrationsn.required' => 'You must enter illustration information for your place',
-                'plc_illustrationsn.json' => 'The illustration information field must be a string',
-                'plc_illustrationsn.min' => 'The illustration information must be a minimum of one character',
-                'plc_illustrationsn.max' => 'The illustration information must be a maximum of 255 characters',
+                'plc_illustrations.required' => 'You must enter illustration information for your place.',
+                'plc_illustrations.file' => 'The selected illustration must be a file.',
+                'plc_illustrations.mimes' => 'The illustration must be a JPEG or PNG file.',
+                'plc_illustrations.max' => 'The illustration must not be larger than 2048 kilobytes.',
 
                 'plc_validated.required' => 'You must enter a validation status for your place',
                 'plc_validated.boolean' => 'The validation status field must be a boolean value',

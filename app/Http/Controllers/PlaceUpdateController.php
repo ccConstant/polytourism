@@ -3,7 +3,7 @@
 /*
 * Filename: PlaceUpdateController.php
 * Creation date: Dec 3 2023
-* Update date: Dec 14 2023
+* Update date: Jan 01 2024
 * This file is used to link the view files and the database that concern the Place Update table.
 * For example: add a place update, delete a place update...
 */
