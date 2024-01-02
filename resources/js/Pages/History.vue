@@ -83,12 +83,22 @@ const props = defineProps(['auth'])
 
 const places = ref([])
 const placeLoaded = ref(false)
-axios.get('/historique/' + props.auth.user.id).then(async (response) => {
-    await response.data.forEach(async element => {
-        await axios.get('/place/' + element.plc_id).then((res) => {
+console.log(props.auth)
+axios.get('/comment/rated/'+props.auth.user.id)
+.then((res) => {
+    console.log(res.data)
+}).catch((err) => {
+    console.log(err)
+})
+
+axios.get('/comment/rated/' + props.auth.user.id).then(async (response) => {
+    let ids = response.data.map(a => a.plc_id);
+    ids = ids.filter((elem,index) => ids.indexOf(elem) == index)
+    await ids.forEach(async element => {
+        await axios.get('/place/' + element).then((res) => {
             places.value.push({
                 ...res.data,
-                id: element.plc_id
+                id: element
             })
             console.log(res.data)
         }).catch(error => console.log(error))

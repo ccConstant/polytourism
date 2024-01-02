@@ -42,7 +42,7 @@
         </div>
     <br><br><br><br><br><br><br>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex mb-5 justify-content-center">
         <Button>Suggérez un lieu</Button>
     </div>
    

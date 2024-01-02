@@ -3,7 +3,7 @@
 /*
 * Filename: PlaceUpdateController.php
 * Creation date: Dec 3 2023
-* Update date: Dec 14 2023
+* Update date: Jan 01 2024
 * This file is used to link the view files and the database that concern the Place Update table.
 * For example: add a place update, delete a place update...
 */
@@ -101,7 +101,7 @@ class PlaceUpdateController extends Controller
                 'plcUpdt_contact' => 'required|string|min:1|max:255',
                 'plcUpdt_ouvertureenclair' => 'required|string|min:1|max:255',
                 'plcUpdt_tarifsenclair' => 'required|string|min:1|max:255',
-                'plcUpdt_illustrationsn' => 'required|string|min:1|max:255',
+                'plcUpdt_illustrations' => 'required|file|mimes:jpeg,png|max:2048',
                 'plcUpdt_validated' => 'required|boolean',
             ],
             [
@@ -145,10 +145,10 @@ class PlaceUpdateController extends Controller
                 'plcUpdt_tarifsenclair.min' => 'The pricing information must be a minimum of one character',
                 'plcUpdt_tarifsenclair.max' => 'The pricing information must be a maximum of 255 characters',
 
-                'plcUpdt_illustrationsn.required' => 'You must enter illustration information for your place',
-                'plcUpdt_illustrationsn.json' => 'The illustration information field must be a string',
-                'plcUpdt_illustrationsn.min' => 'The illustration information must be a minimum of one character',
-                'plcUpdt_illustrationsn.max' => 'The illustration information must be a maximum of 255 characters',
+                'plcUpdt_illustrations.required' => 'You must enter illustration information for your place.',
+                'plcUpdt_illustrations.file' => 'The selected illustration must be a file.',
+                'plcUpdt_illustrations.mimes' => 'The illustration must be a JPEG or PNG file.',
+                'plcUpdt_illustrations.max' => 'The illustration must not be larger than 2048 kilobytes.',
 
                 'plcUpdt_validated.required' => 'You must enter a validation status for your place',
                 'plcUpdt_validated.boolean' => 'The validation status field must be a boolean value',

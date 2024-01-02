@@ -3,8 +3,8 @@
     <Navigation :connected="true" />
     <section class="section container d-flex flex-column gap-5">
         <Header :level="1">bienvenue admin</Header>
-        <Table v-if="userLoaded" title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :onEdit="onEditUser" :delete="onDelete"></Table>
-        <Table v-if="placesLoaded" title="liste des lieux" :onSearch="searchByName" :attr="placesAttributes" :data="places" :onEdit="onEditPlace" :delete="onDelete" :edit="onEdit">
+        <Table v-if="userLoaded" title="liste des utilisateurs" :onSearch="searchByName" :attr="usersAttributes" :data="users" :onEdit="onEditUser" :delete="onDeleteUser"></Table>
+        <Table v-if="placesLoaded" title="liste des lieux" :onSearch="searchPlaceByName" :attr="placesAttributes" :data="places" :onEdit="onEditPlace" :delete="onDeletePlace">
             <Button><a href="/">ajouter un lieu</a></Button>
         </Table>
         <Table title="liste des lieux à valider" :onSearch="searchByName" :attr="placesAttributes" :data="places" :accept="onAccept" :decline="onDecline"></Table>
@@ -96,7 +96,13 @@ axios.get('/placeUpdate/all').then(response => {
 
 const searchByName = (data,input) => {
     return data.filter((elem) => {
-        return elem.nom.includes(input)
+        return elem.nom.toLowerCase().includes(input.toLowerCase())
+    })
+}
+
+const searchPlaceByName = (data, input) => {
+    return data.filter((elem) => {
+        return elem.plc_nom.toLowerCase().includes(input.toLowerCase())
     })
 }
 
@@ -107,9 +113,21 @@ const onEditUser = async (id,role) => {
     .catch(error => console.log(error))
     
 }
+const onDeleteUser = async (id, role) => {
+    await axios.delete('/profile')
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+
+}
 
 const onEditPlace = async (id) => {
     location.href = '/comparePlace/'+id
+}
+
+const onDeletePlace = async (id) => {
+    await axios.post('/place/delete/'+id)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
 }
 
 const onDelete = (data,id) => data.filter((elem) => elem.id !== id)
