@@ -43,7 +43,7 @@
     <br><br><br><br><br><br><br>
     </div>
     <div class="d-flex justify-content-center">
-        <a href=""><Button>Suggérez un lieu</Button>
+        <Button>Suggérez un lieu</Button>
     </div>
    
     <Footer/>
