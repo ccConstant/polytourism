@@ -89,7 +89,9 @@ Route::post('/comment/add', [CommentController::class, 'add_comment']);
 Route::post('/comment/verif', [CommentController::class, 'verif_comment']);
 Route::post('/comment/delete/{id}', [CommentController::class, 'delete_comment']);
 Route::get('/comment/average/{id}', [CommentController::class, 'average_rating']);
-
+Route::get('/placeView/{id}', function() {
+    return Inertia::render('PlaceDetails');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/wishlist', function() {
@@ -104,9 +106,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', function() {
         return Inertia::render('AdminDashboard');
     });
-    Route::get('/placeView/{id}', function() {
-        return Inertia::render('PlaceDetails');
-    });
     Route::get('/newPlace', function() {
     return Inertia::render('NewPlace');
     });
@@ -116,6 +115,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'send_users']);
     Route::post('/users/setRoleToAdmin/{id}', [UserController::class, 'setRoleToAdmin']);
     Route::post('/users/setRoleToUser/{id}', [UserController::class, 'setRoleToUser']);
+    Route::post('/users/delete/{id}', [UserController::class, 'delete']);
 });
 
 

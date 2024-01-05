@@ -34,6 +34,7 @@ class User extends Authenticatable
         'birth_date',
         'gender',
         'pseudo',
+        'role'
     ];
 
     /**
