@@ -83,13 +83,6 @@ const props = defineProps(['auth'])
 
 const places = ref([])
 const placeLoaded = ref(false)
-console.log(props.auth)
-axios.get('/comment/rated/'+props.auth.user.id)
-.then((res) => {
-    console.log(res.data)
-}).catch((err) => {
-    console.log(err)
-})
 
 axios.get('/comment/rated/' + props.auth.user.id).then(async (response) => {
     let ids = response.data.map(a => a.plc_id);
@@ -100,10 +93,8 @@ axios.get('/comment/rated/' + props.auth.user.id).then(async (response) => {
                 ...res.data,
                 id: element
             })
-            console.log(res.data)
         }).catch(error => console.log(error))
     });
-    console.log('fin')
     placeLoaded.value = true
 }).catch((error) => console.log('failed')).finally(() => console.log('finally...'))
 
