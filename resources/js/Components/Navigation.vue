@@ -69,10 +69,6 @@ addEventListener("resize", (e) => {
 
 const logout = () => { 
   showDropDownLinks.value = false
-  console.log("user connected ")
-  console.log(UserIsConnected)
-  console.log("\n props ")
-   console.log(props.connected)
   axios.post('/logout')
   localStorage.clear()
   console.log('logout')
