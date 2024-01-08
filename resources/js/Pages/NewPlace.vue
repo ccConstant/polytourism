@@ -33,7 +33,7 @@
     </div>  <br>
     <div class="div d-flex align-items-center container gap-5 section ">
         <Input class="flexcontainer"  title="Lien externe" placeholder="https://"  />
-        <Input class="flexcontainer"  type="select" :multiple="true" title="Jours d'ouvertures" placeholder="--Indiquez vos jours d'ouvertures--" :options="['Lundi','Mardi','Mercrdi','Jeudi','Vendredi','Samedi','Dimanche']" />
+        <Input class="flexcontainer"  type="select" :multiple="true" title="Jours d'ouvertures" placeholder="--Indiquez vos jours d'ouvertures--" :options="['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche']" />
     </div> <br>
 
 
@@ -47,27 +47,7 @@
     
     <div class="div d-flex align-items-center container gap-5 section ">
         <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com --> 
-    <div class="mb-3">
-      <label
-        for="formFileMultiple"
-        class="mb-2 inline-block text-neutral-700 "
-        >Ajouter des images</label
-      >
-      <input
-        class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none "
-        type="file"
-        id="formFileMultiple"
-        @change="onFileChange"
-        multiple />
-    </div>
 </div>
-    <div class="mb-3">
-        <label
-            for="formFileMultiple"
-            class="mb-2 inline-block text-neutral-700 mr-5"
-            >Donner une note au lieu</label>
-        <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="form.plc_rating = index" :class="form.plc_rating >= index ? 'yellow' : 'empty-star'" ></i>
-    </div>
 <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
       
     
@@ -133,7 +113,6 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const errorMessage = ref(null)
-const stars = [0, 1, 2, 3, 4]
 
 const form = ref({
     'plc_nom' : '',
@@ -148,7 +127,6 @@ const form = ref({
     'plc_ouvertureenclair': null,
     'plc_tarifsenclair': '',
     'plc_illustrations' : null,
-    'plc_rating' : -1,
     'plc_validated' : false,
 })
 
