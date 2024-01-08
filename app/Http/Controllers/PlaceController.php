@@ -127,13 +127,20 @@ class PlaceController extends Controller
         $places = Place::where('plc_validated', 0)->get();
         $array = [];
         foreach ($places as $place) {
+            $illustrations="" ; //a suppr
+            //if le theme contient musee
+            //je modifie $illustrations avec le lien de l'image choisit
+            
+            //idem pour les autres themes
+
+
             $obj = [
                 'id' => $place->id,
                 'plc_nom' => $place->plc_nom,
                 'plc_theme' => $place->plc_theme,
                 'plc_address' => $place->plc_address,
                 'plc_tarifsenclair' => $place->plc_tarifsenclair,
-                'plc_illustrations' => $place->plc_illustrations,
+                'plc_illustrations' => $illustrations,
                 'plc_contact' => $place->plc_contact,
                 'plc_rating' => $place->plc_rating,
             ];

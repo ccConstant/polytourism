@@ -120,5 +120,5 @@ Route::middleware('auth')->group(function () {
 
 
 Route::fallback(function() {
-   return view('404'); // la vue 404.blade.php
+    return Inertia::render('Home');
 });
