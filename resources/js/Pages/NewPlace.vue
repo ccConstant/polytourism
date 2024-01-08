@@ -1,7 +1,7 @@
 
 <template>
     <div id="NewPlace">
-    <Navigation />
+    <Navigation :connected="true" />
     <br><br><br><br><br><br><br>
     
     <Header class="center"  :level="2" fw-bold>Ajouter un nouveau lieu</Header>

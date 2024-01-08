@@ -39,9 +39,6 @@ const links = [{
   nom : 'accueil',
   link: '/#home',
   }, {
-  nom: 'Laissez-nous vous guider',
-  link: '/#proposition',
-}, {
   nom: 'présentation',
   link: '/#presentation',
 }, {
@@ -50,7 +47,13 @@ const links = [{
 }, {
   nom: 'contact',
   link: '/#contact',
-}
+}, {
+  nom: 'Découvrir Lyon',
+  link: '/ListPlaces',
+}, {
+  nom: 'Proposer un lieu',
+  link: '/newPlace',
+},
 ]
 const props = defineProps(['connected'])
 console.log(props)
