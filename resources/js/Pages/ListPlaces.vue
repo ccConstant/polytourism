@@ -21,9 +21,10 @@
             
         </div>
        
-        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
+        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center">
             <Place v-for="place in filteredPlaces.slice(page*limit, (page+1) * limit)" :key="place" :place="{
                 ...place,
+                plc_theme : parseString(place.plc_theme),
             }" />
             
             
@@ -132,9 +133,20 @@ watch(filter.value,() => {
     console.log(minPage.value)
 })
 
+function parseString(str) {
+    try{
+        return JSON.parse(str.replace(/'/g, '"').substring(1, str.length - 1))
+    }catch(e){
+        return ''
+    }
+}
+
 const allPlaces = ref([])
 axios.get('/place/all').then(response => {
     allPlaces.value = response.data
+    allPlaces.value.forEach(element => {
+        console.log(element.plc_theme,parseString(element.plc_theme));
+    });
     filteredPlaces.value = allPlaces.value
     maxPage.value = filteredPlaces.value.length / limit;
     console.log(allPlaces.value[10])

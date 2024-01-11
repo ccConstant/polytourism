@@ -10,9 +10,8 @@
                 <i @click="toggleLike" class=" fa-heart cursor-pointer" :class="isLiked ? 'fa-solid': 'fa-regular'"></i>
             </div>
             <div class="d-flex my-3 justify-content-between align-items-center">
-                <span class="place-theme" v-if="!place.plc_theme.startsWith('[\'')">{{ place.plc_theme }}</span>
-                <span v-else class="place-theme">
-                    <span class="block" v-for="theme in place.plc_theme.substring(1, place.plc_theme.length - 1).split(',')" :key="theme">#{{ theme }}</span>
+                <span class="place-theme">
+                    <span class="block" v-for="theme in place.plc_theme" :key="theme">#{{ theme }}</span>
                 </span>    
                 <span class="place-price">{{ place.plc_tarifsenclair  }}</span>
             </div>
@@ -82,7 +81,7 @@ const toggleLike = () => {
 </script>
 
 <style>
-.wrapper{
-    height: 210px;
+.wrapper {
+    height: 100%;
 }
 </style>
