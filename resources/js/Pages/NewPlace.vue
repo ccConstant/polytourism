@@ -127,10 +127,14 @@ const form = ref({
     'plc_address' : '',
     'plc_descrcourtfr': '',
     'plc_descrdetailfr' : '',
-    'plc_contact' : {
-        tel : '',
-        email : ''
+    'plc_contact' : [{
+        'Téléphone': ''
     },
+    {
+        'Mél' : ''
+    }
+    ],
+
     'plc_ouvertureenclair': null,
     'plc_tarifsenclair': '',
     'plc_illustrations' : null,
@@ -162,7 +166,7 @@ const addPlace = () => {
         console.log(error.message)
         errorMessage.value = error.message
     } else {
-    axios.post('/place/add',form.value)
+    axios.post('/placeUpdate/add',form.value)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }}
