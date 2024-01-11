@@ -72,11 +72,11 @@ addEventListener("resize", (e) => {
 
 const logout = () => { 
   showDropDownLinks.value = false
-  axios.post('/logout')
   localStorage.clear()
   console.log('logout')
   window.location.reload()
   window.location.href = '/';
+  axios.post('/logout')
 }
 
 </script>

@@ -12,7 +12,7 @@
         <div class="d-flex align-items-center container section justify-content-between">
             <Header :level="4" > Filtré par : </Header>
             <Input type="text" title="intitulé" v-model="filter.name" :isInline="true" placeholder="Intitulé"/> 
-            <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
+            <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :labels="themes" :options="themes"/> 
             <div class="d-flex justify-content-between my-3 align-items-center">
              <div>
                  <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
@@ -122,6 +122,9 @@ const filter = ref({
     max : null,
     rating : 0
 })
+
+const themes = ref([])
+axios.get('/place/themes').then((res) => themes.value = res.data).catch((err) => console.log(err))
 
 watch(filter.value,() => {
     filteredPlaces.value = allPlaces.value.filter((place) => {

@@ -15,7 +15,7 @@
       
     <div class="div d-flex align-items-center container  gap-5 section ">
         <Input class="flexcontainer" v-model="form.plc_nom" title="Intitulé" placeholder="Intitulé"  />
-        <Input class="flexcontainer" v-model="form.plc_theme" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--"  :options="themes"/> 
+        <Input class="flexcontainer" v-model="form.plc_theme" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--" :labels="themes"  :options="themes"/> 
     </div>   <br>
     <div class="div d-flex align-items-center container gap-5 section ">
         <Input class="flexcontainer" v-model="form.plc_address" title="Adresse" placeholder="Adresse"  />
@@ -33,7 +33,14 @@
     </div>  <br>
     <div class="div d-flex align-items-center container gap-5 section ">
         <Input class="flexcontainer"  title="Lien externe" placeholder="https://"  />
-        <Input class="flexcontainer"  type="select" :multiple="true" title="Jours d'ouvertures" placeholder="--Indiquez vos jours d'ouvertures--" :options="['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche']" />
+        <div class="d-flex flex-wrap gap-3">
+            <div v-for="day in days" class="d-flex gap-2 align-items-center">
+                
+                <input type="checkbox" :value="day" :id="day"/>
+                <label :for="day">{{ day }}</label>
+            </div>
+            
+        </div>
     </div> <br>
 
 
@@ -130,6 +137,7 @@ const form = ref({
     'plc_validated' : false,
 })
 
+const days = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
 const hourOfStart = ref(null)
 const hourOfend = ref(null)
