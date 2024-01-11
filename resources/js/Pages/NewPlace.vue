@@ -120,10 +120,14 @@ const form = ref({
     'plc_address' : '',
     'plc_descrcourtfr': '',
     'plc_descrdetailfr' : '',
-    'plc_contact' : {
-        tel : '',
-        email : ''
+    'plc_contact' : [{
+        'Téléphone': ''
     },
+    {
+        'Mél' : ''
+    }
+    ],
+
     'plc_ouvertureenclair': null,
     'plc_tarifsenclair': '',
     'plc_illustrations' : null,
