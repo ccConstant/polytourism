@@ -23,22 +23,24 @@ class PlaceUpdateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response : the id of the place update
      */
-    public function add_placeUpdate($request){
-    $placeUpdate=PlaceUpdate::create([
-            'plcUpdt_nom' => $request->plcUpdt_nom,
-            'plcUpdt_theme' => $request->plcUpdt_theme,
-            'plcUpdt_address' => $request->plcUpdt_address,
-            'plcUpdt_descrcourtfr' => $request->plcUpdt_descrcourtfr,
-            'plcUpdt_descrdetailfr' => $request->plcUpdt_descrdetailfr,
-            'plcUpdt_contact' => $request->plcUpdt_contact,
-            'plcUpdt_ouvertureenclair' => $request->plcUpdt_ouvertureenclair,
-            'plcUpdt_ouverture' => $request->plcUpdt_ouverture,
-            'plcUpdt_tarifsenclair' => $request->plcUpdt_tarifsenclair,
-            'plcUpdt_illustrations' => $request->plcUpdt_illustrations,
-            'plcUpdt_validated' => $request->plcUpdt_validated,
-            'plc_id' => $request->plc_id,
+    public function add_placeUpdate(Request $request){
+        
+        return response()->json($request);
+        
+        $placeUpdate=PlaceUpdate::create([
+            'plcUpdt_nom' => $request->plc_nom,
+            'plcUpdt_theme' => $request->plc_theme,
+            'plcUpdt_address' => $request->plc_address,
+            'plcUpdt_descrcourtfr' => $request->plc_descrcourtfr,
+            'plcUpdt_descrdetailfr' => $request->plc_descrdetailfr,
+            //'plcUpdt_contact' => $request->plc_contact,
+            'plcUpdt_ouvertureenclair' => $request->plc_ouvertureenclair,
+            //'plcUpdt_ouverture' => $request->plc_ouverture,
+            'plcUpdt_tarifsenclair' => $request->plc_tarifsenclair,
+            'plc_id' => 6,
         ]);
         return $placeUpdate->id;
+        
     }
 
     /**

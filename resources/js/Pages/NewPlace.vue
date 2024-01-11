@@ -176,7 +176,7 @@ const addPlace = () => {
         console.log(error.message)
         errorMessage.value = error.message
     } else {
-    axios.post('/place/add',form.value)
+    axios.post('/placeUpdate/add',form.value)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }}
