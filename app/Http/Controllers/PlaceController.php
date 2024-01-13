@@ -212,6 +212,7 @@ class PlaceController extends Controller
      */
     public function send_place($id){
         error_log("send place est appelé");
+        (new CommentController)->update_placeRating($id);
         $place=Place::findOrFail($id);
         return response()->json([
             'plc_nom' => $place->plc_nom,

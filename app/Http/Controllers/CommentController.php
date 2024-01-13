@@ -194,7 +194,7 @@ class CommentController extends Controller
      * Notifies the Places table and calls the right function in PlaneController
      * @param int $id the id of the place to update
      */
-    private function update_placeRating($id){
+    public function update_placeRating($id){
         $comments = Comment::where('plc_id', $id)->get();
         if (count($comments) == 0){
             $average = null;
