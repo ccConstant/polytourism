@@ -18,7 +18,7 @@
         <Input class="flexcontainer" v-model="form.plc_theme" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--" :labels="themes"  :options="themes"/> 
     </div>   <br>
     <div class="div d-flex align-items-center container gap-5 section ">
-        <Input class="flexcontainer" v-model="form.plc_address" title="Adresse" placeholder="Adresse"  />
+        <Input class="flexcontainer" v-model="form.plc_address.streetAddress" title="Adresse" placeholder="Adresse"  />
         <Input class="flexcontainer" v-model="form.plc_tarifsenclair" title="Tarif" placeholder="Indiquez le tarif de service"  />
     </div>   <br>
     <div class="div d-flex align-items-center container gap-5 section ">
@@ -124,10 +124,19 @@ import axios from 'axios'
 const errorMessage = ref(null)
 const props = defineProps(['auth'])
 
+/**
+ * "{'postalCode': '69003', 'streetAddress': '129 rue Servient', 'addressCountry': 'FR', 'addressLocality': 'Lyon 3ème'}"
+ */
+
 const form = ref({
     'plc_nom' : '',
     'plc_theme' : '',
-    'plc_address' : '',
+    'plc_address' : {
+        'postalCode' : '',
+        'streetAddress' : '',
+        'addressCountry' : 'FR',
+        'addressLocality' : ''
+    },
     'plc_descrcourtfr': '',
     'plc_descrdetailfr' : '',
     'plc_contact' : [{
@@ -165,15 +174,18 @@ function onFileChange(e) {
 const addPlace = () => {
     form.value.plc_ouvertureenclair = `de ${hourOfStart.value} à ${hourOfend.value}`
     form.value.plc_theme = JSON.stringify([form.value.plc_theme]);
+    
     console.log(form.value)
     const { error, value } = schema.validate(form.value)
     if (error) {
         console.log(error.message)
         errorMessage.value = error.message
     } else {
-    axios.post('/placeUpdate/add',form.value)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error))
+        form.value.plc_contact = JSON.stringify(form.value.plc_contact);
+        form.value.plc_address = JSON.stringify(form.value.plc_address);
+        axios.post('/placeUpdate/add',form.value)
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error))
 }}
 
 const onErrorClose = () => {

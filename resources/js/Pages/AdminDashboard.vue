@@ -7,7 +7,7 @@
         <Table v-if="placesLoaded" title="liste des lieux" :onSearch="searchPlaceByName" :attr="placesAttributes" :data="places" :onEdit="onEditPlace" :delete="onDeletePlace">
             <Button><a href="/">ajouter un lieu</a></Button>
         </Table>
-        <Table title="liste des lieux à valider" :onSearch="searchByName" :attr="placesAttributes" :data="places" :accept="onAccept" :decline="onDecline"></Table>
+        <Table v-if="placesUpdatesLoaded" title="liste des lieux à valider" :onSearch="searchByName" :attr="placesAttributes" :data="placesUpdated" :accept="onAccept" :decline="onDecline"></Table>
     </section>
     <Footer />
   </div>
@@ -89,6 +89,7 @@ axios.get('/place/all').then(response => {
 //get places
 axios.get('/placeUpdate/all').then(response => {
     let data = response.data
+    console.log(data)
     placesUpdated.value = data
     placesUpdatesLoaded.value = true
 

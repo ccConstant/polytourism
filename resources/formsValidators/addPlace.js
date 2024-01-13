@@ -11,9 +11,14 @@ export const schema = Joi.object({
         "any.required": "le thème est obligatoire",
         "array.empty": "le thème est obligatoire",
     }),
-    plc_address: Joi.string().required().messages({
-        "any.required": "l'adresse est obligatoire",
-        "string.empty": "l'adresse est obligatoire",
+    plc_address: Joi.object({
+        'postalCode': Joi.string().optional().min(0),
+        'streetAddress': Joi.string().required().messages({
+            "any.required": "le thème est obligatoire",
+            "string.empty": "le thème est obligatoire",
+        }),
+        'addressCountry': Joi.string().optional(),
+        'addressLocality': Joi.string().optional().min(0),
     }),
     plc_descrcourtfr: Joi.string().required().messages({
         "any.required": "la description courte est obligatoire",

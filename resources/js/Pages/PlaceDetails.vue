@@ -120,6 +120,13 @@ const  getComments = () => {
 getComments();
 
 const onSubmit = () => {
+  console.log({
+    ...comment.value,
+    com_title: 'my comment',
+    user_id: props.auth.user.id,
+    user_pseudo: props.auth.user.pseudo,
+    plc_id: id,
+  })
   axios.post('/comment/add',{
     ...comment.value,
     com_title : 'my comment',

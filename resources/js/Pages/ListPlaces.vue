@@ -15,8 +15,8 @@
             <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :labels="themes" :options="themes"/> 
             <div class="d-flex justify-content-between my-3 align-items-center">
              <div>
-                 <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
-                 <i class="fa-solid ml-3 fa-ban fa-lg cursor-pointer hover:text-danger" @click="selectedStars = -1" ></i>
+                 <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="filter.rating = index" :class="filter.rating >= index ? 'yellow' : 'empty-star' " ></i>
+                 <i class="fa-solid ml-3 fa-ban fa-lg cursor-pointer hover:text-danger" @click="filter.rating = -1" ></i>
              </div>
            </div>
             
@@ -121,16 +121,21 @@ const filter = ref({
     name : '',
     min : 0,
     max : null,
-    rating : 0
+    rating : -1
 })
 
 const themes = ref([])
 axios.get('/place/themes').then((res) => themes.value = res.data).catch((err) => console.log(err))
 
 watch(filter.value,() => {
+    console.log(filter.value.rating)
     filteredPlaces.value = allPlaces.value.filter((place) => {
         return place.plc_theme.includes(filter.value.theme) && place.plc_nom.toLowerCase().includes(filter.value.name)
     })
+    filteredPlaces.value = filteredPlaces.value.filter((place) => {
+        return place.plc_rating == -1 ? true : place.plc_rating == filter.value.rating+1 ;
+    })
+    console.log(filteredPlaces.value.length)
     maxPage.value = filteredPlaces.value.length / limit;
     minPage.value = 1
     page.value = 0
@@ -150,9 +155,6 @@ axios.get('/place/all').then(response => {
     allPlaces.value = response.data
     console.log(allPlaces.value[0]);
     allPlaces.value.forEach(element => {
-        if(element.plc_rating != null){
-            console.log(element.plc_rating);
-        }
         //console.log(element.plc_theme,parseString(element.plc_theme));
     });
     filteredPlaces.value = allPlaces.value
