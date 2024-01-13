@@ -2,7 +2,7 @@
   <div class="d-flex flex-column">
     <Navigation :connected="true" />
     <section v-if="placeLoaded" class="section bg-img">
-      <img :src="url" class="img-fluid" alt="">
+      <img :src="place.plc_illustrations" class="img-fluid" alt="">
     </section>
     <div v-if="placeLoaded">
     <section class="section container d-flex flex-column gap-5">
@@ -107,8 +107,6 @@ axios.get('/place/'+id).then((response) => {
   place.value.plc_address = place.value.plc_address.replace(/'/g, '"')
   place.value.plc_address = JSON.parse(place.value.plc_address.substring(1,place.value.plc_address.length - 1))
     
-  let images = place.value.plc_illustrations ? JSON.parse(place.value.plc_illustrations.replace(/'/g, '"').replace(/'/g, '"').substring(1, place.value.plc_illustrations.length - 1)) : ''
-  url.value = isArray(images) ? images[0].url : images.url
   placeLoaded.value = true
 }).catch((error) => console.log(error))
 
