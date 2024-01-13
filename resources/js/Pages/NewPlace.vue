@@ -1,7 +1,7 @@
 
 <template>
     <div id="NewPlace">
-    <Navigation />
+    <Navigation :connected="true" />
     <br><br><br><br><br><br><br>
     
     <Header class="center"  :level="2" fw-bold>Ajouter un nouveau lieu</Header>
@@ -15,7 +15,7 @@
       
     <div class="div d-flex align-items-center container  gap-5 section ">
         <Input class="flexcontainer" v-model="form.plc_nom" title="Intitulé" placeholder="Intitulé"  />
-        <Input class="flexcontainer" v-model="form.plc_theme" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--"  :options="themes"/> 
+        <Input class="flexcontainer" v-model="form.plc_theme" type="select" title="Thèmes" placeholder="--Choisissez les thèmes--" :labels="themes"  :options="themes"/> 
     </div>   <br>
     <div class="div d-flex align-items-center container gap-5 section ">
         <Input class="flexcontainer" v-model="form.plc_address" title="Adresse" placeholder="Adresse"  />
@@ -33,7 +33,14 @@
     </div>  <br>
     <div class="div d-flex align-items-center container gap-5 section ">
         <Input class="flexcontainer"  title="Lien externe" placeholder="https://"  />
-        <Input class="flexcontainer"  type="select" :multiple="true" title="Jours d'ouvertures" placeholder="--Indiquez vos jours d'ouvertures--" :options="['Lundi','Mardi','Mercrdi','Jeudi','Vendredi','Samedi','Dimanche']" />
+        <div class="d-flex flex-wrap gap-3">
+            <div v-for="day in days" class="d-flex gap-2 align-items-center">
+                
+                <input type="checkbox" :value="day" :id="day"/>
+                <label :for="day">{{ day }}</label>
+            </div>
+            
+        </div>
     </div> <br>
 
 
@@ -47,27 +54,7 @@
     
     <div class="div d-flex align-items-center container gap-5 section ">
         <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com --> 
-    <div class="mb-3">
-      <label
-        for="formFileMultiple"
-        class="mb-2 inline-block text-neutral-700 "
-        >Ajouter des images</label
-      >
-      <input
-        class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none "
-        type="file"
-        id="formFileMultiple"
-        @change="onFileChange"
-        multiple />
-    </div>
 </div>
-    <div class="mb-3">
-        <label
-            for="formFileMultiple"
-            class="mb-2 inline-block text-neutral-700 mr-5"
-            >Donner une note au lieu</label>
-        <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="form.plc_rating = index" :class="form.plc_rating >= index ? 'yellow' : 'empty-star'" ></i>
-    </div>
 <Error v-if="errorMessage" :onErrorClose="onErrorClose" :message="errorMessage" />
       
     
@@ -133,7 +120,6 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const errorMessage = ref(null)
-const stars = [0, 1, 2, 3, 4]
 
 const form = ref({
     'plc_nom' : '',
@@ -141,17 +127,21 @@ const form = ref({
     'plc_address' : '',
     'plc_descrcourtfr': '',
     'plc_descrdetailfr' : '',
-    'plc_contact' : {
-        tel : '',
-        email : ''
+    'plc_contact' : [{
+        'Téléphone': ''
     },
+    {
+        'Mél' : ''
+    }
+    ],
+
     'plc_ouvertureenclair': null,
     'plc_tarifsenclair': '',
     'plc_illustrations' : null,
-    'plc_rating' : -1,
     'plc_validated' : false,
 })
 
+const days = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 
 const hourOfStart = ref(null)
 const hourOfend = ref(null)
@@ -176,7 +166,7 @@ const addPlace = () => {
         console.log(error.message)
         errorMessage.value = error.message
     } else {
-    axios.post('/place/add',form.value)
+    axios.post('/placeUpdate/add',form.value)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }}

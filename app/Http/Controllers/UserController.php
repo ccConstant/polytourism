@@ -45,4 +45,14 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update(['role' => 'user']);
     }
+
+    /**
+     * Function called by ???.vue with the route: /user/delete/{id} (post)
+     * Delete the user
+     * @param int $id : id of the user we want to delete
+     */
+    public function delete($id){
+        $user = User::find($id);
+        $user->delete();
+    }
 }

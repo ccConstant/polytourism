@@ -12,7 +12,7 @@
         <div class="d-flex align-items-center container section justify-content-between">
             <Header :level="4" > Filtré par : </Header>
             <Input type="text" title="intitulé" v-model="filter.name" :isInline="true" placeholder="Intitulé"/> 
-            <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :options="['Restaurants','Nocturne','Patrimoine','Lieux de spectacle','Shopping','Hébergement']"/> 
+            <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :labels="themes" :options="themes"/> 
             <div class="d-flex justify-content-between my-3 align-items-center">
              <div>
                  <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
@@ -21,9 +21,10 @@
             
         </div>
        
-        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
+        <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center">
             <Place v-for="place in filteredPlaces.slice(page*limit, (page+1) * limit)" :key="place" :place="{
                 ...place,
+                plc_theme : parseString(place.plc_theme),
             }" />
             
             
@@ -122,6 +123,9 @@ const filter = ref({
     rating : 0
 })
 
+const themes = ref([])
+axios.get('/place/themes').then((res) => themes.value = res.data).catch((err) => console.log(err))
+
 watch(filter.value,() => {
     filteredPlaces.value = allPlaces.value.filter((place) => {
         return place.plc_theme.includes(filter.value.theme) && place.plc_nom.toLowerCase().includes(filter.value.name)
@@ -132,9 +136,20 @@ watch(filter.value,() => {
     console.log(minPage.value)
 })
 
+function parseString(str) {
+    try{
+        return JSON.parse(str.replace(/'/g, '"').substring(1, str.length - 1))
+    }catch(e){
+        return ''
+    }
+}
+
 const allPlaces = ref([])
 axios.get('/place/all').then(response => {
     allPlaces.value = response.data
+    allPlaces.value.forEach(element => {
+        console.log(element.plc_theme,parseString(element.plc_theme));
+    });
     filteredPlaces.value = allPlaces.value
     maxPage.value = filteredPlaces.value.length / limit;
     console.log(allPlaces.value[10])

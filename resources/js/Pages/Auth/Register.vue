@@ -281,13 +281,13 @@ const onErrorClose = () => {
                 <Input v-model="form.pseudo"  title="Pseudo" type="text" placeholder="Pseudo" hint="Exemple : Pseudo utilisé pour saisir des commentaires" />
             </div>
             <div>
-                <Input v-model="form.country"  title="Pays" type="select" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />
+                <Input v-model="form.country"  title="Pays" type="select" :labels="countries" :options="countries" placeholder="-- Pays --" hint="Choississez votre pays" />
             </div>
             <div>
                 <Input v-model="form.birth_date"  title="Date de naissance" type="date" hint="Saisir votre date de naissance" />
             </div>
             <div>
-                <Input v-model="form.gender"  title="Sexe" type="select" :options="['Man','Woman','Other']" placeholder="Sexe" hint="Choisir votre sexe" />
+                <Input v-model="form.gender"  title="Sexe" type="select" :labels="['Homme','Femme','Autre']" :options="['Man','Woman','Other']" placeholder="Genre" hint="Choisir votre sexe" />
             </div>
             <div>
                 <Input v-model="form.password"  title="mot de passe" type="password" placeholder="mot de passe" hint="Votre mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule et un caractère spécial" />

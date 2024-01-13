@@ -28,9 +28,9 @@ return new class extends Migration
             $table->string('plc_descrdetailfr', 3500)->nullable();
             $table->jsonb('plc_contact', 1500)->nullable();
             $table->string('plc_ouvertureenclair', 1000)->nullable();
-            $table->string('plc_tarifsenclair',1000)->nullable();
+            $table->string('plc_tarifsenclair',1300)->nullable();
             $table->jsonb('plc_illustrations', 7000)->nullable();
-            $table->float('plc_rating')->nullable();
+            $table->float('plc_rating')->default(0);
             $table->boolean('plc_validated')->default(false);
             $table->timestamps();
         });

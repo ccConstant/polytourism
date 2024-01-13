@@ -1,17 +1,4 @@
-/*'plc_nom' : '',
-    'plc_theme' : '',
-        'plc_address' : '',
-            'plc_descrcourtfr': '',
-                'plc_descrdetailfr' : '',
-                    'plc_contact' : {
-    tel: '',
-        mail : ''
-},
-'plc_ouvertureenclair': null,
-    'plc_tarifsenclair': '',
-        'plc_illustrations' : '',
-            'plc_rating' : null,
-                'plc_validated' : false,*/
+
 
 import Joi from 'joi'
 
@@ -58,8 +45,5 @@ export const schema = Joi.object({
         "string.empty": "le tarif est obligatoire",
     }),
     plc_illustrations: Joi.optional(),
-    plc_rating: Joi.number().required().messages({
-        "any.required": "la note est obligatoire",
-    }),
     plc_validated: Joi.optional(),
 })

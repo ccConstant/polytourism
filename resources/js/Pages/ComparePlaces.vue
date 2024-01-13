@@ -8,7 +8,7 @@
 
                 <div v-for="prop in Object.keys(form)" :key="prop">
                     <i class="fa-solid fa-x" v-if="listViewed.indexOf(prop) == -1" @click="decline(prop)"></i>
-                    <Input  v-model="form[prop]"  :title="obj[prop].title" :options="themes" :type="obj[prop].type" :placeholder="obj[prop].title" />
+                    <Input  v-model="form[prop]"  :title="obj[prop].title" :labels="themes" :options="themes" :type="obj[prop].type" :placeholder="obj[prop].title" />
                 </div> 
                 
             </div>
@@ -17,7 +17,7 @@
 
                     <div v-for="prop in Object.keys(data)" :key="prop">
                         <i class="fa-solid fa-check" v-if="listViewed.indexOf(prop) == -1" @click="accept(prop)"></i>
-                        <Input :disabled="true" v-model="data[prop]"  :title="obj[prop].title"  :options="themes" :type="obj[prop].type" :placeholder="obj[prop].title" />
+                        <Input :disabled="true" v-model="data[prop]"  :title="obj[prop].title" :labels="themes"  :options="themes" :type="obj[prop].type" :placeholder="obj[prop].title" />
                     </div> 
 
             </div>

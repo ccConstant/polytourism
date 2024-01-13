@@ -3,7 +3,7 @@
         <label :for="props.title">{{ lodash.capitalize(props.title) }}</label>
         <select @change="update" :disabled="disabled" class="form-control rounded-2 form-control-sm" :multiple="props.multiple" v-if="props.type == 'select'" >
             <option selected disabled>{{ props.placeholder }}</option>
-            <option :value="option" :selected="option == modelValue" v-for="option in props.options" :key="option" >{{ option }}</option>
+            <option :value="option" :selected="option == modelValue" v-for="(option,index) in props.options" :key="option" >{{ props.labels[index] ? props.labels[index] : props.options[index] }}</option>
         </select>
         <input @change="update" v-else-if="props.type == 'date'" :max="now" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm" :disabled="disabled">
         <textarea @change="update" style="resize: none;" rows="5" res v-else-if="props.type == 'textarea'" :max="now" :value="modelValue" :id="props.title" :type="props.type" :placeholder="props.placeholder" class="form-control rounded-2 form-control-sm" :disabled="disabled "></textarea>
@@ -22,7 +22,7 @@ if(props.type == 'select')
     console.log(props.options,props.modelValue)
 
 
-const props = defineProps(['modelValue','title','placeholder','full','isInline','options','hint','type','disabled','multiple'])
+const props = defineProps(['modelValue','title','placeholder','full','isInline','options','hint','type','disabled','multiple','labels'])
 const emits = defineEmits(['update:modelValue'])
 
 const update = function(e){
