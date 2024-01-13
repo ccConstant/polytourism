@@ -211,71 +211,8 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function send_place($id){
-        
         error_log("send place est appelé");
         $place=Place::findOrFail($id);
-
-        $illustrations = "";
-        switch ($place->plc_theme) {
-            case "['Patrimoine - Unesco']":
-                $illustrations = "https://ibb.co/HDGSYSc";
-                break;
-            case "['Activités, Loisirs et Bien-être']":
-                $illustrations = "https://ibb.co/ZfqY6fp";
-                break;
-            case "['Lyon Pratique']":
-                $illustrations = "https://ibb.co/vmKBXbQ";
-                break;
-            case "['Shopping']":
-                $illustrations = "https://ibb.co/mqfbBSw";
-                break;
-            case "['Lieux de spectacles']":
-                $illustrations = "https://ibb.co/yY7pc1D";
-                break;
-            case "['Culture & Musées']":
-                $illustrations = "https://ibb.co/3yynWms";
-                break;
-            case "['Lieux de spectacles', 'Culture & Musées', 'Restaurants & Gastronomie', 'Nocturne']":
-                $illustrations = "https://ibb.co/RzSz9mw";
-                break;
-            case "['Nocturne']":
-                $illustrations = "https://ibb.co/0XWcD3t";
-                break;
-            case "['Lieux de spectacles', 'Nocturne']":
-                $illustrations = "https://ibb.co/6mWV366";
-                break;
-            case "['Hébergements']":
-                $illustrations = "https://ibb.co/zsTbGr0";
-                break;
-            case "['Restaurants & Gastronomie']":
-                $illustrations = "https://ibb.co/bd8Skbg";
-                break;
-            case "['Culture & Musées', 'Shopping']":
-                $illustrations = "https://ibb.co/wrshqcc";
-                break;
-            case "['Agenda', 'Activités, Loisirs et Bien-être']":
-                $illustrations = "https://ibb.co/TWC2kJ4";
-                break;
-            case "['Patrimoine - Unesco', 'Culture & Musées']":
-                $illustrations = "https://ibb.co/5TFFK5G";
-                break;
-            case "['Lieux de spectacles', 'Culture & Musées']":
-                $illustrations = "https://ibb.co/1ZM6sr1";
-                break;
-            case "['Restaurants & Gastronomie', 'Nocturne']":
-                $illustrations = "https://ibb.co/0C2wmLB";
-                break;
-            case "['Patrimoine - Unesco', 'Activités, Loisirs et Bien-être']":
-                $illustrations = "https://ibb.co/cQzh3JS";
-                break;
-            case "['Restaurants & Gastronomie', 'Activités, Loisirs et Bien-être', 'Shopping']":
-                $illustrations = "https://ibb.co/6020rHm";
-                break;
-            case "['Culture & Musées', 'Culture & Musées']":
-                $illustrations = "https://ibb.co/LtfXr8w";
-                break;
-        }
-
         return response()->json([
             'plc_nom' => $place->plc_nom,
             'plc_theme' => $place->plc_theme,
@@ -285,7 +222,7 @@ class PlaceController extends Controller
             'plc_contact' => $place->plc_contact,
             'plc_ouvertureenclair' => $place->plc_ouvertureenclair,
             'plc_modepaiement' => $place->plc_modepaiement,
-            'plc_illustrations' => $illustrations, 
+            'plc_illustrations' => $place->plc_illustrations, 
             'plc_tarifsenclair' => $place->plc_tarifsenclair,
             'plc_rating' => $place->plc_rating,
             ]);
