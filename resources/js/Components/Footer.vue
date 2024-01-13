@@ -1,7 +1,7 @@
 <template>
   <footer class="section py-3 light-green">
     <div class="container d-flex flex-column gap-3">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex flex-lg-row flex-column justify-content-between">
             <div class="d-flex flex-column gap-3">
                 <p class="large3 primary-color">Polytourisme</p>
                 <p class="large3">votre agence de tourisme à Lyon</p>

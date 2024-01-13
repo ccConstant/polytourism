@@ -25,8 +25,6 @@ class PlaceUpdateController extends Controller
      */
     public function add_placeUpdate(Request $request){
         
-        return response()->json($request);
-        
         $placeUpdate=PlaceUpdate::create([
             'plcUpdt_nom' => $request->plc_nom,
             'plcUpdt_theme' => $request->plc_theme,

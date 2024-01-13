@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    <Navigation :connected="true" />
+    <Navigation :auth="auth" />
     <section v-if="placeLoaded" class="section bg-img">
       <img :src="place.plc_illustrations" class="img-fluid" alt="">
     </section>

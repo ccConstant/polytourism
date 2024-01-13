@@ -1,7 +1,7 @@
 
 <template>
     <div id="NewPlace">
-    <Navigation :connected="true" />
+    <Navigation :auth="auth" />
     <br><br><br><br><br><br><br>
     
     <Header class="center"  :level="2" fw-bold>Ajouter un nouveau lieu</Header>
@@ -28,18 +28,20 @@
         <Input class="flexDetaiDesc" v-model="form.plc_descrdetailfr" type="textarea" title="Description détaillée" placeholder="Description détaillée ... "  />
     </div>  <br>
     <div class="div d-flex align-items-center container gap-5 section ">
-        <Input class="flexcontainer" v-model="form.plc_contact.tel" title="Numéro de téléphone" placeholder="+33"  />
-        <Input  class="flexcontainer" v-model="form.plc_contact.email" title="Adresse mail" placeholder="@"  />
+        <Input class="flexcontainer" v-model="form.plc_contact[0]['Téléphone']" title="Numéro de téléphone" placeholder="+33"  />
+        <Input  class="flexcontainer" v-model="form.plc_contact[1]['Mél']" title="Adresse mail" placeholder="@"  />
     </div>  <br>
     <div class="div d-flex align-items-center container gap-5 section ">
         <Input class="flexcontainer"  title="Lien externe" placeholder="https://"  />
-        <div class="d-flex flex-wrap gap-3">
-            <div v-for="day in days" class="d-flex gap-2 align-items-center">
-                
-                <input type="checkbox" :value="day" :id="day"/>
-                <label :for="day">{{ day }}</label>
+        <div class="d-flex flex-column flex-wrap gap-3">
+            <label>Jours d'ouverture</label>
+            <div class="d-flex flex-wrap gap-3">
+                <div v-for="day in days" :key="day" class="d-flex gap-2 align-items-center">
+                    
+                    <input type="checkbox" :value="day" :id="day"/>
+                    <label :for="day">{{ day }}</label>
+                </div>
             </div>
-            
         </div>
     </div> <br>
 
@@ -120,6 +122,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const errorMessage = ref(null)
+const props = defineProps(['auth'])
 
 const form = ref({
     'plc_nom' : '',
@@ -160,7 +163,9 @@ function onFileChange(e) {
 }
 
 const addPlace = () => {
-    form.value.plc_ouvertureenclair = `de ${hourOfStart} à ${hourOfend}`
+    form.value.plc_ouvertureenclair = `de ${hourOfStart.value} à ${hourOfend.value}`
+    form.value.plc_theme = JSON.stringify([form.value.plc_theme]);
+    console.log(form.value)
     const { error, value } = schema.validate(form.value)
     if (error) {
         console.log(error.message)

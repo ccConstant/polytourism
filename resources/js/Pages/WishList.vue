@@ -1,5 +1,5 @@
 <template >
-    <Navigation  :connected="props.auth.user" />
+    <Navigation  :auth="auth" />
     <br><br><br><br><br><br><br>
     <Header class="center" :level="2">Bienvenue dans votre Wishlist</Header>
 

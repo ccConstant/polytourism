@@ -9,6 +9,7 @@ import {schema} from '../../../formsValidators/connectUser'
 import { ref } from 'vue';
 import axios from 'axios'
 
+const props = defineProps(['auth'])
 const errorMessage = ref(null)
 const form = ref({
     email: '',
@@ -37,7 +38,7 @@ const onErrorClose = () => {
 </script>
 
 <template>
-    <Navigation />
+    <Navigation :auth="auth"/>
     <GuestLayout>
         
         <Head title="Log in" />

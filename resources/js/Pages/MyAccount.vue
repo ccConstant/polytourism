@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navigation :connected="props.auth.user" />
+        <Navigation :auth="auth" />
         <section class="section container d-flex flex-column align-items-center gap-5">
             <Header :level="2">mon compte</Header>
             <div class="d-flex w-full flex-wrap fluid my-20 justify-space-between gap-5">

@@ -1,6 +1,6 @@
 <template>
     
-    <Navigation :connected="auth.user" />
+    <Navigation :auth="auth" />
     <br><br><br><br><br><br><br>
     
     <Header class="center" :level="2">Découvrez les lieux touristiques de Lyon</Header>
@@ -9,13 +9,14 @@
     
     
     <div >
-        <div class="d-flex align-items-center container section justify-content-between">
+        <div class="d-flex align-items-center flex-column gap-3 flex-md-row gap-md-0 container section justify-content-between">
             <Header :level="4" > Filtré par : </Header>
             <Input type="text" title="intitulé" v-model="filter.name" :isInline="true" placeholder="Intitulé"/> 
             <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :labels="themes" :options="themes"/> 
             <div class="d-flex justify-content-between my-3 align-items-center">
              <div>
                  <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="selectedStars = index" :class="selectedStars >= index ? 'yellow' : 'empty-star' " ></i>
+                 <i class="fa-solid ml-3 fa-ban fa-lg cursor-pointer hover:text-danger" @click="selectedStars = -1" ></i>
              </div>
            </div>
             
@@ -32,12 +33,12 @@
         <div class="d-flex justify-content-center">
             <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item cursor-pointer" @click="minPage > 1 ? minPage -= 1 : minPage"><a class="page-link">Précédent</a></li>
+                <li class="page-item" :class="minPage <= 1 ? 'cursor-not-allowed' : 'cursor-pointer'" @click="minPage > 1 ? page = minPage -= 1 : minPage"><a class="page-link">Précédent</a></li>
                 <li class="page-item" v-for="pg in Array.from({ length: maxPage }, (_, i) => i + 1).slice(minPage-1, minPage-1 +nbPageLinks)" :key="pg">
                     <a class="page-link cursor-pointer" :class="page == pg -1? 'active' : ''" @click="page = pg - 1">{{ pg }}</a>
                 </li>
 
-                <li class="page-item cursor-pointer" @click="minPage < maxPage - nbPageLinks ? minPage += 1 : minPage" ><a class="page-link">Suivant</a></li>
+                <li class="page-item cursor-pointer" @click="minPage < maxPage - nbPageLinks ? page = minPage += 1 : minPage" ><a class="page-link">Suivant</a></li>
             </ul>
             </nav>
         </div>
@@ -147,12 +148,16 @@ function parseString(str) {
 const allPlaces = ref([])
 axios.get('/place/all').then(response => {
     allPlaces.value = response.data
+    console.log(allPlaces.value[0]);
     allPlaces.value.forEach(element => {
-        console.log(element.plc_theme,parseString(element.plc_theme));
+        if(element.plc_rating != null){
+            console.log(element.plc_rating);
+        }
+        //console.log(element.plc_theme,parseString(element.plc_theme));
     });
     filteredPlaces.value = allPlaces.value
     maxPage.value = filteredPlaces.value.length / limit;
-    console.log(allPlaces.value[10])
+    //console.log(allPlaces.value[10])
 }).catch((error => console.log(error)))
 
 

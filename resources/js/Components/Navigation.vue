@@ -20,7 +20,7 @@
       
             <div class="dropdown-menu" :class="showDropDownLinks ? 'show' : ''" aria-labelledby="dropdownMenuLink">
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/myaccount">Mes infos</a>
-              <a @click="showDropDownLinks = false" class="dropdown-item" v-if="connected.role == 'admin'" href="/admin">Tableau de bord</a>
+              <a @click="showDropDownLinks = false" class="dropdown-item" v-if="auth?.user?.role == 'admin'" href="/admin">Tableau de bord</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/wishlist">Wishlist</a>
               <a @click="showDropDownLinks = false" class="dropdown-item" href="/history">Historique</a>
               <a @click="logout" class="dropdown-item cursor-pointer">Déconnexion</a>
@@ -55,14 +55,15 @@ const links = [{
   link: '/newPlace',
 },
 ]
-const props = defineProps(['connected'])
+const props = defineProps(['auth'])
 console.log(props)
-const UserIsConnected = props.connected
+const UserIsConnected = props?.auth?.user
 const clickedLink = ref(0)
 const showDropDownLinks = ref(false)
 const showNavBarLinks = ref(true)
 
 addEventListener("resize", (e) => {
+  
     if (window.innerWidth > 1020)
         showNavBarLinks.value = true
     else if(showNavBarLinks.value == true){

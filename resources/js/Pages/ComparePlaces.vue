@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column align-items-center">
-        <Navigation :connected="true" />
+        <Navigation :auth="auth" />
         <Header class="header" :level="1" >modifier le lieu</Header>
 
         <div v-if="data" class="container">
@@ -37,6 +37,8 @@ import Error from '@/Components/Error.vue'
 import { ref } from 'vue'
 import {schema} from '@/../formsValidators/updatePlace'
 import axios from 'axios'
+
+const props = defineProps(['auth'])
 
 const data = ref(null)
 const themes = ref([])
