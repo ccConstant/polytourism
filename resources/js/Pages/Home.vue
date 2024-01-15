@@ -83,7 +83,7 @@ if(props.auth)
 console.log(props.auth.user)
 
 const allPlaces = ref([])
-const index = ref(0);
+const index = ref(50);
 
 function parseString(str) {
   try {
@@ -96,13 +96,15 @@ function parseString(str) {
 axios.get('/place/all').then(response => {
   allPlaces.value = response.data;
 }).catch((error => console.log(error)))
-/*
-setInterval(() => {
-  index.value++;
-},10000);
-*/
-</script>
 
+setInterval(() => {
+  if(index.value + 3 > allPlaces.value.length)
+    index.value = 0;
+  else
+    index.value= index.value+3;
+},7000);
+
+</script>
 <style>
 
 </style>

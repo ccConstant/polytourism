@@ -1,16 +1,15 @@
 <template>
   <div class="d-flex flex-column">
     <Navigation :auth="auth" />
-    <section v-if="placeLoaded" class="section bg-img">
-      <img :src="place.plc_illustrations" class="img-fluid" alt="">
+    <section v-if="placeLoaded" class="section bg-img d-flex justify-content-center">
+      <img :src="place.plc_illustrations" class="img-fluid w-100" alt="">
     </section>
     <div v-if="placeLoaded">
     <section class="section container d-flex flex-column gap-5">
       <div class="d-flex flex-column gap-1">
         <Header class="text-start" :level="2">{{ place.plc_nom }}</Header>
-        <span class="place-theme" v-if="!place.plc_theme.startsWith('[\'')">{{ place.plc_theme }}</span>
-        <span v-else class="place-theme">
-            <span class="block" v-for="theme in place.plc_theme.substring(1, place.plc_theme.length - 1).split(',')" :key="theme">#{{ theme }}</span>
+        <span class="place-theme">
+            <span class="block" v-for="theme in parseString(place.plc_theme)" :key="theme">#{{ theme }}</span>
         </span> 
       </div>
       <Header class="text-start" :level="3">Description</Header>
@@ -25,16 +24,20 @@
           <Header level="4">Localisation & infos pratiques</Header>
           <div class="d-flex gap-4 flex-column">
             <Info :hasBorder="false" :info="place.plc_address.streetAddress + ' ' + place.plc_address.addressLocality + ' ' + place.plc_address.postalCode + ' ' + place.plc_address.addressCountry"><i class="fa-solid fa-location-dot fa-xl" style="color: #000000;"></i></Info>
-            <Info :hasBorder="false" :info="place.plc_tarifsenclair"><i class="fa-solid fa-sack-dollar fa-xl" style="color: #000000;"></i></Info>
-            <Info :hasBorder="false" info="06.06.06.06.06"><i class="fa-solid fa-phone fa-xl" style="color: #000000;"></i></Info>
-            <Info :hasBorder="false" info="info@lyon.fr"><i class="fa-regular fa-envelope fa-xl" style="color: #000000;"></i></Info>
-            <Info :hasBorder="false" :info="place.plc_ouvertureenclair"><i class="fa-regular fa-calendar fa-xl" style="color: #000000;"></i></Info>
+            <Info v-if="place.plc_tarifsenclair" :hasBorder="false" :info="place.plc_tarifsenclair"><i class="fa-solid fa-sack-dollar fa-xl" style="color: #000000;"></i></Info>
+            <Info v-if="place.plc_phone" :hasBorder="false" :info="place.plc_phone"><i class="fa-solid fa-phone fa-xl" style="color: #000000;"></i></Info>
+            <Info v-if="place.plc_mail" :hasBorder="false" :info="place.plc_mail"><i class="fa-regular fa-envelope fa-xl" style="color: #000000;"></i></Info>
+            <Info v-if="place.plc_webSite" :hasBorder="false" :info="place.plc_webSite"><i class="fa-solid fa-globe fa-xl" style="color: #000000;"></i></Info>
+            <Info v-if="place.plc_ouvertureenclair" :hasBorder="false" :info="place.plc_ouvertureenclair"><i class="fa-regular fa-calendar fa-xl" style="color: #000000;"></i></Info>
             <Info :hasBorder="false" info="ouvert tous le temps"><i class="fa-regular fa-clock fa-xl" style="color: #000000;"></i></Info>
           </div>
         </div>
       </div>
       <PopUp v-model="comment" :onSubmit="onSubmit" :onClose="onClose" title="Ajouter un commentaire" type="textarea" placeholder="Donnez votre avis ..." :note="true"  v-if="showPopUp" />
-      <Button @click="handleShow">Ajouter un commentaire</Button>
+      <div class="d-flex align-items-center ">
+        <Button @click="handleShow">Ajouter un commentaire</Button>
+        <Button @click="handleModify(id)">Suggérer une modification</Button>
+      </div>
     </section>
     <section v-if="allComments.length > 0" class="section container d-flex flex-column gap-5 align-items-start">
       <Header level="2">Note moyenne : {{ rating }}</Header>
@@ -64,7 +67,7 @@ import PopUp from '@/Components/PopUp.vue'
 import Comment from '@/Components/Comment.vue'
 import { ref, watch } from 'vue'
 import axios from 'axios'
-import isArray from 'lodash/isArray'
+import { parseString } from '@/utils/fonctions'
 
 const props = defineProps(['auth'])
 console.log(props.auth.user)
@@ -96,7 +99,7 @@ watch(comment,() => console.log('comment updated',comment.value))
 axios.get('/comment/average/'+id)
 .then((res) => {
   console.log(typeof res.data)
-  rating.value = res.data.toFixed(2)
+  rating.value = rating.value ? res.data.toFixed(2) : 0
 })
 .catch(err => console.log(err))
 
@@ -106,7 +109,19 @@ axios.get('/place/'+id).then((response) => {
 
   place.value.plc_address = place.value.plc_address.replace(/'/g, '"')
   place.value.plc_address = JSON.parse(place.value.plc_address.substring(1,place.value.plc_address.length - 1))
-    
+
+  let contact = parseString(place.value.plc_contact)
+  for(let i =0 ; i < contact.length ; i++){
+    if(Object.keys(contact[i])[0] == 'Téléphone'){
+      place.value.plc_phone = contact[i]['Téléphone']
+    }else if (Object.keys(contact[i])[0] == 'Mél') {
+      place.value.plc_mail = contact[i]['Mél']
+    } else if (Object.keys(contact[i])[0] == 'Site web (URL)') {
+      place.value.plc_webSite = contact[i]['Site web (URL)']
+      console.log(contact[i]['Site web (URL)'])
+    }
+  }
+
   placeLoaded.value = true
 }).catch((error) => console.log(error))
 
@@ -118,6 +133,8 @@ const  getComments = () => {
 }
 
 getComments();
+
+const handleModify = (id) => window.location.href = '/comparePlace/' + id
 
 const onSubmit = () => {
   console.log({

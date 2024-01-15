@@ -34,16 +34,18 @@ class UserController extends Controller
     public function setRoleToAdmin($id){
         $user = User::find($id);
         $user->update(['role' => 'admin']);
+        return 'done';
     }
 
     /**
-     * Function called by ???.vue with the route: /users/setRoleToUser/{id} (post)
+     * Function called by AdminDashboard.vue with the route: /users/setRoleToUser/{id} (post)
      * Set the role of the user to user
      * @param int $id : id of the user
      */
     public function setRoleToUser($id){
         $user = User::find($id);
         $user->update(['role' => 'user']);
+        return $user;
     }
 
     /**

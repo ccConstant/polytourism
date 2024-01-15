@@ -31,11 +31,11 @@ class PlaceUpdateController extends Controller
             'plcUpdt_address' => $request->plc_address,
             'plcUpdt_descrcourtfr' => $request->plc_descrcourtfr,
             'plcUpdt_descrdetailfr' => $request->plc_descrdetailfr,
-            //'plcUpdt_contact' => $request->plc_contact,
+            'plcUpdt_contact' => $request->plc_contact,
             'plcUpdt_ouvertureenclair' => $request->plc_ouvertureenclair,
-            //'plcUpdt_ouverture' => $request->plc_ouverture,
+            'plcUpdt_ouverture' => $request->plc_ouverture,
             'plcUpdt_tarifsenclair' => $request->plc_tarifsenclair,
-            'plc_id' => 6,
+            'plc_id' => 20,
         ]);
         return $placeUpdate->id;
         

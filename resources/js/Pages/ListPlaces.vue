@@ -10,7 +10,7 @@
     
     <div >
         <div class="d-flex align-items-center flex-column gap-3 flex-md-row gap-md-0 container section justify-content-between">
-            <Header :level="4" > Filtré par : </Header>
+            <Header :level="4" > Filtrer par : </Header>
             <Input type="text" title="intitulé" v-model="filter.name" :isInline="true" placeholder="Intitulé"/> 
             <Input type="select" title="Thèmes" v-model="filter.theme" :isInline="true" placeholder="Thèmes" :labels="themes" :options="themes"/> 
             <div class="d-flex justify-content-between my-3 align-items-center">
@@ -19,7 +19,6 @@
                  <i class="fa-solid ml-3 fa-ban fa-lg cursor-pointer hover:text-danger" @click="filter.rating = -1" ></i>
              </div>
            </div>
-            
         </div>
        
         <div class="d-flex flex-wrap gap-3 my-5 container section justify-content-center">
@@ -111,6 +110,7 @@ import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
 import { ref, watch } from 'vue'
 import axios from 'axios'
+import {parseString} from '@/utils/fonctions.js'
 
 const props = defineProps(['auth']);
 const showFilterBar=ref(false)
@@ -119,36 +119,33 @@ const pageList = ref([])
 const filter = ref({
     theme : '',
     name : '',
-    min : 0,
-    max : null,
     rating : -1
 })
+
+
 
 const themes = ref([])
 axios.get('/place/themes').then((res) => themes.value = res.data).catch((err) => console.log(err))
 
 watch(filter.value,() => {
-    console.log(filter.value.rating)
-    filteredPlaces.value = allPlaces.value.filter((place) => {
+    console.log('filter => ',filter.value)
+    filteredPlaces.value = allPlaces.value
+    filteredPlaces.value = filteredPlaces.value.filter((place) => {
         return place.plc_theme.includes(filter.value.theme) && place.plc_nom.toLowerCase().includes(filter.value.name)
     })
-    filteredPlaces.value = filteredPlaces.value.filter((place) => {
-        return place.plc_rating == -1 ? true : place.plc_rating == filter.value.rating+1 ;
-    })
-    console.log(filteredPlaces.value.length)
+    if(filter.value.rating > -1){
+        filteredPlaces.value = filteredPlaces.value.filter((place) => {
+            return place.plc_rating >= filter.value.rating + 1 &&  place.plc_rating <= filter.value.rating + 2;
+        })
+    }
+    
+    console.log(allPlaces.value.length,filteredPlaces.value.length)
     maxPage.value = filteredPlaces.value.length / limit;
     minPage.value = 1
     page.value = 0
-    console.log(minPage.value)
 })
 
-function parseString(str) {
-    try{
-        return JSON.parse(str.replace(/'/g, '"').substring(1, str.length - 1))
-    }catch(e){
-        return ''
-    }
-}
+
 
 const allPlaces = ref([])
 axios.get('/place/all').then(response => {
@@ -161,7 +158,6 @@ axios.get('/place/all').then(response => {
     maxPage.value = filteredPlaces.value.length / limit;
     //console.log(allPlaces.value[10])
 }).catch((error => console.log(error)))
-
 
 
 const stars = [0,1,2,3,4]

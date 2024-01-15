@@ -37,6 +37,7 @@ import Error from '@/Components/Error.vue'
 import { ref } from 'vue'
 import {schema} from '@/../formsValidators/updatePlace'
 import axios from 'axios'
+import { parseString } from '@/utils/fonctions'
 
 const props = defineProps(['auth'])
 
@@ -44,15 +45,18 @@ const data = ref(null)
 const themes = ref([])
 const errorMessage = ref(null)
 const form  = ref({
-    plc_nom : '',
-    plc_theme : '',
-    plc_address : '',
-    plc_descrcourtfr : '',
-    plc_descrdetailfr : '' ,
-    plc_tarifsenclair  : 0,
-    tel : '',
-    email : ''
+    'plc_nom' : '',
+    'plc_theme' : '',
+    'plc_address' : '',
+    'plc_descrcourtfr' : '',
+    'plc_descrdetailfr' : '' ,
+    'plc_tarifsenclair' : '' ,
+    'tel': '',
+    'email': '',
 })
+console.log(Object.keys(form.value))
+let recupObj = {}
+
 let place = {}
 const obj = {
     plc_nom: {title : 'Intitulé',type: 'text'},
@@ -68,9 +72,6 @@ const listViewed = ref([])
 
 const id = window.location.pathname.split('/')[2]
 
-function parseString(str){
-    return JSON.parse(str.replace(/'/g, '"').substring(1, str.length - 1))
-}
 const onErrorClose = () => {
     errorMessage.value = null
 }
@@ -83,28 +84,32 @@ function accept(str){
 }
 
 function validate(){
+    
+let placeObj = {
+    ...place,
+    ...form.value,
+    plc_theme : [form.value.plc_theme],
+    plc_contact : [
+        {'Téléphone' : form.value.tel},
+        {'Mél' : form.value.email},
+    ],
+    plc_address : {
+        'postalCode': '',
+        'streetAddress': form.value.plc_address,
+        'addressCountry': 'FR',
+        'addressLocality': ''
+    },
+    plc_validated: true
+}
+delete placeObj.Mél
+delete placeObj.Téléphone
+console.log(placeObj)
+    axios.post('/place/update/'+id,placeObj)
+    .then((resp) => {
+        window.location.href = '/listPlaces'
+    })
+    .catch((err) => console.log(err))
 
-    const { error, value } = schema.validate(form.value)
-    if (error) {
-        console.log(error)
-        errorMessage.value = error.message
-    }else{
-        console.log({
-            ...place,
-            ...form.value,
-            plc_validated : true
-        })
-        axios.post('/place/update/'+id,{
-            ...place,
-            ...form.value,
-            plc_validated : true
-        })
-        .then((resp) => {
-            console.log(resp)
-            window.location.href = '/listPlaces'
-        })
-        .catch((err) => console.log(err))
-    }
 
 }
 
@@ -118,7 +123,6 @@ axios.get('/place/'+id)
     resp.plc_address = parseString(resp.plc_address)
     resp.plc_contact = parseString(resp.plc_contact)
     resp.plc_theme = (parseString(resp.plc_theme))[0]
-    console.log(resp)
     for(let i = 0 ; i < resp.plc_contact.length ; i++){
         if(resp.plc_contact[i]['Téléphone']){
             resp.tel = resp.plc_contact[i]['Téléphone']
@@ -127,13 +131,18 @@ axios.get('/place/'+id)
         }
     }
 
+    recupObj.plc_contact = resp.plc_contact
+    recupObj.plc_ouvertureenclair = resp.plc_ouvertureenclair
+    recupObj.plc_modepaiement = resp.plc_modepaiement
+    recupObj.plc_rating = resp.plc_rating
+    recupObj.plc_illustrations = resp.plc_illustrations
+
     resp.plc_address = `${resp.plc_address.streetAddress} ${resp.plc_address.addressLocality} ${resp.plc_address.postalCode} ${resp.plc_address.addressCountry}`
     delete resp.plc_contact
     delete resp.plc_ouvertureenclair
     delete resp.plc_modepaiement
     delete resp.plc_rating
     delete resp.plc_illustrations
-
     console.log(resp)
     data.value = resp
 })

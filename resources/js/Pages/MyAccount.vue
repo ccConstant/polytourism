@@ -34,18 +34,30 @@ const modifierField = ref('')
 let isDeleting = false;
 const input = ref('')
 const onClose = () => showPopUp.value = false
-const onSubmit = () => {
+const onSubmit = async () => {
+    console.log('input.calue == ',input.value)
+    if(input.value == "")
+        return ;
     object.value[modifierField.value] = input.value
-    
+        console.log({
+        ...props.auth.user,
+        name: object.value.nom,
+        email: object.value.email,
+
+    })
     axios.patch('profile',{
         ...props.auth.user,
-        password: object.value.pseudo,
         name : object.value.nom,
         email : object.value.email,
         
-    }).then((response) => console.log('succes',response))
+    }).then((response) =>{
+        console.log('succes', response)
+        
+        input.value = ''
+        onClose()
+    })
     .catch((error) => console.log('error',error))
-    onClose()
+    
 }
 const onClick = (field) => {
     showPopUp.value = true

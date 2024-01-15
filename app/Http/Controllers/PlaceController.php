@@ -128,62 +128,62 @@ class PlaceController extends Controller
         $illustrations = "";
         foreach ($places as $place) {
             switch ($place->plc_theme) {
-                case "['Patrimoine - Unesco']":
-                    $illustrations = "https://ibb.co/HDGSYSc";
+                case "\"['Patrimoine - Unesco']\"": /**"['Patrimoine - Unesco']" */
+                    $illustrations = "https://i.ibb.co/N6Wvpv0/patrimoine1.png";
                     break;
-                case "['Activités, Loisirs et Bien-être']":
-                    $illustrations = "https://ibb.co/ZfqY6fp";
+                case "\"['Activités, Loisirs et Bien-être']\"":
+                    $illustrations = "https://i.ibb.co/8m1dDmL/loisirs.png";
                     break;
-                case "['Lyon Pratique']":
-                    $illustrations = "https://ibb.co/vmKBXbQ";
+                case "\"['Lyon Pratique']\"":
+                    $illustrations = "https://i.ibb.co/4M5f1cY/info.jpg";
                     break;
-                case "['Shopping']":
-                    $illustrations = "https://ibb.co/mqfbBSw";
+                case "\"['Shopping']\"":
+                    $illustrations = "https://i.ibb.co/G2znJFL/shopping.png";
                     break;
-                case "['Lieux de spectacles']":
-                    $illustrations = "https://ibb.co/yY7pc1D";
+                case "\"['Lieux de spectacles']\"":
+                    $illustrations = "https://i.ibb.co/Hx3Cfs0/spec.png";
                     break;
-                case "['Culture & Musées']":
-                    $illustrations = "https://ibb.co/3yynWms";
+                case "\"['Culture & Musées']\"":
+                    $illustrations = "https://i.ibb.co/Y77x8BW/museee.jpg";
                     break;
-                case "['Lieux de spectacles', 'Culture & Musées', 'Restaurants & Gastronomie', 'Nocturne']":
-                    $illustrations = "https://ibb.co/RzSz9mw";
+                case "\"['Lieux de spectacles', 'Culture & Musées', 'Restaurants & Gastronomie', 'Nocturne']\"":
+                    $illustrations = "https://i.ibb.co/dGcGrqY/noct-musee.jpg";
                     break;
-                case "['Nocturne']":
-                    $illustrations = "https://ibb.co/0XWcD3t";
+                case "\"['Nocturne']\"":
+                    $illustrations = "https://i.ibb.co/TTnkv5L/nocturne.png";
                     break;
-                case "['Lieux de spectacles', 'Nocturne']":
-                    $illustrations = "https://ibb.co/6mWV366";
+                case "\"['Lieux de spectacles', 'Nocturne']\"":
+                    $illustrations = "https://i.ibb.co/2ykmDXX/spec-nocturne.png";
                     break;
-                case "['Hébergements']":
-                    $illustrations = "https://ibb.co/zsTbGr0";
+                case "\"['Hébergements']\"":
+                    $illustrations = "https://i.ibb.co/CB3vhzT/hebergement.png";
                     break;
-                case "['Restaurants & Gastronomie']":
-                    $illustrations = "https://ibb.co/bd8Skbg";
+                case "\"['Restaurants & Gastronomie']\"":
+                    $illustrations = "https://i.ibb.co/12wDkzf/resto.png";
                     break;
-                case "['Culture & Musées', 'Shopping']":
-                    $illustrations = "https://ibb.co/wrshqcc";
+                case "\"['Culture & Musées', 'Shopping']\"":
+                    $illustrations = "https://i.ibb.co/mF85KNN/22159-Boutique-mus-e-du-Quai-Branly-630x405-Boutique-du-mus-e-Quai-Branly.jpg";
                     break;
-                case "['Agenda', 'Activités, Loisirs et Bien-être']":
-                    $illustrations = "https://ibb.co/TWC2kJ4";
+                case "\"['Agenda', 'Activités, Loisirs et Bien-être']\"":
+                    $illustrations = "https://i.ibb.co/cYm31R6/acti.jpg";
                     break;
-                case "['Patrimoine - Unesco', 'Culture & Musées']":
-                    $illustrations = "https://ibb.co/5TFFK5G";
+                case "\"['Patrimoine - Unesco', 'Culture & Musées']\"":
+                    $illustrations = "https://i.ibb.co/rkssdZF/musee-loi.jpg";
                     break;
-                case "['Lieux de spectacles', 'Culture & Musées']":
-                    $illustrations = "https://ibb.co/1ZM6sr1";
+                case "\"['Lieux de spectacles', 'Culture & Musées']\"":
+                    $illustrations = "https://i.ibb.co/kKJ134j/path-spect.jpg";
                     break;
-                case "['Restaurants & Gastronomie', 'Nocturne']":
-                    $illustrations = "https://ibb.co/0C2wmLB";
+                case "\"['Restaurants & Gastronomie', 'Nocturne']\"":
+                    $illustrations = "https://i.ibb.co/X7LwjPy/resto-nocturne.png";
                     break;
-                case "['Patrimoine - Unesco', 'Activités, Loisirs et Bien-être']":
-                    $illustrations = "https://ibb.co/cQzh3JS";
+                case "\"['Patrimoine - Unesco', 'Activités, Loisirs et Bien-être']\"":
+                    $illustrations = "https://i.ibb.co/3ctmd19/pat-act-loi.jpg";
                     break;
-                case "['Restaurants & Gastronomie', 'Activités, Loisirs et Bien-être', 'Shopping']":
-                    $illustrations = "https://ibb.co/6020rHm";
+                case "\"['Restaurants & Gastronomie', 'Activités, Loisirs et Bien-être', 'Shopping']\"":
+                    $illustrations = "https://i.ibb.co/hFkFLBy/Khalifa-Mall-4.jpg";
                     break;
-                case "['Culture & Musées', 'Culture & Musées']":
-                    $illustrations = "https://ibb.co/LtfXr8w";
+                case "\"['Culture & Musées', 'Culture & Musées']\"":
+                    $illustrations = "https://i.ibb.co/MVLxfsT/CULTURE.jpg";
                     break;
             }
     
@@ -214,6 +214,68 @@ class PlaceController extends Controller
         error_log("send place est appelé");
         (new CommentController)->update_placeRating($id);
         $place=Place::findOrFail($id);
+
+        $illustrations = "";
+        switch ($place->plc_theme) {
+            case "\"['Patrimoine - Unesco']\"": /**"['Patrimoine - Unesco']" */
+                $illustrations = "https://i.ibb.co/N6Wvpv0/patrimoine1.png";
+                break;
+            case "\"['Activités, Loisirs et Bien-être']\"":
+                $illustrations = "https://i.ibb.co/8m1dDmL/loisirs.png";
+                break;
+            case "\"['Lyon Pratique']\"":
+                $illustrations = "https://i.ibb.co/4M5f1cY/info.jpg";
+                break;
+            case "\"['Shopping']\"":
+                $illustrations = "https://i.ibb.co/G2znJFL/shopping.png";
+                break;
+            case "\"['Lieux de spectacles']\"":
+                $illustrations = "https://i.ibb.co/Hx3Cfs0/spec.png";
+                break;
+            case "\"['Culture & Musées']\"":
+                $illustrations = "https://i.ibb.co/Y77x8BW/museee.jpg";
+                break;
+            case "\"['Lieux de spectacles', 'Culture & Musées', 'Restaurants & Gastronomie', 'Nocturne']\"":
+                $illustrations = "https://i.ibb.co/dGcGrqY/noct-musee.jpg";
+                break;
+            case "\"['Nocturne']\"":
+                $illustrations = "https://i.ibb.co/TTnkv5L/nocturne.png";
+                break;
+            case "\"['Lieux de spectacles', 'Nocturne']\"":
+                $illustrations = "https://i.ibb.co/2ykmDXX/spec-nocturne.png";
+                break;
+            case "\"['Hébergements']\"":
+                $illustrations = "https://i.ibb.co/CB3vhzT/hebergement.png";
+                break;
+            case "\"['Restaurants & Gastronomie']\"":
+                $illustrations = "https://i.ibb.co/12wDkzf/resto.png";
+                break;
+            case "\"['Culture & Musées', 'Shopping']\"":
+                $illustrations = "https://i.ibb.co/mF85KNN/22159-Boutique-mus-e-du-Quai-Branly-630x405-Boutique-du-mus-e-Quai-Branly.jpg";
+                break;
+            case "\"['Agenda', 'Activités, Loisirs et Bien-être']\"":
+                $illustrations = "https://i.ibb.co/cYm31R6/acti.jpg";
+                break;
+            case "\"['Patrimoine - Unesco', 'Culture & Musées']\"":
+                $illustrations = "https://i.ibb.co/rkssdZF/musee-loi.jpg";
+                break;
+            case "\"['Lieux de spectacles', 'Culture & Musées']\"":
+                $illustrations = "https://i.ibb.co/kKJ134j/path-spect.jpg";
+                break;
+            case "\"['Restaurants & Gastronomie', 'Nocturne']\"":
+                $illustrations = "https://i.ibb.co/X7LwjPy/resto-nocturne.png";
+                break;
+            case "\"['Patrimoine - Unesco', 'Activités, Loisirs et Bien-être']\"":
+                $illustrations = "https://i.ibb.co/3ctmd19/pat-act-loi.jpg";
+                break;
+            case "\"['Restaurants & Gastronomie', 'Activités, Loisirs et Bien-être', 'Shopping']\"":
+                $illustrations = "https://i.ibb.co/hFkFLBy/Khalifa-Mall-4.jpg";
+                break;
+            case "\"['Culture & Musées', 'Culture & Musées']\"":
+                $illustrations = "https://i.ibb.co/MVLxfsT/CULTURE.jpg";
+                break;
+        }
+
         return response()->json([
             'plc_nom' => $place->plc_nom,
             'plc_theme' => $place->plc_theme,
@@ -223,7 +285,7 @@ class PlaceController extends Controller
             'plc_contact' => $place->plc_contact,
             'plc_ouvertureenclair' => $place->plc_ouvertureenclair,
             'plc_modepaiement' => $place->plc_modepaiement,
-            'plc_illustrations' => $place->plc_illustrations, 
+            'plc_illustrations' => $illustrations, 
             'plc_tarifsenclair' => $place->plc_tarifsenclair,
             'plc_rating' => $place->plc_rating,
             ]);

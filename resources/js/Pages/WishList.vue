@@ -11,7 +11,10 @@
     <div>
         <div v-if="placeLoaded" class="d-flex flex-wrap gap-3 my-5 container section justify-content-center ">
             
-            <Place v-for="place in places" @refresh-page="refresh" :key="place.id" :place="place" />
+            <Place v-for="place in places" @refresh-page="refresh" :key="place.id" :place="{
+                ...place,
+                plc_theme: parseString(place.plc_theme),
+            }" />
         </div>
 
         <br><br><br><br><br><br><br>
@@ -78,6 +81,7 @@ import Footer from '@/Components/Footer.vue'
 import Navigation from '@/Components/Navigation.vue'
 import axios from 'axios'
 import { ref } from 'vue'
+import { parseString } from '@/utils/fonctions'
 
 const props = defineProps(['auth'])
 

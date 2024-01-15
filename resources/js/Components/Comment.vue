@@ -8,14 +8,16 @@
             </div>
         </div>
         <p>{{ comment.com_text }}</p>
-        <p>publié le {{ comment.created_at }}</p>
+        <p>publié le {{ dayjs(comment.com_date).format('DD/MM/YYYY') }}</p>
     </div>
 </template>
 
 <script setup>
 import Header from '@/Components/Header.vue'
+import dayjs from 'dayjs';
 
 const props = defineProps(['comment'])
+console.log(props.comment)
 </script>
 
 <style>

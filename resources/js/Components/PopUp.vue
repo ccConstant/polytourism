@@ -9,9 +9,9 @@
         <Header :level="3">Note : </Header>
         <i class="fa-solid fa-star fa-lg cursor-pointer" v-for="index in stars" :key="index" @click="() => updateStars(index)" :class="selectedStars >= index ? 'yellow' : 'empty-star'" ></i>
     </div>
-    <Input :type="type" :options="options" @input="update" :full="true" :placeholder="placeholder" />
+    <Input :type="type" :options="options" :labels="labels" @input="update" :full="true" :placeholder="placeholder" />
     
-    <Button @click="onSubmit">{{ title }}</Button>
+    <Button @click="submit">{{ title }}</Button>
   </div>
 </div>
 </template>
@@ -22,13 +22,18 @@ import Header from './Header.vue';
 import Input from './Input.vue';
 import Button from './Button.vue';
 
-const props = defineProps(['onClose','onSubmit','modelValue','type','title','options','note','placeholder'])
+const props = defineProps(['onClose','onSubmit','modelValue','type','title','options','note','placeholder','labels'])
 const input = ref('')
 
 const stars = [0, 1, 2, 3, 4]
 const selectedStars = ref(-1)
 
 const emits = defineEmits(['update:modelValue'])
+
+const submit = () => {
+    props.onSubmit();
+    props.onClose();
+}
 
 const updateStars = (index) => {
     selectedStars.value = index

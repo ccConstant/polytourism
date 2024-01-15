@@ -1,6 +1,6 @@
 <template>
-    <PopUp v-if="showPopUp" :onClose="onClose" :onSubmit="() => onEdit(id,role)" v-model="role" type="select" :options="['admin','utilisateur']" title="modifier le role" />
-    <div>
+    <PopUp :onClose="onClose" :onSubmit="() => onEdit(id,role)" v-model="role" type="select" :options="['admin','utilisateur']" :labels="['admin', 'utilisateur']" title="modifier le role" v-if="showPopUp" />
+        <div>
         <div class="d-flex w-full justify-content-between">
             <Header :level="3">{{ title }}</Header>
             <Input v-model="input" class="searchBar" type="text" placeholder="Recherche par nom"  />
@@ -22,9 +22,9 @@
                     <td>
                         <div class="d-flex h-[20px] gap-2 justify-content-center align-items-center">
                             <i v-if="props.onEdit" @click="() => {title == 'liste des utilisateurs' ? edit(elem.id) : onEdit(elem.id)}" class="fa-solid fa-pencil fa-lg" style="color: #000000;"></i>
-                            <i v-if="props.delete" @click="() => data = props.delete(data,elem.id)" class="fa-solid fa-trash fa-lg" style="color: #000000;"></i>
-                            <i v-if="props.accept" @click="() => data = accept(data,elem.id)" class="fa-solid fa-check fa-lg" style="color: #000000;"></i>
-                            <i v-if="props.decline" @click="() => data = decline(data,elem.id)" class="fa-solid fa-x fa-lg" style="color: #000000;"></i>
+                            <i v-if="props.delete" @click="() => props.delete(elem.id)" class="fa-solid fa-trash fa-lg" style="color: #000000;"></i>
+                            <i v-if="props.accept" @click="() =>  accept(elem.id)" class="fa-solid fa-check fa-lg" style="color: #000000;"></i>
+                            <i v-if="props.decline" @click="() => decline(elem.id)" class="fa-solid fa-x fa-lg" style="color: #000000;"></i>
                         </div>
                     </td>
                 </tr>
@@ -53,7 +53,6 @@ function edit(_id){
     console.log('edit here ? ')
     id.value = _id
     showPopUp.value = true
-    props.onEdit(_id)
     console.log(showPopUp.value,id.value)
 }
 
@@ -64,6 +63,7 @@ function onClose(){
 const filterdData = ref(props.data)
 console.log(filterdData.value[0])
 watch([input,data],() => {
+    console.log('data 2 => ',data.value)
     filterdData.value = props.onSearch(data.value, input.value)
     console.log(filterdData)
 })

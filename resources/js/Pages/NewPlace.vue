@@ -78,7 +78,6 @@
      <p >
 <span class="fw-bold"> 1. Intitulé de lieu touristique</span> : Indiquez le nom complet du lieu touristique que vous souhaitez ajouter. <br><br>
 <span class="fw-bold"> 2. Thémes</span> : Choisissez les thémes qui correspondent le mieux au lieu touristique que vous souhaitez ajouter, par exemple : musée, parc, restaurant, monument, etc.<br><br>
-<span class="fw-bold"> 3. Type </span>:  Précisez le type du lieu, comme restauration,hotellerie,patrimoine culturel,commerce et service, etc.<br><br>
 <span class="fw-bold"> 4. Adresse</span> :  Indiquez l'adresse complète du lieu touristique, y compris le code postal, pour que les visiteurs puissent facilement le trouver.<br><br>
 <span class="fw-bold"> 5. Description Courte </span>: Fournissez une brève description du lieu en quelques phrases. Cela peut inclure des points forts, des caractéristiques uniques, ou des informations attractives.<br><br>
 <span class="fw-bold"> 6. Description Longue </span>: Décrivez plus en détail le lieu touristique, ses attractions, son histoire, et toute information que vous jugez importante pour les visiteurs.<br><br>
@@ -87,8 +86,7 @@
 <span class="fw-bold"> 9. Lien Externe </span>: Si le lieu a un site web ou une page de réseaux sociaux que vous souhaitez partager, ajoutez le lien externe.<br><br>
 <span class="fw-bold"> 10. Jours d'Ouverture </span>: Indiquez les jours de la semaine où le lieu est ouvert au public.<br><br>
 <span class="fw-bold"> 11. Heures de Service </span>: Précisez les heures d'ouverture et de fermeture habituelles du lieu touristique.<br><br>
-<span class="fw-bold"> 12. Tarif </span>: Si le lieu a un coût d'entrée, veuillez l'indiquer ici.<br><br>
-<span class="fw-bold"> 13. Ajout des Images</span> : Téléchargez des images du lieu touristique pour aider les visiteurs à le visualiser. Vous pouvez télécharger plusieurs images pour donner une vue complète.<br><br></p>
+<span class="fw-bold"> 12. Tarif </span>: Si le lieu a un coût d'entrée, veuillez l'indiquer ici.<br><br></p>
 
 <div class="fw-bold">
 <p>Assurez-vous de fournir des informations précises et complètes pour aider les futurs visiteurs à Lyon à découvrir de nouveaux lieux passionnants. Votre contribution est précieuse pour notre communauté !</p><br>
@@ -183,11 +181,25 @@ const addPlace = () => {
     } else {
         form.value.plc_contact = JSON.stringify(form.value.plc_contact);
         form.value.plc_address = JSON.stringify(form.value.plc_address);
+        console.log(form.value)
         axios.post('/placeUpdate/add',form.value)
-            .then((response) => console.log(response))
+            .then((response) => {
+                location.href = '/listPLaces';
+                console.log(response)
+            })
             .catch((error) => console.log(error))
 }}
+/**
+ * SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`polytourism`.`place_updates`, CONSTRAINT `place_updates_plc_id_foreign` FOREIGN KEY (`plc_id`) REFERENCES `places` (`id`) ON DELETE CASCADE) (Connection: mysql, SQL: insert into `place_updates` (`plcUpdt_nom`, `plcUpdt_theme`, `plcUpdt_address`, `plcUpdt_descrcourtfr`, `plcUpdt_descrdetailfr`, `plcUpdt_contact`, `plcUpdt_ouvertureenclair`, `plcUpdt_tarifsenclair`, `plc_id`, `updated_at`, `created_at`) values (La Tour de la Part-Dieu, ["Patrimoine - Unesco"], {"postalCode":"","streetAddress":"7 rue Pailleron Lyon 4ème 69004 FR","addressCountry":"FR","addressLocality":""}, Plongez dans l'harmonie naturelle du Jardin Étoilé, un lieu où la magie de la nature se mêle à l'art et à l'exploration céleste. Découvrez des jardins luxuriants, des sculptures inspirantes, et des soirées étoilées enchanteuses., La Tour de la Part-DieuLa Tour de la Part-DieuLa Tour de la Part-DieuLa Tour de la Part-DieuLa Tour de la Part-DieuLa Tour de la Part-Dieu, [{"Téléphone":"0478291493"},{"Mél":"substrat@abcdugout.com"}], de 21:36 à 22:36, 10, 6, 2024-01-14 20:36:21, 2024-01-14 20:36:21))
+ */
 
+/**
+ * SQLSTATE[23000]: Integrity constraint violation: 4025 CONSTRAINT `place_updates.plcUpdt_address` failed for `polytourism`.`place_updates` 
+ * (Connection: mysql, SQL: insert into `place_updates` 
+ * (`plcUpdt_nom`, `plcUpdt_theme`, `plcUpdt_address`, `plcUpdt_descrcourtfr`, `plcUpdt_descrdetailfr`, `plcUpdt_contact`, `plcUpdt_ouvertureenclair`, `plcUpdt_tarifsenclair`, `plc_id`, `updated_at`, `created_at`) 
+ * values
+ *  (test, ["Patrimoine - Unesco"], "{"postalCode":"","streetAddress":"7 rue Pailleron Lyon 4ème 69004 FR","addressCountry":"FR","addressLocality":""}", testtesttesttesttesttesttest, test desc, "[{"Téléphone":"0478291493"},{"Mél":"substrat@abcdugout.com"}]", de 21:32 à 00:32, 10, 6, 2024-01-14 20:32:19, 2024-01-14 20:32:19))
+ */
 const onErrorClose = () => {
     errorMessage.value = null
 }

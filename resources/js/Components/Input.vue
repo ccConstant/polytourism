@@ -18,12 +18,14 @@ import dayjs from 'dayjs'
 
 const now = dayjs().format('YYYY-MM-DD')
 
-if(props.type == 'select')
-    console.log(props.options,props.modelValue)
 
 
 const props = defineProps(['modelValue','title','placeholder','full','isInline','options','hint','type','disabled','multiple','labels'])
 const emits = defineEmits(['update:modelValue'])
+
+console.log(props.labels)
+if (props.type == 'select')
+    console.log(props.options, props.modelValue)
 
 const update = function(e){
     emits('update:modelValue',e.target.value)

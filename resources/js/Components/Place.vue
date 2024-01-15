@@ -1,5 +1,5 @@
 <template>
-    <div class="place">
+    <div class="place h-fit">
         <div class="place-image">
             
             <img :src=url class="img-fluid rounded-top" alt="">
