@@ -78,6 +78,7 @@
      <p >
 <span class="fw-bold"> 1. Intitulé de lieu touristique</span> : Indiquez le nom complet du lieu touristique que vous souhaitez ajouter. <br><br>
 <span class="fw-bold"> 2. Thémes</span> : Choisissez les thémes qui correspondent le mieux au lieu touristique que vous souhaitez ajouter, par exemple : musée, parc, restaurant, monument, etc.<br><br>
+<span class="fw-bold"> 3. Type </span>:  Précisez le type du lieu, comme restauration,hotellerie,patrimoine culturel,commerce et service, etc.<br><br>
 <span class="fw-bold"> 4. Adresse</span> :  Indiquez l'adresse complète du lieu touristique, y compris le code postal, pour que les visiteurs puissent facilement le trouver.<br><br>
 <span class="fw-bold"> 5. Description Courte </span>: Fournissez une brève description du lieu en quelques phrases. Cela peut inclure des points forts, des caractéristiques uniques, ou des informations attractives.<br><br>
 <span class="fw-bold"> 6. Description Longue </span>: Décrivez plus en détail le lieu touristique, ses attractions, son histoire, et toute information que vous jugez importante pour les visiteurs.<br><br>
@@ -86,7 +87,8 @@
 <span class="fw-bold"> 9. Lien Externe </span>: Si le lieu a un site web ou une page de réseaux sociaux que vous souhaitez partager, ajoutez le lien externe.<br><br>
 <span class="fw-bold"> 10. Jours d'Ouverture </span>: Indiquez les jours de la semaine où le lieu est ouvert au public.<br><br>
 <span class="fw-bold"> 11. Heures de Service </span>: Précisez les heures d'ouverture et de fermeture habituelles du lieu touristique.<br><br>
-<span class="fw-bold"> 12. Tarif </span>: Si le lieu a un coût d'entrée, veuillez l'indiquer ici.<br><br></p>
+<span class="fw-bold"> 12. Tarif </span>: Si le lieu a un coût d'entrée, veuillez l'indiquer ici.<br><br>
+<span class="fw-bold"> 13. Ajout des Images</span> : Téléchargez des images du lieu touristique pour aider les visiteurs à le visualiser. Vous pouvez télécharger plusieurs images pour donner une vue complète.<br><br></p>
 
 <div class="fw-bold">
 <p>Assurez-vous de fournir des informations précises et complètes pour aider les futurs visiteurs à Lyon à découvrir de nouveaux lieux passionnants. Votre contribution est précieuse pour notre communauté !</p><br>
